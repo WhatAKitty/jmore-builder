@@ -1,0 +1,22 @@
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  security:
+    login: /demo/login
+    logout: /demo/login?logout
+    home: /demo/home
+  thymeleaf:
+    enabled: true
+    cache: false
+    mode: HTML5
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/jmore?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    druid:
+      initial-size: 5
+      max-active: 20
+      max-wait: 10000
+
+

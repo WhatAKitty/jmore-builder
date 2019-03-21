@@ -1,0 +1,20 @@
+package com.whatakitty.jmore.lock;
+
+import org.springframework.context.annotation.ImportSelector;
+import org.springframework.core.type.AnnotationMetadata;
+
+/**
+ * lock configuration selector
+ *
+ * @author WhatAKitty
+ * @date 2019/02/22
+ * @description
+ **/
+public final class LockConfigurationSelector implements ImportSelector {
+
+    @Override
+    public String[] selectImports(AnnotationMetadata annotationMetadata) {
+        return new String[0];
+    }
+
+}
