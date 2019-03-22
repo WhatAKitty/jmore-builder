@@ -1,7 +1,6 @@
 package com.whatakitty.jmore.demo.domain.model.user;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -11,8 +10,7 @@ import lombok.NoArgsConstructor;
  * @date 2019/02/27
  * @description
  **/
-@Getter
-@Builder
+@Data
 @NoArgsConstructor
 public class User {
 
@@ -45,9 +43,9 @@ public class User {
      * @return user info
      */
     public User login(String username, String password) {
-        return User.builder()
-            .accountInfo(AccountInfo.of(username, password, false, true, false))
-            .build();
+        User user = new User();
+        user.setAccountInfo(AccountInfo.of(username, password, false, true, false));
+        return user;
     }
 
 
