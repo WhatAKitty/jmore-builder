@@ -38,7 +38,7 @@ public class DemoApiTest {
     private final MockMvc mockMvc;
 
     public DemoApiTest() {
-        mockMvc = MockMvcBuilders.standaloneSetup(DemoApi.class)
+        mockMvc = MockMvcBuilders.standaloneSetup(DemoApiImpl.class)
             .setControllerAdvice(new ApiAdvice())
             .build();
     }
