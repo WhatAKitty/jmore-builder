@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.lock;
 
+import com.whatakitty.jmore.lock.exception.LockException;
+import com.whatakitty.jmore.lock.exception.TimeoutLockException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -13,6 +15,8 @@ public interface Lock {
 
     /**
      * sync lock operation
+     *
+     * @throws LockException
      */
     void lock() throws LockException;
 
@@ -28,13 +32,16 @@ public interface Lock {
      *
      * @param time the time to wait
      * @param unit time unit
-     * @return {true} locked successfully; {false} locked failed.
+     * @throws TimeoutLockException
+     * @throws LockException
      */
-    boolean lock(long time, TimeUnit unit) throws TimeoutLockException;
+    void lock(long time, TimeUnit unit) throws LockException;
 
     /**
      * unlock
+     *
+     * @throws LockException
      */
-    void unLock() throws BizTimeoutLockException;
+    void unLock() throws LockException;
 
 }

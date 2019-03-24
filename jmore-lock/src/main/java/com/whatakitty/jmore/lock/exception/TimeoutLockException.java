@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.lock;
+package com.whatakitty.jmore.lock.exception;
 
 import java.util.concurrent.TimeUnit;
 

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({LockConfigurationSelector.class})
-@EnableConfigurationProperties(LockPropsConfiguration.class)
+@EnableConfigurationProperties(LockProperties.class)
 public @interface EnableJMoreLock {
 
     int order() default 2147483647;

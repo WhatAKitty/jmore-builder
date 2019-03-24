@@ -1,9 +1,8 @@
 package com.whatakitty.jmore.lock.zookeeper;
 
-import com.whatakitty.jmore.lock.BizTimeoutLockException;
 import com.whatakitty.jmore.lock.Lock;
-import com.whatakitty.jmore.lock.LockException;
-import com.whatakitty.jmore.lock.TimeoutLockException;
+import com.whatakitty.jmore.lock.exception.LockException;
+import com.whatakitty.jmore.lock.exception.TimeoutLockException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,12 +37,12 @@ public class ZookeeperLock implements Lock {
     }
 
     @Override
-    public boolean lock(long time, TimeUnit unit) throws TimeoutLockException {
-        return false;
+    public void lock(long time, TimeUnit unit) throws TimeoutLockException {
+        return;
     }
 
     @Override
-    public void unLock() throws BizTimeoutLockException {
+    public void unLock() throws LockException {
 
     }
 

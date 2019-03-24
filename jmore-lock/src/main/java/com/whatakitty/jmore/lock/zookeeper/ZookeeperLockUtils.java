@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.lock.zookeeper;
 
-import com.whatakitty.jmore.lock.LockException;
+import com.whatakitty.jmore.lock.exception.LockException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;

@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.lock;
+package com.whatakitty.jmore.lock.exception;
 
 /**
  * lock exception
@@ -19,4 +19,9 @@ public class LockException extends Exception {
     public LockException(Throwable cause) {
         super(cause);
     }
+
+    public LockException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

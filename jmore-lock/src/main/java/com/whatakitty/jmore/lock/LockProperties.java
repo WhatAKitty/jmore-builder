@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Role;
 @Configuration
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @ConfigurationProperties(prefix = "spring.lock")
-public class LockPropsConfiguration {
+public class LockProperties {
 
     /**
      * the lock type; the jvm lock is default.
