@@ -22,13 +22,13 @@ public interface UserConverter {
      * @param userDO userDO instance
      * @return converted user instance
      */
-    @Mappings({
-        @Mapping(source = "username", target = "accountInfo.username"),
-        @Mapping(source = "password", target = "accountInfo.password"),
-        @Mapping(source = "expired", target = "accountInfo.expired"),
-        @Mapping(source = "locked", target = "accountInfo.locked"),
-        @Mapping(source = "enabled", target = "accountInfo.enabled")
-    })
+//    @Mappings({
+//        @Mapping(source = "username", target = "accountInfo.username"),
+//        @Mapping(source = "password", target = "accountInfo.password"),
+//        @Mapping(source = "expired", target = "accountInfo.expired"),
+//        @Mapping(source = "locked", target = "accountInfo.locked"),
+//        @Mapping(source = "enabled", target = "accountInfo.enabled")
+//    })
     User fromDO(UserDO userDO);
 
 }
