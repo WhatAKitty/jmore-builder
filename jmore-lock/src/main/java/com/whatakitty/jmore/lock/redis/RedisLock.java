@@ -134,6 +134,14 @@ public class RedisLock implements Lock {
             if (locked) {
                 return;
             }
+
+            // sleep
+            try {
+                Thread.sleep(lockOptions.getRetriesInterval());
+            } catch (InterruptedException e) {
+                log.error("sleep interrupted", e);
+                Thread.currentThread().interrupt();
+            }
         }
 
         log.error("all lock retries with timeout {}ms reached", time);
