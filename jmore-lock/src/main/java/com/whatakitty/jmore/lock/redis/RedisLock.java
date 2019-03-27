@@ -92,6 +92,12 @@ public class RedisLock implements Lock {
         while ((System.currentTimeMillis() - start) < time) {
             final Boolean locked;
             try {
+                // get the min value of remain time and origin time.
+                // prevents negative number of
+                // getting 1ms for remain timeout value if {System.currentTimeMillis() - start}
+                // get negative result
+                final long remainTime = Math.min(Math.max(time - (System.currentTimeMillis() - start), 1L), time);
+                log.debug("lock with timeout remain {}ms", remainTime);
                 // wrap setIfAbsent operation with timeout monitor
                 // throw timeout exception while execute timeout
                 locked = timeLimiter.callUninterruptiblyWithTimeout(
@@ -101,11 +107,7 @@ public class RedisLock implements Lock {
                         lockOptions.getExpiredAfterSet(),
                         TimeUnit.MILLISECONDS
                     ),
-                    // get the min value of remain time and origin time.
-                    // prevents negative number of
-                    // getting 1ms for remain timeout value if {System.currentTimeMillis() - start}
-                    // get negative result
-                    Math.min(Math.max(System.currentTimeMillis() - start, 1L), time),
+                    remainTime,
                     unit
                 );
             } catch (TimeoutException e) {
