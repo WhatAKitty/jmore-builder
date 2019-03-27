@@ -38,12 +38,15 @@ public class RedisLock implements Lock {
             try {
                 locked = op.setIfAbsent(lockOptions.getKey(), LOCK_OBJ, lockOptions.getExpiredAfterSet(), TimeUnit.MILLISECONDS);
             } catch (Throwable t) {
+                log.error("something wrong happened", t);
+
                 // sleep
                 try {
                     Thread.sleep(lockOptions.getRetriesInterval());
                 } catch (InterruptedException e) {
                     // no throw interrupted exception
                     // continue to do lock action instead
+                    log.error("sleep interrupted", e);
                     Thread.currentThread().interrupt();
                 }
 
@@ -107,13 +110,16 @@ public class RedisLock implements Lock {
                 );
             } catch (TimeoutException e) {
                 // setIfAbsent command execute timeout
-                log.error("lock with timeout {}ms reached", time);
+                log.error("lock once with timeout {}ms reached", time);
                 throw new TimeoutLockException(time, unit);
             } catch (Throwable t) {
+                log.error("something wrong happened", t);
+
                 // sleep
                 try {
                     Thread.sleep(lockOptions.getRetriesInterval());
                 } catch (InterruptedException e) {
+                    log.error("sleep interrupted", e);
                     Thread.currentThread().interrupt();
                 }
 
@@ -128,7 +134,7 @@ public class RedisLock implements Lock {
             }
         }
 
-        log.error("lock with timeout {}ms reached", time);
+        log.error("all lock retries with timeout {}ms reached", time);
         throw new TimeoutLockException(time, unit);
     }
 

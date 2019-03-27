@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import com.whatakitty.jmore.lock.exception.LockException;
 import com.whatakitty.jmore.lock.exception.TimeoutLockException;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import org.springframework.data.redis.core.ValueOperations;
  * @date 2019/03/24
  * @description
  **/
+@Slf4j
 @RunWith(MockitoJUnitRunner.class)
 public class RedisLockTest {
 
@@ -132,6 +134,7 @@ public class RedisLockTest {
         try {
             redisLock.lock(10000, TimeUnit.MILLISECONDS);
         } catch (LockException e) {
+            log.error("lock with timeout normal", e);
             Assert.fail();
         }
     }
