@@ -24,7 +24,7 @@ import org.springframework.data.redis.core.ValueOperations;
  * @description
  **/
 @Slf4j
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class RedisLockTest {
 
     @Mock
