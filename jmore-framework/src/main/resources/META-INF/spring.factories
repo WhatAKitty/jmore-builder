@@ -1,0 +1,4 @@
+org.springframework.boot.SpringApplicationRunListener=\
+  com.whatakitty.jmore.framework.bootstrap.JMoreRunListener
+org.springframework.context.event.ApplicationEventMulticaster=\
+  org.springframework.context.event.SimpleApplicationEventMulticaster

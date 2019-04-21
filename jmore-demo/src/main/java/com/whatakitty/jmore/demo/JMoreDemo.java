@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.demo;
 
-import org.springframework.boot.SpringApplication;
+import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JMoreDemo {
 
     public static void main(String[] args) {
-        SpringApplication.run(JMoreDemo.class, args);
+        JMoreApplication.run(JMoreDemo.class, args);
     }
 
 }
