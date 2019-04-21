@@ -44,6 +44,8 @@
         <module>jmore-demo</module>
         <module>jmore-lock</module>
         <module>jmore-mybatis</module>
+        <module>jmore-console</module>
+        <module>jmore-web</module>
     </modules>
 
     <properties>

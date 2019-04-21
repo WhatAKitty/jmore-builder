@@ -27,9 +27,10 @@
 
         <!-- jmore -->
         <jmore-parent.version>1.0-SNAPSHOT</jmore-parent.version>
+        <jmore-framework.version>1.0-SNAPSHOT</jmore-framework.version>
+        <jmore-web.version>1.0-SNAPSHOT</jmore-web.version>
         <jmore-lock.version>1.0-SNAPSHOT</jmore-lock.version>
         <jmore-mybatis.version>1.0-SNAPSHOT</jmore-mybatis.version>
-        <jmore-framework.version>1.0-SNAPSHOT</jmore-framework.version>
         <jmore-demo.version>1.0-SNAPSHOT</jmore-demo.version>
 
         <!-- db -->
@@ -78,6 +79,16 @@
             <!-- JMore -->
             <dependency>
                 <groupId>com.whatakitty.jmore</groupId>
+                <artifactId>jmore-framework</artifactId>
+                <version>${jmore-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.jmore</groupId>
+                <artifactId>jmore-web</artifactId>
+                <version>${jmore-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.jmore</groupId>
                 <artifactId>jmore-lock</artifactId>
                 <version>${jmore-lock.version}</version>
             </dependency>
@@ -85,11 +96,6 @@
                 <groupId>com.whatakitty.jmore</groupId>
                 <artifactId>jmore-mybatis</artifactId>
                 <version>${jmore-mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.whatakitty.jmore</groupId>
-                <artifactId>jmore-framework</artifactId>
-                <version>${jmore-framework.version}</version>
             </dependency>
 
 

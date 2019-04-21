@@ -1,5 +1,6 @@
-package com.whatakitty.jmore.framework.api;
+package com.whatakitty.jmore.web.api;
 
+import com.whatakitty.jmore.framework.validation.DetailedMsg;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,17 +58,6 @@ public class Result<T> implements Serializable {
     public Result<T> addDetailedMsgs(Collection<DetailedMsg> detailedMsgs) {
         this.detailedMsgs.addAll(detailedMsgs);
         return this;
-    }
-
-    /**
-     * detailed msg for describe more info about result.
-     * such as the validation of some beans.
-     */
-    public static abstract class DetailedMsg implements Serializable {
-
-        @Override
-        public abstract String toString();
-
     }
 
 }

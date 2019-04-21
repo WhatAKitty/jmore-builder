@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.framework.security;
+package com.whatakitty.jmore.web.security;
 
 import java.util.List;
 import javax.annotation.PostConstruct;

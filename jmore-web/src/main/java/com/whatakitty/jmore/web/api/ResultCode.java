@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.framework.api;
+package com.whatakitty.jmore.web.api;
 
 import java.io.Serializable;
 import lombok.AccessLevel;

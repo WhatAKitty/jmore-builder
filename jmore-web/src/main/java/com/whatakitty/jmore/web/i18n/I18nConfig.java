@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.framework.i18n;
+package com.whatakitty.jmore.web.i18n;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

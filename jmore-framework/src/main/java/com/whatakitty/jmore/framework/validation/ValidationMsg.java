@@ -1,6 +1,5 @@
 package com.whatakitty.jmore.framework.validation;
 
-import com.whatakitty.jmore.framework.api.Result.DetailedMsg;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.validation.FieldError;

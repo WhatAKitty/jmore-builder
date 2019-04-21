@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.framework.security;
+package com.whatakitty.jmore.web.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

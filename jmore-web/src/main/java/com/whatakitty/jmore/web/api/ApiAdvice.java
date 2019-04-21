@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.framework.api;
+package com.whatakitty.jmore.web.api;
 
 import com.whatakitty.jmore.framework.validation.ValidationMsg;
 import java.util.stream.Collectors;
