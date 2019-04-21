@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.alibaba.fastjson.JSON;
-import com.whatakitty.jmore.framework.api.ApiAdvice;
-import com.whatakitty.jmore.framework.i18n.I18nConfig;
+import com.whatakitty.jmore.web.api.ApiAdvice;
+import com.whatakitty.jmore.web.i18n.I18nConfig;
 import com.whatakitty.jmore.framework.validation.ValidatorConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;

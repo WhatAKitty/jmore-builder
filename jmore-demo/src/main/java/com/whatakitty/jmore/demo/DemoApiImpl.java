@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.demo;
 
-import com.whatakitty.jmore.framework.api.Result;
+import com.whatakitty.jmore.web.api.Result;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.RestController;

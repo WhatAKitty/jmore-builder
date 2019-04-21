@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.whatakitty.jmore</groupId>
-            <artifactId>jmore-framework</artifactId>
+            <artifactId>jmore-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.whatakitty.jmore</groupId>
