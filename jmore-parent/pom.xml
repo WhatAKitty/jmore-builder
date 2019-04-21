@@ -49,6 +49,21 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifestEntries>
+                            <Implementation-Title>JMore</Implementation-Title>
+                            <Automatic-Module-Name>jmore</Automatic-Module-Name>
+                            <Implementation-Version>${jmore.version}</Implementation-Version>
+                            <Built-By>WhatAKitty</Built-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
