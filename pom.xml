@@ -12,6 +12,31 @@
     <name>jmore-builder</name>
     <url>http://www.example.com</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/WhatAKitty/jmore-builder/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:WhatAKitty/jmore-builder.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/WhatAKitty/jmore-builder.git</developerConnection>
+        <url>git@github.com:WhatAKitty/jmore-builder.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>WhatAKitty</id>
+            <name>WhatAKitty</name>
+            <email>104xuqiang@gmail.com</email>
+            <roles>
+                <role>Owner</role>
+            </roles>
+        </developer>
+    </developers>
+
     <modules>
         <module>jmore-dependencies</module>
         <module>jmore-framework</module>
