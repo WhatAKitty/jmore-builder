@@ -9,15 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jmore-console</artifactId>
+    <artifactId>jmore-console-demo</artifactId>
 
-    <name>jmore-console</name>
+    <name>jmore-console-demo</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
 
     <dependencies>
         <dependency>
             <groupId>com.whatakitty.jmore</groupId>
-            <artifactId>jmore-framework</artifactId>
+            <artifactId>jmore-console</artifactId>
         </dependency>
     </dependencies>
 

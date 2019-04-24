@@ -29,6 +29,7 @@
         <jmore-parent.version>1.0-SNAPSHOT</jmore-parent.version>
         <jmore-framework.version>1.0-SNAPSHOT</jmore-framework.version>
         <jmore-web.version>1.0-SNAPSHOT</jmore-web.version>
+        <jmore-console.version>1.0-SNAPSHOT</jmore-console.version>
         <jmore-lock.version>1.0-SNAPSHOT</jmore-lock.version>
         <jmore-mybatis.version>1.0-SNAPSHOT</jmore-mybatis.version>
         <jmore-demo.version>1.0-SNAPSHOT</jmore-demo.version>
@@ -50,6 +51,9 @@
 
         <!-- console -->
         <termd-console.version>1.1.7</termd-console.version>
+
+        <!-- validator -->
+        <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
 
         <!-- chore utils -->
         <lombok.version>1.18.6</lombok.version>
@@ -89,6 +93,11 @@
                 <groupId>com.whatakitty.jmore</groupId>
                 <artifactId>jmore-web</artifactId>
                 <version>${jmore-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whatakitty.jmore</groupId>
+                <artifactId>jmore-console</artifactId>
+                <version>${jmore-console.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.whatakitty.jmore</groupId>
@@ -217,6 +226,14 @@
                 <groupId>io.termd</groupId>
                 <artifactId>termd-core</artifactId>
                 <version>${termd-console.version}</version>
+            </dependency>
+
+
+            <!-- Validator -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
             </dependency>
 
 
