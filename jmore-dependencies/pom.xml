@@ -5,14 +5,14 @@
     <parent>
         <artifactId>jmore-builder</artifactId>
         <groupId>com.whatakitty.jmore</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jmore-dependencies</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>jmore-dependencies</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
@@ -26,13 +26,13 @@
         <druid-boot.version>1.1.10</druid-boot.version>
 
         <!-- jmore -->
-        <jmore-parent.version>1.0-SNAPSHOT</jmore-parent.version>
-        <jmore-framework.version>1.0-SNAPSHOT</jmore-framework.version>
-        <jmore-web.version>1.0-SNAPSHOT</jmore-web.version>
-        <jmore-console.version>1.0-SNAPSHOT</jmore-console.version>
-        <jmore-lock.version>1.0-SNAPSHOT</jmore-lock.version>
-        <jmore-mybatis.version>1.0-SNAPSHOT</jmore-mybatis.version>
-        <jmore-demo.version>1.0-SNAPSHOT</jmore-demo.version>
+        <jmore-parent.version>1.0.0-SNAPSHOT</jmore-parent.version>
+        <jmore-framework.version>1.0.0-SNAPSHOT</jmore-framework.version>
+        <jmore-web.version>1.0.0-SNAPSHOT</jmore-web.version>
+        <jmore-console.version>1.0.0-SNAPSHOT</jmore-console.version>
+        <jmore-lock.version>1.0.0-SNAPSHOT</jmore-lock.version>
+        <jmore-mybatis.version>1.0.0-SNAPSHOT</jmore-mybatis.version>
+        <jmore-demo.version>1.0.0-SNAPSHOT</jmore-demo.version>
 
         <!-- db -->
         <mongodb.version>3.9.1</mongodb.version>

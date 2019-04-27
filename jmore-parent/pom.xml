@@ -5,14 +5,14 @@
     <parent>
         <artifactId>jmore-dependencies</artifactId>
         <groupId>com.whatakitty.jmore</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../jmore-dependencies/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jmore-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>jmore-parent</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
