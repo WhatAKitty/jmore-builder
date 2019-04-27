@@ -16,13 +16,6 @@
     <name>jmore-framework</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
 
-    <repositories>
-        <repository>
-            <id>projectlombok.org</id>
-            <url>https://projectlombok.org/edge-releases</url>
-        </repository>
-    </repositories>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
