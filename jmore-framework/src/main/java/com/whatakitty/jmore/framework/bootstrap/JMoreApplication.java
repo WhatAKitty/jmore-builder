@@ -1,12 +1,20 @@
 package com.whatakitty.jmore.framework.bootstrap;
 
+import com.whatakitty.jmore.framework.bootstrap.listener.JMoreApplicationListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ApplicationEventMulticaster;
+import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.SpringFactoriesLoader;
@@ -25,12 +33,21 @@ public final class JMoreApplication extends SpringApplication {
     @Getter(AccessLevel.PACKAGE)
     private ApplicationEventMulticaster applicationEventMulticaster;
 
+    @Getter
+    private List<JMoreApplicationListener> jmoreListeners;
+
     public JMoreApplication(Class<?>... primarySources) {
         super(primarySources);
     }
 
+    @SuppressWarnings("unchecked")
     public JMoreApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
         super(resourceLoader, primarySources);
+
+        // load jmore listeners
+        List<JMoreApplicationListener> applicationListeners = SpringFactoriesLoader
+            .loadFactories(JMoreApplicationListener.class, this.getClassLoader());
+        setJMoreListeners((Collection) applicationListeners);
     }
 
     @Override
@@ -67,7 +84,15 @@ public final class JMoreApplication extends SpringApplication {
         }
 
         // get the highest priority application event multi casters
-        return applicationEventMulticasters.get(0);
+        ApplicationEventMulticaster publisher = applicationEventMulticasters.get(0);
+
+        // set task executor
+        if (publisher instanceof PooledEventPublisher) {
+            ((PooledEventPublisher) publisher).setExecutor(createDefaultTaskExecutor());
+        } else if (publisher instanceof SimpleApplicationEventMulticaster) {
+            ((SimpleApplicationEventMulticaster) publisher).setTaskExecutor(createDefaultTaskExecutor());
+        }
+        return publisher;
     }
 
     /**
@@ -97,6 +122,26 @@ public final class JMoreApplication extends SpringApplication {
     }
 
     /**
+     * set jmore listeners
+     * will reset the jmorelisteners list
+     *
+     * @param listeners
+     */
+    private void setJMoreListeners(Collection<? extends JMoreApplicationListener<?>> listeners) {
+        this.jmoreListeners = new ArrayList<>(16);
+        this.jmoreListeners.addAll(listeners);
+    }
+
+    /**
+     * add jmore listeners
+     *
+     * @param listener the listeners to add
+     */
+    public void addJMoreListener(JMoreApplicationListener<?>... listener) {
+        this.jmoreListeners.addAll(Arrays.asList(listener));
+    }
+
+    /**
      * A basic main that can be used to launch an application. This method is useful when
      * application sources are defined via a {@literal --spring.main.sources} command line
      * argument.
@@ -111,6 +156,17 @@ public final class JMoreApplication extends SpringApplication {
      */
     public static void main(String[] args) throws Exception {
         JMoreApplication.run(new Class<?>[0], args);
+    }
+
+    private ThreadPoolExecutor createDefaultTaskExecutor() {
+        return new ThreadPoolExecutor(
+            3,
+            5,
+            1000,
+            TimeUnit.MILLISECONDS,
+            new ArrayBlockingQueue<>(200),
+            new ThreadPoolExecutor.CallerRunsPolicy()
+        );
     }
 
 }
