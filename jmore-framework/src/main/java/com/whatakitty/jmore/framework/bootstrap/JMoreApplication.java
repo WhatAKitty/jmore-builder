@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import lombok.AccessLevel;
 import lombok.Getter;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -37,7 +38,7 @@ public final class JMoreApplication extends SpringApplication {
     private List<JMoreApplicationListener> jmoreListeners;
 
     public JMoreApplication(Class<?>... primarySources) {
-        super(primarySources);
+        this(null, primarySources);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +63,11 @@ public final class JMoreApplication extends SpringApplication {
     @Override
     protected ConfigurableApplicationContext createApplicationContext() {
         ConfigurableApplicationContext applicationContext = super.createApplicationContext();
+
+        // if the event multi caster instance of BeanFacotryAware, then set the beanFactory in it.
+        if (applicationEventMulticaster instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) applicationEventMulticaster).setBeanFactory(applicationContext.getBeanFactory());
+        }
 
         return applicationContext;
     }

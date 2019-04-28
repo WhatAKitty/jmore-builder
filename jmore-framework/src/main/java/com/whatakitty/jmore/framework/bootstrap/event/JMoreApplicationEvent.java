@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.framework.bootstrap.event;
 
-import org.springframework.context.ApplicationEvent;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.context.event.SpringApplicationEvent;
 
 /**
  * jmore application based event
@@ -9,14 +10,10 @@ import org.springframework.context.ApplicationEvent;
  * @date 2019/04/28
  * @description
  **/
-public abstract class JMoreApplicationEvent extends ApplicationEvent {
+public abstract class JMoreApplicationEvent extends SpringApplicationEvent {
 
-    /**
-     * Create a new JMoreApplicationEvent.
-     * @param source the object on which the event initially occurred (never {@code null})
-     */
-    public JMoreApplicationEvent(Object source) {
-        super(source);
+    public JMoreApplicationEvent(SpringApplication application, String[] args) {
+        super(application, args);
     }
 
 }
