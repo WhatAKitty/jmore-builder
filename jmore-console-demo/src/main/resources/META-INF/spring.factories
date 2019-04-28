@@ -1,0 +1,2 @@
+com.whatakitty.jmore.framework.bootstrap.listener.JMoreApplicationListener=\
+  com.whatakitty.jmore.console.demo.ConsoleDemoStartedListener

@@ -6,7 +6,7 @@ import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Created with IntelliJ IDEA.
+ * example console application base on jmore console
  *
  * @author WhatAKitty
  * @date 2019/04/23
@@ -17,7 +17,7 @@ public class Application implements JMoreConsoleRunner {
 
     @Override
     public void run(ConsoleContext context) {
-        System.out.println();
+        System.out.println("test");
     }
 
     public static void main(String[] args) {
