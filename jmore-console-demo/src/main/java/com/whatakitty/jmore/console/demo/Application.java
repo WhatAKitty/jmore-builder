@@ -7,6 +7,7 @@ import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
 import java.util.Arrays;
 import java.util.Scanner;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2019/04/23
  * @description
  **/
+@Slf4j
 @SpringBootApplication(scanBasePackages = "com.whatakitty.jmore")
 public class Application implements JMoreConsoleRunner {
 
@@ -25,12 +27,16 @@ public class Application implements JMoreConsoleRunner {
 
     @Override
     public void run(ConsoleContext context) {
-        System.out.println("Please enter command:");
         final Scanner scanner = new Scanner(System.in);
         while (true) {
+            System.out.println("Please enter command:");
             final String cmd = scanner.nextLine();
-            ICommand command = commandFactory.create(context, Arrays.asList(cmd));
-            command.execute();
+            try {
+                ICommand command = commandFactory.create(context, Arrays.asList(cmd));
+                command.execute();
+            } catch (UnsupportedOperationException e) {
+                log.error(e.getMessage());
+            }
         }
     }
 
