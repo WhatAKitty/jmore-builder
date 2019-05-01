@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console;
 
-import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
+import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
@@ -17,6 +17,7 @@ import org.springframework.core.env.Environment;
  * @date 2019/04/23
  * @description
  **/
+@ThreadSafe
 public class ConsoleContext {
 
     private static final ConsoleContextBuilder BUILDER = new ConsoleContextBuilder();
@@ -35,7 +36,7 @@ public class ConsoleContext {
      * source
      */
     @Getter
-    private final JMoreApplication source;
+    private final Object source;
 
     /**
      * inner parameters holder
@@ -60,7 +61,7 @@ public class ConsoleContext {
     @Getter(AccessLevel.PROTECTED)
     private final Environment environment;
 
-    private ConsoleContext(final JMoreApplication source, final ApplicationContext appContext) {
+    private ConsoleContext(final Object source, final ApplicationContext appContext) {
         this.source = source;
         this.appContext = appContext;
         this.environment = appContext.getEnvironment();
@@ -128,15 +129,15 @@ public class ConsoleContext {
         /**
          * build console context from application args
          *
-         * @param application the main application
-         * @param appContext  the application context
-         * @param args        args passed from command line
+         * @param source     the source
+         * @param appContext the application context
+         * @param args       args passed from command line
          * @return console context
          */
-        final ConsoleContext buildFromArgs(final JMoreApplication application,
+        final ConsoleContext buildFromArgs(final Object source,
                                            final ApplicationContext appContext,
                                            final ApplicationArguments args) {
-            ConsoleContext context = new ConsoleContext(application, appContext);
+            ConsoleContext context = new ConsoleContext(source, appContext);
             args.getOptionNames().parallelStream()
                 .forEach(name -> {
                     context.addParameter(name, args.getOptionValues(name));

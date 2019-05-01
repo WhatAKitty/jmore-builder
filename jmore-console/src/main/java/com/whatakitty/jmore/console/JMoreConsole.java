@@ -29,7 +29,7 @@ public final class JMoreConsole implements ApplicationRunner, ApplicationContext
         }
 
         for (JMoreConsoleRunner runner : runners) {
-            runner.run(ConsoleContext.builder().buildFromArgs(applicationContext, args));
+            runner.run(ConsoleContext.builder().buildFromArgs(this, applicationContext, args));
         }
     }
 
