@@ -1,11 +1,13 @@
 package com.whatakitty.jmore.console;
 
+import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.core.env.Environment;
 
 /**
@@ -22,6 +24,18 @@ public class ConsoleContext {
     static ConsoleContextBuilder builder() {
         return BUILDER;
     }
+
+    /**
+     * current command to execute
+     */
+    @Getter
+    private final ThreadLocal<String> command = new ThreadLocal<>();
+
+    /**
+     * source
+     */
+    @Getter
+    private final JMoreApplication source;
 
     /**
      * inner parameters holder
@@ -46,7 +60,8 @@ public class ConsoleContext {
     @Getter(AccessLevel.PROTECTED)
     private final Environment environment;
 
-    private ConsoleContext(ApplicationContext appContext) {
+    private ConsoleContext(final JMoreApplication source, final ApplicationContext appContext) {
+        this.source = source;
         this.appContext = appContext;
         this.environment = appContext.getEnvironment();
     }
@@ -97,6 +112,15 @@ public class ConsoleContext {
     }
 
     /**
+     * publish event
+     *
+     * @param event the raw event obj
+     */
+    public void publishEvent(ApplicationEvent event) {
+        getAppContext().publishEvent(event);
+    }
+
+    /**
      * Console context builder
      */
     static class ConsoleContextBuilder {
@@ -104,11 +128,15 @@ public class ConsoleContext {
         /**
          * build console context from application args
          *
-         * @param args args passed from command line
+         * @param application the main application
+         * @param appContext  the application context
+         * @param args        args passed from command line
          * @return console context
          */
-        final ConsoleContext buildFromArgs(ApplicationContext appContext, ApplicationArguments args) {
-            ConsoleContext context = new ConsoleContext(appContext);
+        final ConsoleContext buildFromArgs(final JMoreApplication application,
+                                           final ApplicationContext appContext,
+                                           final ApplicationArguments args) {
+            ConsoleContext context = new ConsoleContext(application, appContext);
             args.getOptionNames().parallelStream()
                 .forEach(name -> {
                     context.addParameter(name, args.getOptionValues(name));
