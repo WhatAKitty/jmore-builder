@@ -112,6 +112,18 @@ public class ConsoleContext {
         return defaultValue;
     }
 
+    public void setCurrentCommand(String cmd) {
+        command.set(cmd);
+    }
+
+    public String currentCommand() {
+        return command.get();
+    }
+
+    public void removeCommand() {
+        command.remove();
+    }
+
     /**
      * publish event
      *
