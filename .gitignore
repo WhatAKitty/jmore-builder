@@ -2,3 +2,4 @@
 target/
 .idea/
 doc/
+.DS_Store
