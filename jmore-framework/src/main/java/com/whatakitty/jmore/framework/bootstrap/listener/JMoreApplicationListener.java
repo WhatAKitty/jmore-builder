@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.framework.bootstrap.listener;
 
-import com.whatakitty.jmore.framework.bootstrap.event.JMoreApplicationEvent;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationListener;
  * @description
  **/
 @FunctionalInterface
-public interface JMoreApplicationListener<E extends JMoreApplicationEvent> extends ApplicationListener<E> {
+public interface JMoreApplicationListener<E extends ApplicationEvent> extends ApplicationListener<E> {
 
     /**
      * Handle an application event.
