@@ -1,5 +1,6 @@
 # JMORE FrameWork
 
+```text
          _   .-')                _  .-')     ('-.
         ( '.( OO )_             ( \( -O )  _(  OO)       ,-.,-.,-.
      ,--.,--.   ,--.).-'),-----. ,------. (,------.       \ \\ \\ \
@@ -9,19 +10,19 @@
 ,--. |  ||  |   |  |  \ |  | |  ||  .  '.' |  .--'         / // // /
 |  '-'  /|  |   |  |   `'  '-'  '|  |\  \  |  `---.       / // // /
  `-----' `--'   `--'     `-----' `--' '--' `------'      `-'`-'`-'
-
+```
 
 ## API JSON SCHEMA
 
-后端通讯全部以`POST`形式传递
+All communications with backend service is based on json format.
 
-### 成功消息体
+### Success Body
 
 ```json
 {
   "code": 0,
   "timestamp": 1524640724522,
-  "msg": "成功",
+  "msg": "Success",
   "data": ["label"]
 }
 ```
@@ -30,20 +31,20 @@
 {
   "code": 0,
   "timestamp": 1524640724522,
-  "msg": "成功",
+  "msg": "Success",
   "data": {
     "name": "jmore"
   }
 }
 ```
 
-### 失败消息体
+### Failure Body
 
 ```json
 {
   "code": -1010,
   "timestamp": 1524640724522,
-  "msg": "获取失败",
+  "msg": "Failure",
   "data": null
 }
 ```
