@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.demo;
+package com.whatakitty.jmore.console.demo.application.listener;
 
 import com.whatakitty.jmore.framework.bootstrap.event.JMoreStartedEvent;
 import com.whatakitty.jmore.framework.bootstrap.listener.JMoreApplicationListener;

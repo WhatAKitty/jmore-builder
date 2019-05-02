@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.demo;
+package com.whatakitty.jmore.console.demo.domain.command;
 
 import com.whatakitty.jmore.console.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.ICommand;
@@ -19,8 +19,13 @@ public class DemoCommandParser implements ICommandParser {
     public ICommand parse(ConsoleContext context, String command) {
         switch (command) {
             case SayHelloWorldCommand.COMMAND_TIP:
-                context.setCurrentCommand(command);
-                return new SayHelloWorldCommand(context);
+                SayHelloWorldCommand cmd = new SayHelloWorldCommand(context);
+                context.setCurrentCommand(cmd);
+                return cmd;
+            case ShowHistoryCommand.COMMAND_TIP:
+                ShowHistoryCommand showHistoryCommand = new ShowHistoryCommand(context);
+                context.setCurrentCommand(showHistoryCommand);
+                return showHistoryCommand;
             default:
                 throw new UnsupportedOperationException(String.format("unsupported command %s", command));
         }

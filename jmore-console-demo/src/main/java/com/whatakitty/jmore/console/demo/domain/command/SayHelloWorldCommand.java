@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.demo;
+package com.whatakitty.jmore.console.demo.domain.command;
 
 import com.whatakitty.jmore.console.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.Command;

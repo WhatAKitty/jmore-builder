@@ -1,10 +1,10 @@
-package com.whatakitty.jmore.console.demo;
+package com.whatakitty.jmore.console.demo.application.listener;
 
-import com.whatakitty.jmore.console.event.CommandFinishedEvent;
+import com.whatakitty.jmore.console.domain.command.event.CommandFinishedEvent;
 import com.whatakitty.jmore.framework.bootstrap.listener.JMoreApplicationListener;
 
 /**
- * Created with IntelliJ IDEA.
+ * console command execute finished listener
  *
  * @author WhatAKitty
  * @date 2019/05/02
@@ -14,6 +14,7 @@ public class ConsoleDemoCommandExecuteFinishedListener implements JMoreApplicati
 
     @Override
     public void onApplicationEvent(CommandFinishedEvent event) {
-        System.out.println(String.format("command %s has finished", event.getCommand()));
+        System.out.println(String.format("command %s has finished", event.getCommand().getName()));
     }
+
 }
