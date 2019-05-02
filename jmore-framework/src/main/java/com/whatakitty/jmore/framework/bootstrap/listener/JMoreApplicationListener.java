@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.framework.bootstrap.listener;
 
+import com.whatakitty.jmore.framework.compilerule.annotations.NotNull;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
@@ -19,6 +20,6 @@ public interface JMoreApplicationListener<E extends ApplicationEvent> extends Ap
      * @param event the event to respond to
      */
     @Override
-    void onApplicationEvent(E event);
+    void onApplicationEvent(@NotNull E event);
 
 }
