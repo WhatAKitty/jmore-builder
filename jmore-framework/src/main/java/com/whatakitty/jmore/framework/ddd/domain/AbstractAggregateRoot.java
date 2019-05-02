@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.framework.ddd.domain;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -13,6 +14,6 @@ import lombok.Data;
 @Data
 public abstract class AbstractAggregateRoot implements Serializable {
 
-    private Long id;
+    private AggregateId id;
 
 }
