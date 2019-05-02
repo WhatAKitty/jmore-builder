@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
-import com.whatakitty.jmore.framework.ddd.domain.BaseEntity;
+import com.whatakitty.jmore.framework.ddd.domain.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
@@ -12,7 +12,7 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
  * @date 2019/05/01
  * @description
  **/
-public class BatchCommand extends BaseEntity implements ICommand {
+public class BatchCommand extends AbstractEntity implements ICommand {
 
     private final List<ICommand> commands;
 
@@ -43,6 +43,11 @@ public class BatchCommand extends BaseEntity implements ICommand {
         // collections sort
         AnnotationAwareOrderComparator.sort(commands);
         return this;
+    }
+
+    @Override
+    public String getName() {
+        return "BatchCommand";
     }
 
     @Override
