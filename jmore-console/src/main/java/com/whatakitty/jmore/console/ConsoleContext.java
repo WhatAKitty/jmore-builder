@@ -1,7 +1,11 @@
 package com.whatakitty.jmore.console;
 
+import com.whatakitty.jmore.console.domain.command.ICommand;
+import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
+import java.io.PrintStream;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,11 +30,19 @@ public class ConsoleContext {
         return BUILDER;
     }
 
+    private static final Object HISTORY_LOCK = new Object();
+
+    /**
+     * the current context's commands history
+     */
+    @Getter
+    private History history;
+
     /**
      * current command to execute
      */
     @Getter
-    private final ThreadLocal<String> command = new ThreadLocal<>();
+    private final ThreadLocal<ICommand> command = new ThreadLocal<>();
 
     /**
      * source
@@ -60,6 +72,17 @@ public class ConsoleContext {
      */
     @Getter(AccessLevel.PROTECTED)
     private final Environment environment;
+
+    /**
+     * the writer to print message
+     */
+    @Getter
+    private final PrintStream writer = System.out;
+    /**
+     * the reader to read message
+     */
+    @Getter
+    private final Scanner reader = new Scanner(System.in);
 
     private ConsoleContext(final Object source, final ApplicationContext appContext) {
         this.source = source;
@@ -112,11 +135,32 @@ public class ConsoleContext {
         return defaultValue;
     }
 
-    public void setCurrentCommand(String cmd) {
+    /**
+     * set history
+     *
+     * @param history new history
+     * @return {null} set successfully while old value returned for failure
+     */
+    public History setHistory(History history) {
+        if (this.history != null) {
+            return this.history;
+        }
+
+        synchronized (HISTORY_LOCK) {
+            if (this.history == null) {
+                this.history = history;
+                return null;
+            } else {
+                return this.history;
+            }
+        }
+    }
+
+    public void setCurrentCommand(ICommand cmd) {
         command.set(cmd);
     }
 
-    public String currentCommand() {
+    public ICommand currentCommand() {
         return command.get();
     }
 
