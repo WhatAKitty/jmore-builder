@@ -1,10 +1,10 @@
 package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.ConsoleContext;
-import com.whatakitty.jmore.console.event.CommandAfterExecuteEvent;
-import com.whatakitty.jmore.console.event.CommandBeforeExecuteEvent;
-import com.whatakitty.jmore.console.event.CommandExecuteFailedEvent;
-import com.whatakitty.jmore.console.event.CommandFinishedEvent;
+import com.whatakitty.jmore.console.domain.command.event.CommandAfterExecuteEvent;
+import com.whatakitty.jmore.console.domain.command.event.CommandBeforeExecuteEvent;
+import com.whatakitty.jmore.console.domain.command.event.CommandExecuteFailedEvent;
+import com.whatakitty.jmore.console.domain.command.event.CommandFinishedEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import lombok.AccessLevel;
 import lombok.Data;
