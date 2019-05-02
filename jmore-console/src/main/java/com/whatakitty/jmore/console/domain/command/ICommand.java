@@ -1,6 +1,5 @@
 package com.whatakitty.jmore.console.domain.command;
 
-import java.io.Serializable;
 import org.springframework.core.Ordered;
 
 /**
@@ -10,7 +9,14 @@ import org.springframework.core.Ordered;
  * @date 2019/05/01
  * @description
  **/
-public interface ICommand extends Ordered, Serializable {
+public interface ICommand extends Ordered {
+
+    /**
+     * get command name
+     *
+     * @return command name
+     */
+    String getName();
 
     /**
      * get the snapshot of the current command

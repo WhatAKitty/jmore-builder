@@ -1,7 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.ConsoleContext;
-import java.io.Serializable;
 
 /**
  * receiver
@@ -11,7 +10,7 @@ import java.io.Serializable;
  * @description
  **/
 @FunctionalInterface
-public interface IReceiver extends Serializable {
+public interface IReceiver {
 
     /**
      * receiver invoke the action while receive command
