@@ -8,9 +8,8 @@ import com.whatakitty.jmore.console.domain.command.event.CommandFinishedEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * Command aggregate root
@@ -23,9 +22,8 @@ import org.springframework.stereotype.Component;
  * @date 2019/05/01
  * @description
  **/
-@Component
-@Scope("prototype")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public abstract class Command extends AbstractAggregateRoot implements ICommand {
 
     /**
