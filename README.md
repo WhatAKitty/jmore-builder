@@ -1,4 +1,4 @@
-# JMORE FrameWork
+# JMORE
 
 ```text
          _   .-')                _  .-')     ('-.
@@ -12,39 +12,17 @@
  `-----' `--'   `--'     `-----' `--' '--' `------'      `-'`-'`-'
 ```
 
-## API JSON SCHEMA
+## Framework Module
 
-All communications with backend service is based on json format.
+- [ ] Base Framework(jmore-framework)
+- [ ] Distributed Lock(jmore-lock)
+- [ ] Data Operation(jmore-data)
+- [ ] Event Bus(jmore-eventbus)
+- [ ] Distributed Transaction(jmore-transaction)
+- [ ] Console Framework(jmore-console)
+- [ ] Web Framework(jmore-web)
+- [ ] Concurrent Limit(jmore-concurrent-limit)
+- [ ] DDD Project Template(jmore-ddd-template)
 
-### Success Body
+## Framework Graph
 
-```json
-{
-  "code": 0,
-  "timestamp": 1524640724522,
-  "msg": "Success",
-  "data": ["label"]
-}
-```
-
-```json
-{
-  "code": 0,
-  "timestamp": 1524640724522,
-  "msg": "Success",
-  "data": {
-    "name": "jmore"
-  }
-}
-```
-
-### Failure Body
-
-```json
-{
-  "code": -1010,
-  "timestamp": 1524640724522,
-  "msg": "Failure",
-  "data": null
-}
-```
