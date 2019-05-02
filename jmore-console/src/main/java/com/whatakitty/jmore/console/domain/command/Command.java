@@ -42,15 +42,15 @@ public abstract class Command extends AbstractAggregateRoot implements ICommand 
 
     @Override
     public void execute() {
-        context.publishEvent(new CommandBeforeExecuteEvent(context));
+        publishEvent(new CommandBeforeExecuteEvent(context));
         try {
             // invoke
             final Object result = execute(receiver);
-            context.publishEvent(new CommandAfterExecuteEvent(context, result));
+            publishEvent(new CommandAfterExecuteEvent(context, result));
         } catch (Throwable e) {
-            context.publishEvent(new CommandExecuteFailedEvent(context, e));
+            publishEvent(new CommandExecuteFailedEvent(context, e));
         }
-        context.publishEvent(new CommandFinishedEvent(context));
+        publishEvent(new CommandFinishedEvent(context));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.whatakitty.jmore.console.domain.context;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
+import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.io.PrintStream;
 import java.util.Map;
 import java.util.Scanner;
@@ -11,7 +12,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.core.env.Environment;
 
 /**
@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
  * @description
  **/
 @ThreadSafe
-public class ConsoleContext {
+public class ConsoleContext extends AbstractAggregateRoot {
 
     private static final ConsoleContextBuilder BUILDER = new ConsoleContextBuilder();
 
@@ -166,15 +166,6 @@ public class ConsoleContext {
 
     public void removeCommand() {
         command.remove();
-    }
-
-    /**
-     * publish event
-     *
-     * @param event the raw event obj
-     */
-    public void publishEvent(ApplicationEvent event) {
-        getAppContext().publishEvent(event);
     }
 
     /**
