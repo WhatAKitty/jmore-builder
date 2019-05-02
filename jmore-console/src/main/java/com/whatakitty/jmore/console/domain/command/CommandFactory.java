@@ -20,7 +20,7 @@ public class CommandFactory {
     /**
      * command parser interface inject
      */
-    private final ICommandParser parser;
+    private final CommandParser parser;
 
     /**
      * parse user command and get an instance of command.

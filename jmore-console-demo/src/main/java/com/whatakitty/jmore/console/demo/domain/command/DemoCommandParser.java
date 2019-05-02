@@ -2,7 +2,7 @@ package com.whatakitty.jmore.console.demo.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.ICommand;
-import com.whatakitty.jmore.console.domain.command.ICommandParser;
+import com.whatakitty.jmore.console.domain.command.CommandParser;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @description
  **/
 @Component
-public class DemoCommandParser implements ICommandParser {
+public class DemoCommandParser extends CommandParser {
 
     @Override
     public ICommand parse(ConsoleContext context, String command) {
