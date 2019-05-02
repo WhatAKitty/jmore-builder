@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.demo;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.JMoreConsoleRunner;
 import com.whatakitty.jmore.console.application.service.CommandService;
 import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;

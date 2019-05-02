@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 
 /**
  * receiver

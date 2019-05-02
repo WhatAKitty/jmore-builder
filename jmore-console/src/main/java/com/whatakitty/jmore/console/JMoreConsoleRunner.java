@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.console;
 
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+
 /**
  * JMore Console Runner
  *

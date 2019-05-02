@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.domain.command.event;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 
 /**
  * command before execute event

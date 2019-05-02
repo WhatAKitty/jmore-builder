@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.application.listeners;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.command.event.CommandAfterExecuteEvent;
 import com.whatakitty.jmore.console.domain.history.History;

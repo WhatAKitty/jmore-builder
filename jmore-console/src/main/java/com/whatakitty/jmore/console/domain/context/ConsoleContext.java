@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console;
+package com.whatakitty.jmore.console.domain.context;
 
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.history.History;

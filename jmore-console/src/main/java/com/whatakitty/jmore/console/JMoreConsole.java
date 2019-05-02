@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.console;
 
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import java.util.Collection;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.ApplicationArguments;

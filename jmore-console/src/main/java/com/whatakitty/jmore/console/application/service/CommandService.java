@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.application.service;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.CommandFactory;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import java.util.Collections;

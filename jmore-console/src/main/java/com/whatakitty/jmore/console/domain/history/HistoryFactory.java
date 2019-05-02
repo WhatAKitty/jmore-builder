@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.domain.history;
 
-import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
