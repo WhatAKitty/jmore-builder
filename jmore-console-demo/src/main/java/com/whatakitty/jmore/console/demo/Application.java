@@ -2,13 +2,11 @@ package com.whatakitty.jmore.console.demo;
 
 import com.whatakitty.jmore.console.ConsoleContext;
 import com.whatakitty.jmore.console.JMoreConsoleRunner;
-import com.whatakitty.jmore.console.domain.command.CommandFactory;
-import com.whatakitty.jmore.console.domain.command.ICommand;
+import com.whatakitty.jmore.console.application.service.CommandService;
 import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
-import java.util.Arrays;
-import java.util.Scanner;
+import javax.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -19,25 +17,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description
  **/
 @Slf4j
+@RequiredArgsConstructor
 @SpringBootApplication(scanBasePackages = "com.whatakitty.jmore")
 public class Application implements JMoreConsoleRunner {
 
-    @Autowired
-    private CommandFactory commandFactory;
+    private final CommandService commandService;
 
     @Override
     public void run(ConsoleContext context) {
-        final Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Please enter command:");
-            final String cmd = scanner.nextLine();
+            context.getWriter().println("Please enter command: ");
+            final String command = context.getReader().nextLine();
             try {
-                ICommand command = commandFactory.create(context, Arrays.asList(cmd));
-                command.execute();
+                commandService.execute(context, command);
             } catch (UnsupportedOperationException e) {
                 log.error(e.getMessage());
             }
         }
+    }
+
+    @PreDestroy
+    public void destroy() {
+
     }
 
     public static void main(String[] args) {
