@@ -1,6 +1,7 @@
-package com.whatakitty.jmore.console.event;
+package com.whatakitty.jmore.console.domain.command.event;
 
 import com.whatakitty.jmore.console.ConsoleContext;
+import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.framework.ddd.event.DomainEvent;
 import lombok.Getter;
 
@@ -14,10 +15,16 @@ import lombok.Getter;
 public class AbstractCommandDomainEvent extends DomainEvent {
 
     /**
+     * the console context
+     */
+    @Getter
+    private final ConsoleContext context;
+
+    /**
      * the command passed by user
      */
     @Getter
-    private final String command;
+    private final ICommand command;
 
     /**
      * Create a new Command Domain Event.
@@ -26,6 +33,7 @@ public class AbstractCommandDomainEvent extends DomainEvent {
      */
     public AbstractCommandDomainEvent(final ConsoleContext context) {
         super(context.getSource());
+        this.context = context;
         this.command = context.getCommand().get();
     }
 

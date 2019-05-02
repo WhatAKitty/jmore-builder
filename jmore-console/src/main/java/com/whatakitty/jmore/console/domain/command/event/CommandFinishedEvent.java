@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.event;
+package com.whatakitty.jmore.console.domain.command.event;
 
 import com.whatakitty.jmore.console.ConsoleContext;
 
