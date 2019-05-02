@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
@@ -23,12 +22,6 @@ import org.springframework.core.env.Environment;
  **/
 @ThreadSafe
 public class ConsoleContext extends AbstractAggregateRoot {
-
-    private static final ConsoleContextBuilder BUILDER = new ConsoleContextBuilder();
-
-    static ConsoleContextBuilder builder() {
-        return BUILDER;
-    }
 
     private static final Object HISTORY_LOCK = new Object();
 
@@ -84,7 +77,7 @@ public class ConsoleContext extends AbstractAggregateRoot {
     @Getter
     private final Scanner reader = new Scanner(System.in);
 
-    private ConsoleContext(final Object source, final ApplicationContext appContext) {
+    ConsoleContext(final Object source, final ApplicationContext appContext) {
         this.source = source;
         this.appContext = appContext;
         this.environment = appContext.getEnvironment();
@@ -96,7 +89,7 @@ public class ConsoleContext extends AbstractAggregateRoot {
      * @param key   the entry key
      * @param value the entry value
      */
-    private void addParameter(String key, Object value) {
+    void addParameter(String key, Object value) {
         parameters.put(key, value);
     }
 
@@ -166,32 +159,6 @@ public class ConsoleContext extends AbstractAggregateRoot {
 
     public void removeCommand() {
         command.remove();
-    }
-
-    /**
-     * Console context builder
-     */
-    static class ConsoleContextBuilder {
-
-        /**
-         * build console context from application args
-         *
-         * @param source     the source
-         * @param appContext the application context
-         * @param args       args passed from command line
-         * @return console context
-         */
-        final ConsoleContext buildFromArgs(final Object source,
-                                           final ApplicationContext appContext,
-                                           final ApplicationArguments args) {
-            ConsoleContext context = new ConsoleContext(source, appContext);
-            args.getOptionNames().parallelStream()
-                .forEach(name -> {
-                    context.addParameter(name, args.getOptionValues(name));
-                });
-            return context;
-        }
-
     }
 
 }

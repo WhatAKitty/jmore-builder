@@ -1,7 +1,8 @@
 package com.whatakitty.jmore.console;
 
-import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import com.whatakitty.jmore.console.domain.context.ConsoleContextFactory;
 import java.util.Collection;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,10 +18,12 @@ import org.springframework.util.Assert;
  * @date 2019/04/23
  * @description
  **/
+@RequiredArgsConstructor
 @Component
 public final class JMoreConsole implements ApplicationRunner, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
+    private final ConsoleContextFactory consoleContextFactory;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -30,7 +33,7 @@ public final class JMoreConsole implements ApplicationRunner, ApplicationContext
         }
 
         for (JMoreConsoleRunner runner : runners) {
-            runner.run(ConsoleContext.builder().buildFromArgs(this, applicationContext, args));
+            runner.run(consoleContextFactory.create(this, applicationContext, args));
         }
     }
 
