@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
-import com.whatakitty.jmore.framework.ddd.domain.BaseEntity;
+import com.whatakitty.jmore.framework.ddd.domain.ValueObject;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
  * @description
  **/
 @RequiredArgsConstructor
-public abstract class Receiver extends BaseEntity implements IReceiver {
+public abstract class Receiver extends ValueObject implements IReceiver {
 
     @Getter(AccessLevel.PROTECTED)
     private final IReceiver function;
