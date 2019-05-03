@@ -39,7 +39,7 @@ public class BatchCommand extends AbstractEntity implements ICommand {
      * @param command concreate command
      * @return batch command instance
      */
-    public final BatchCommand addCommand(ICommand command) {
+    public final BatchCommand addCommand(Command command) {
         commands.add(command);
         // collections sort
         AnnotationAwareOrderComparator.sort(commands);

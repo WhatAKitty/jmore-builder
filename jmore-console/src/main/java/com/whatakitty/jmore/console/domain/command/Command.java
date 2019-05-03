@@ -53,6 +53,16 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
         undo(context, receiver);
     }
 
+    /**
+     * create a batch command task
+     *
+     * @param commands commands list
+     * @return batch command instance
+     */
+    public static BatchCommand createBatch(List<ICommand> commands) {
+        return new BatchCommand(commands);
+    }
+
     protected abstract Object execute(ConsoleContext context, IReceiver receiver);
 
     protected abstract Object undo(ConsoleContext context, IReceiver receiver);
