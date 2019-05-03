@@ -24,8 +24,8 @@ public class ShowHistoryCommand extends Command {
     }
 
     @Override
-    protected Object undo(ConsoleContext context, IReceiver receiver) {
-        return null;
+    public boolean supportUndo() {
+        return false;
     }
 
     /**

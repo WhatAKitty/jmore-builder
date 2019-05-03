@@ -49,6 +49,9 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
 
     @Override
     public void undo(ConsoleContext context) {
+        if (!supportUndo()) {
+            throw new UnsupportedOperationException("unsupported undo operation");
+        }
         // undo
         undo(context, receiver);
     }
@@ -65,6 +68,8 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
 
     protected abstract Object execute(ConsoleContext context, IReceiver receiver);
 
-    protected abstract Object undo(ConsoleContext context, IReceiver receiver);
+    protected Object undo(ConsoleContext context, IReceiver receiver) {
+        return null;
+    }
 
 }

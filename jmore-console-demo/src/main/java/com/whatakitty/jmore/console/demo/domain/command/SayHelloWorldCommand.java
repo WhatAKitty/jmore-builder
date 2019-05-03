@@ -32,4 +32,8 @@ public class SayHelloWorldCommand extends Command {
         throw new UnsupportedOperationException("undo is not supported yet");
     }
 
+    @Override
+    public boolean supportUndo() {
+        return false;
+    }
 }

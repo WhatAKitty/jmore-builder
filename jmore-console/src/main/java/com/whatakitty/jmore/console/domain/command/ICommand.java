@@ -27,7 +27,18 @@ public interface ICommand extends Ordered {
     /**
      * undo the command
      */
-    void undo(ConsoleContext context);
+    default void undo(ConsoleContext context) {
+        if (!supportUndo()) {
+            throw new UnsupportedOperationException("unsupported undo operation");
+        }
+    }
+
+    /**
+     * whether the command support undo operation
+     *
+     * @return {true} supported while {false} unsupported
+     */
+    boolean supportUndo();
 
     /**
      * the order the commands should execute as excepted

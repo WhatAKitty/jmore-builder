@@ -3,7 +3,9 @@ package com.whatakitty.jmore.console.domain.command;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractEntity;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 /**
@@ -58,7 +60,18 @@ public class BatchCommand extends AbstractEntity implements ICommand {
 
     @Override
     public void undo(ConsoleContext context) {
+        if (!supportUndo()) {
+            throw new UnsupportedOperationException("unsupported undo operation");
+        }
+        
+        List<ICommand> snapshots = this.commands.parallelStream().collect(Collectors.toList());
+        Collections.reverse(snapshots);
+        snapshots.forEach(item -> item.undo(context));
+    }
 
+    @Override
+    public boolean supportUndo() {
+        return this.commands.parallelStream().allMatch(item -> item.supportUndo());
     }
 
 }
