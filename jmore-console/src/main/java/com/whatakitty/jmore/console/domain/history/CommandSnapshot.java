@@ -17,6 +17,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class CommandSnapshot extends AbstractEntity {
 
+    /**
+     * create command snapshot from command
+     *
+     * @param command command
+     * @return command snapshot
+     */
+    public static final CommandSnapshot snapshot(ICommand command) {
+        return new CommandSnapshot(command.getName(), command);
+    }
+
     private final String name;
     private final ICommand command;
 

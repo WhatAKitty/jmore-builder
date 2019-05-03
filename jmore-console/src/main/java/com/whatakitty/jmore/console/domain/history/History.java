@@ -17,10 +17,6 @@ import lombok.RequiredArgsConstructor;
 public class History extends AbstractAggregateRoot<String> {
 
     /**
-     * command snapshot factory
-     */
-    private final CommandSnapshotFactory commandSnapshotFactory;
-    /**
      * the stack of command snapshot
      */
     private final Stack<CommandSnapshot> stack = new Stack<>();
@@ -35,7 +31,7 @@ public class History extends AbstractAggregateRoot<String> {
      * @param command the command to execute successfully
      */
     public void addHistory(ICommand command) {
-        stack.push(commandSnapshotFactory.snapshot(command));
+        stack.push(CommandSnapshot.snapshot(command));
     }
 
     /**
