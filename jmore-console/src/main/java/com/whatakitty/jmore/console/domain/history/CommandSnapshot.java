@@ -23,7 +23,7 @@ public class CommandSnapshot extends AbstractEntity {
      * @param command command
      * @return command snapshot
      */
-    public static final CommandSnapshot snapshot(ICommand command) {
+    public static CommandSnapshot snapshot(ICommand command) {
         return new CommandSnapshot(command.getName(), command);
     }
 
