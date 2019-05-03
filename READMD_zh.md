@@ -12,6 +12,9 @@
  `-----' `--'   `--'     `-----' `--' '--' `------'      `-'`-'`-'
 ```
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder)
+[![HitCount](http://hits.dwyl.io/WhatAKitty/jmore-builder.svg)](http://hits.dwyl.io/WhatAKitty/jmore-builder)
+
 ## 架构组件
 
 - [ ] 基础框架层(jmore-framework)

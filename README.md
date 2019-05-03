@@ -12,6 +12,9 @@
  `-----' `--'   `--'     `-----' `--' '--' `------'      `-'`-'`-'
 ```
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder)
+[![HitCount](http://hits.dwyl.io/WhatAKitty/jmore-builder.svg)](http://hits.dwyl.io/WhatAKitty/jmore-builder)
+
 ## Framework Module
 
 - [ ] Base Framework(jmore-framework)
