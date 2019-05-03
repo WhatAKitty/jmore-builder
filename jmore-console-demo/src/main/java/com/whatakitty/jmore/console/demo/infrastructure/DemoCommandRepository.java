@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoCommandRepository extends DefaultCommandRepository {
 
-    static {
-        holder.put(new AggregateId<>(SayHelloWorldCommand.COMMAND_TIP), new SayHelloWorldCommand());
+    @Override
+    protected void init() {
+        super.init();
+        put(new AggregateId<>(SayHelloWorldCommand.COMMAND_TIP), new SayHelloWorldCommand());
     }
-
+    
 }
