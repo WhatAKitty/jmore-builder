@@ -1,7 +1,7 @@
 package com.whatakitty.jmore.console.domain.history;
 
-import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.ICommand;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Stack;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
  * @description
  **/
 @RequiredArgsConstructor
-public class History extends AbstractAggregateRoot {
+public class History extends AbstractAggregateRoot<String> {
 
     /**
      * command snapshot factory

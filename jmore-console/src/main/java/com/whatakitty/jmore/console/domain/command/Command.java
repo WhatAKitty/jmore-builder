@@ -6,10 +6,9 @@ import com.whatakitty.jmore.console.domain.command.event.CommandExecuteFailedEve
 import com.whatakitty.jmore.console.domain.command.event.CommandFinishedEvent;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
-import lombok.AccessLevel;
+import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 /**
  * Command aggregate root
@@ -24,7 +23,7 @@ import lombok.Getter;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public abstract class Command extends AbstractAggregateRoot implements ICommand {
+public abstract class Command extends AbstractAggregateRoot<String> implements ICommand {
 
     /**
      * command name

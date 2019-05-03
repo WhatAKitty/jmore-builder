@@ -1,7 +1,7 @@
 package com.whatakitty.jmore.framework.ddd.publishedlanguage;
 
 import java.io.Serializable;
-import lombok.Data;
+import lombok.Value;
 
 /**
  * aggregate root id
@@ -10,9 +10,9 @@ import lombok.Data;
  * @date 2019/05/02
  * @description
  **/
-@Data
-public class AggregateId implements Serializable {
+@Value
+public class AggregateId<T> implements Serializable {
 
-    private Long id;
+    private T id;
 
 }

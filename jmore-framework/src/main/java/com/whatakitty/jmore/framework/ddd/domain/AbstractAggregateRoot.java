@@ -17,10 +17,10 @@ import org.springframework.context.ApplicationEvent;
  * @description
  **/
 @Data
-public abstract class AbstractAggregateRoot implements Serializable, ApplicationContextAware {
+public abstract class AbstractAggregateRoot<PK> implements Serializable {
 
-    private AggregateId id;
     private ApplicationContext applicationContext;
+    private AggregateId<PK> id;
 
     /**
      * publish event

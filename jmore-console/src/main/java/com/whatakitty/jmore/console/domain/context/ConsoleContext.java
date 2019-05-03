@@ -21,7 +21,7 @@ import org.springframework.core.env.Environment;
  * @description
  **/
 @ThreadSafe
-public class ConsoleContext extends AbstractAggregateRoot {
+public class ConsoleContext extends AbstractAggregateRoot<String> {
 
     private static final Object HISTORY_LOCK = new Object();
 
