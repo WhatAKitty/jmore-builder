@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import org.springframework.core.Ordered;
 
 /**
@@ -28,12 +29,12 @@ public interface ICommand extends Ordered {
     /**
      * execute the command
      */
-    void execute();
+    void execute(ConsoleContext context);
 
     /**
      * undo the command
      */
-    void undo();
+    void undo(ConsoleContext context);
 
     /**
      * the order the commands should execute as excepted

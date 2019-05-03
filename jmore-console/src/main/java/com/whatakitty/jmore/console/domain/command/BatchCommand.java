@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +57,12 @@ public class BatchCommand extends AbstractEntity implements ICommand {
     }
 
     @Override
-    public void execute() {
-        commands.forEach(ICommand::execute);
+    public void execute(ConsoleContext context) {
+        commands.forEach(item -> item.execute(context));
     }
 
     @Override
-    public void undo() {
+    public void undo(ConsoleContext context) {
 
     }
 
