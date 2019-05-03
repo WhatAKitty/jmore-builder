@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.console.domain.history;
 
 import com.whatakitty.jmore.console.domain.command.ICommand;
+import com.whatakitty.jmore.console.domain.command.ShowHistoryCommand;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Stack;
@@ -31,6 +32,11 @@ public class History extends AbstractAggregateRoot<String> {
      * @param command the command to execute successfully
      */
     public void addHistory(ICommand command) {
+        // ignore history command itself
+        if (command instanceof ShowHistoryCommand) {
+            return;
+        }
+        // create command snapshot and push the snapshot into history stack
         stack.push(CommandSnapshot.snapshot(command));
     }
 
