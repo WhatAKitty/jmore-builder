@@ -1,7 +1,6 @@
 package com.whatakitty.jmore.console.demo.domain.command;
 
 import com.whatakitty.jmore.console.domain.command.Command;
-import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.command.IReceiver;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 
@@ -31,11 +30,6 @@ public class SayHelloWorldCommand extends Command {
     @Override
     protected Object undo(ConsoleContext context, IReceiver receiver) {
         throw new UnsupportedOperationException("undo is not supported yet");
-    }
-
-    @Override
-    public ICommand get() {
-        return this;
     }
 
 }

@@ -52,11 +52,6 @@ public class BatchCommand extends AbstractEntity implements ICommand {
     }
 
     @Override
-    public ICommand get() {
-        return new BatchCommand(commands);
-    }
-
-    @Override
     public void execute(ConsoleContext context) {
         commands.forEach(item -> item.execute(context));
     }

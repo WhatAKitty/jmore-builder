@@ -1,10 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
-import com.whatakitty.jmore.console.domain.command.Command;
-import com.whatakitty.jmore.console.domain.command.ICommand;
-import com.whatakitty.jmore.console.domain.command.IReceiver;
-import com.whatakitty.jmore.console.domain.command.Receiver;
 
 /**
  * show history command
@@ -30,11 +26,6 @@ public class ShowHistoryCommand extends Command {
     @Override
     protected Object undo(ConsoleContext context, IReceiver receiver) {
         return null;
-    }
-
-    @Override
-    public ICommand get() {
-        return this;
     }
 
     /**

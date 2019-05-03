@@ -20,13 +20,6 @@ public interface ICommand extends Ordered {
     String getName();
 
     /**
-     * get the snapshot of the current command
-     *
-     * @return snapshot command
-     */
-    ICommand get();
-
-    /**
      * execute the command
      */
     void execute(ConsoleContext context);
