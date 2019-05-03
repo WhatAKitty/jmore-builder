@@ -29,16 +29,17 @@
 
 ### 限界上下文
 
-![限界上下文](https://static.xuqiang.me/public/images/%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.png)
+![限界上下文](https://static.xuqiang.me/public/images/%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87-1.png)
 
 ### 上下文映射图
 
-![上下文映射图](https://static.xuqiang.me/public/images/%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E5%9B%BE.png)
+![上下文映射图](https://static.xuqiang.me/public/images/%E6%88%98%E7%95%A5%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E5%9B%BE-1.png)
 
 ### 聚合跟
 
 * 命令
 * 历史
+* 上下文
 
 ### 实体
 
@@ -51,11 +52,15 @@
 * 批处理
 * 领域服务——命令解析器【将语义化命令转化为具现化命令以及执行者】
 
-#### 历史上下文
+#### 历史子域
 
 * 历史
 * 命令快照【值对象】
 * 回滚脚本【值对象】
+
+### 上下文支撑子域
+
+* 上下文
 
 ### 领域模型
 
