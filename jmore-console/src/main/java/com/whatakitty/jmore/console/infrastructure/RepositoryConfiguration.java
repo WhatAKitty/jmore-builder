@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.console.infrastructure;
 
 import com.whatakitty.jmore.console.domain.command.CommandRepository;
+import com.whatakitty.jmore.console.domain.history.HistoryRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,12 @@ public class RepositoryConfiguration {
     @Bean
     public CommandRepository commandRepository() {
         return new DefaultCommandRepository();
+    }
+
+    @ConditionalOnMissingBean(HistoryRepository.class)
+    @Bean
+    public HistoryRepository historyRepository() {
+        return new DefaultHistoryRepository();
     }
 
 }

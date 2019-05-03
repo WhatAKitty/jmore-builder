@@ -1,10 +1,10 @@
 package com.whatakitty.jmore.console.application.listeners;
 
-import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.command.event.CommandAfterExecuteEvent;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.history.History;
-import com.whatakitty.jmore.console.domain.history.HistoryFactory;
+import com.whatakitty.jmore.console.domain.history.HistoryRepository;
 import com.whatakitty.jmore.framework.bootstrap.listener.JMoreApplicationListener;
 import com.whatakitty.jmore.framework.compilerule.annotations.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandAfterExecuteListener implements JMoreApplicationListener<CommandAfterExecuteEvent> {
 
-    private final HistoryFactory historyFactory;
+    private final HistoryRepository historyRepository;
 
     @Override
     public void onApplicationEvent(@NotNull CommandAfterExecuteEvent event) {
@@ -29,7 +29,11 @@ public class CommandAfterExecuteListener implements JMoreApplicationListener<Com
         ICommand command = event.getCommand();
 
         // get or create history
-        History history = historyFactory.getOrCreateHistory(context);
+        History history = context.bindHistory(() -> {
+            History newOne = new History(context);
+            historyRepository.create(newOne);
+            return newOne;
+        });
 
         // add command into history
         history.addHistory(command);
