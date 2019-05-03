@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.demo.domain.command;
+package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.command.Command;
@@ -17,18 +17,18 @@ public class ShowHistoryCommand extends Command {
 
     public static final String COMMAND_TIP = "history";
 
-    public ShowHistoryCommand(ConsoleContext context) {
-        super(COMMAND_TIP, new ShowHistoryReceiver(), context);
+    public ShowHistoryCommand() {
+        super(COMMAND_TIP, new ShowHistoryReceiver());
     }
 
     @Override
-    protected Object execute(IReceiver receiver) {
-        receiver.invoke(getContext());
+    protected Object execute(ConsoleContext context, IReceiver receiver) {
+        receiver.invoke(context);
         return null;
     }
 
     @Override
-    protected Object undo(IReceiver receiver) {
+    protected Object undo(ConsoleContext context, IReceiver receiver) {
         return null;
     }
 
