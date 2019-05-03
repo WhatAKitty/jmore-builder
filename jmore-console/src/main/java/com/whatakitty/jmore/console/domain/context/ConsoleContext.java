@@ -129,19 +129,18 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
     }
 
     /**
-     * set history
+     * bind history into this console context
      *
-     * @param history new history
-     * @return {null} set successfully while old value returned for failure
+     * @param fetcher not exists history, do get it from fetcher
      */
-    public History setHistory(History history) {
+    public History bindHistory(HistoryFetcher fetcher) {
         if (this.history != null) {
             return this.history;
         }
 
         synchronized (HISTORY_LOCK) {
             if (this.history == null) {
-                this.history = history;
+                this.history = fetcher.invoke();
                 return null;
             } else {
                 return this.history;
@@ -159,6 +158,13 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
 
     public void removeCommand() {
         command.remove();
+    }
+
+    @FunctionalInterface
+    public interface HistoryFetcher {
+
+        History invoke();
+
     }
 
 }
