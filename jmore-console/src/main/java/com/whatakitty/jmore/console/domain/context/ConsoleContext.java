@@ -141,10 +141,8 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
         synchronized (HISTORY_LOCK) {
             if (this.history == null) {
                 this.history = fetcher.invoke();
-                return null;
-            } else {
-                return this.history;
             }
+            return this.history;
         }
     }
 
