@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.infrastructure;
+package com.whatakitty.jmore.console.infrastructure.repository;
 
 import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.console.domain.history.HistoryRepository;

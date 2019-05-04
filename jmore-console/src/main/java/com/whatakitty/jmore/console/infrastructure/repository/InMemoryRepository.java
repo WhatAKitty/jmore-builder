@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.console.infrastructure;
+package com.whatakitty.jmore.console.infrastructure.repository;
 
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Map;
