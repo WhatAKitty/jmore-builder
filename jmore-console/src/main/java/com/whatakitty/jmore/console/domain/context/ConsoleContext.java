@@ -2,9 +2,9 @@ package com.whatakitty.jmore.console.domain.context;
 
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.history.History;
+import com.whatakitty.jmore.console.infrastructure.stream.PrintStreamAdapter;
 import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
-import java.io.PrintStream;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
@@ -70,7 +70,7 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
      * the writer to print message
      */
     @Getter
-    private final PrintStream writer = System.out;
+    private final PrintStreamAdapter writer = new PrintStreamAdapter(System.out);
     /**
      * the reader to read message
      */
