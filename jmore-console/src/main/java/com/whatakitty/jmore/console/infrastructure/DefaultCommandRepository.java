@@ -3,6 +3,7 @@ package com.whatakitty.jmore.console.infrastructure;
 import com.whatakitty.jmore.console.domain.command.CommandRepository;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.command.ShowHistoryCommand;
+import com.whatakitty.jmore.console.domain.command.UnDoCommand;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.List;
 import java.util.Objects;
@@ -39,5 +40,6 @@ public class DefaultCommandRepository extends InMemoryRepository<String, IComman
     @Override
     protected void init() {
         put(new AggregateId<>(ShowHistoryCommand.COMMAND_TIP), new ShowHistoryCommand());
+        put(new AggregateId<>(UnDoCommand.COMMAND_TIP), new UnDoCommand());
     }
 }

@@ -34,4 +34,8 @@ public class CommandSnapshot extends AbstractEntity {
         command.undo(context);
     }
 
+    public boolean supportUndo() {
+        return command.supportUndo();
+    }
+
 }
