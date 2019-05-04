@@ -47,7 +47,7 @@ public class History extends AbstractAggregateRoot<String> {
         int total = stack.size();
         for (int i = 0; i < total; i++) {
             CommandSnapshot snapshot = stack.get(i);
-            context.getWriter().println(String.format("[%s] %s", i, snapshot.getCommand()));
+            context.getWriter().println(String.format("[%s] %s", i + 1, snapshot.getName()));
         }
     }
 
@@ -62,9 +62,10 @@ public class History extends AbstractAggregateRoot<String> {
             throw new IllegalArgumentException("exceed max rollback");
         }
 
-        for (int i = 1; i < index; i++) {
-            CommandSnapshot snapshot = stack.get(i);
-            context.getWriter().println(snapshot.getCommand());
+        for (int i = 1; i <= index; i++) {
+            CommandSnapshot snapshot = stack.remove(i - 1);
+            snapshot.undo(context);
+            context.getWriter().println(String.format("The command %s has been undo", snapshot.getName()));
         }
     }
 
