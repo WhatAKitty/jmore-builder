@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.console.domain.command.event;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import lombok.Getter;
 
 /**
  * command execute failed event
@@ -11,6 +12,7 @@ import com.whatakitty.jmore.console.domain.context.ConsoleContext;
  **/
 public class CommandExecuteFailedEvent extends AbstractCommandDomainEvent {
 
+    @Getter
     private final Throwable throwable;
 
     /**
