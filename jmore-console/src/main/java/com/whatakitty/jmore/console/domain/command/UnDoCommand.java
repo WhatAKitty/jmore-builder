@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import com.whatakitty.jmore.console.infrastructure.stream.StreamMgr;
 
 /**
  * undo command
@@ -33,8 +34,8 @@ public class UnDoCommand extends Command {
         public UnDoReceiver() {
             super(context -> {
                 context.getHistory().showHistory();
-                context.getWriter().println("Please enter the rollback index");
-                int index = context.getReader().nextInt();
+                StreamMgr.getINSTANCE().println("Please enter the rollback index");
+                int index = StreamMgr.getINSTANCE().reader().nextInt();
                 context.getHistory().rollback(index);
             });
         }

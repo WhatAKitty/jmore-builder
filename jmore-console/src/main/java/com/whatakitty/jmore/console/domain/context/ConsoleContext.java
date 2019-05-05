@@ -2,11 +2,9 @@ package com.whatakitty.jmore.console.domain.context;
 
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.history.History;
-import com.whatakitty.jmore.console.infrastructure.stream.PrintStreamAdapter;
 import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -65,17 +63,6 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
      */
     @Getter(AccessLevel.PROTECTED)
     private final Environment environment;
-
-    /**
-     * the writer to print message
-     */
-    @Getter
-    private final PrintStreamAdapter writer = new PrintStreamAdapter(System.out);
-    /**
-     * the reader to read message
-     */
-    @Getter
-    private final Scanner reader = new Scanner(System.in);
 
     ConsoleContext(final Object source, final ApplicationContext appContext) {
         this.source = source;

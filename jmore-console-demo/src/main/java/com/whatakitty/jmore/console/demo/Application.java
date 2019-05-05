@@ -1,8 +1,9 @@
 package com.whatakitty.jmore.console.demo;
 
-import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.JMoreConsoleRunner;
 import com.whatakitty.jmore.console.application.service.CommandService;
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import com.whatakitty.jmore.console.infrastructure.stream.StreamMgr;
 import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
 import javax.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,7 @@ public class Application implements JMoreConsoleRunner {
     @Override
     public void run(ConsoleContext context) {
         while (true) {
-            context.getWriter().println("Please enter command: ");
-            final String command = context.getReader().nextLine();
+            final String command = StreamMgr.getINSTANCE().reader().nextLine();
             try {
                 commandService.execute(context, command);
             } catch (UnsupportedOperationException e) {

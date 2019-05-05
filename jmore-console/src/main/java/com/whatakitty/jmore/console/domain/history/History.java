@@ -3,6 +3,7 @@ package com.whatakitty.jmore.console.domain.history;
 import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.command.ShowHistoryCommand;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import com.whatakitty.jmore.console.infrastructure.stream.StreamMgr;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Stack;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class History extends AbstractAggregateRoot<String> {
         int total = stack.size();
         for (int i = 0; i < total; i++) {
             CommandSnapshot snapshot = stack.get(i);
-            context.getWriter().println(String.format("[%s] %s", i + 1, snapshot.getName()));
+            StreamMgr.getINSTANCE().println(String.format("[%s] %s", i + 1, snapshot.getName()));
         }
     }
 
@@ -65,7 +66,7 @@ public class History extends AbstractAggregateRoot<String> {
         for (int i = 1; i <= index; i++) {
             CommandSnapshot snapshot = stack.remove(i - 1);
             snapshot.undo(context);
-            context.getWriter().println(String.format("The command %s has been undo", snapshot.getName()));
+            StreamMgr.getINSTANCE().println(String.format("The command %s has been undo", snapshot.getName()));
         }
     }
 
