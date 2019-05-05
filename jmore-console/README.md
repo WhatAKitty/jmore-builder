@@ -2,7 +2,7 @@
 
 Develop based on JMore Framework, do great job on non web environment.
 
-## 功能
+## Features
 
 - [x] Do response while user type something.
 - [x] Support command history
