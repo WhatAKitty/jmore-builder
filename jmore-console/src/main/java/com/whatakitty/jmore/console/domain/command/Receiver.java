@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.console.domain.command;
 
+import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.ValueObject;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,5 +18,10 @@ public abstract class Receiver extends ValueObject implements IReceiver {
 
     @Getter(AccessLevel.PROTECTED)
     private final IReceiver function;
+
+    @Override
+    public final void invoke(ConsoleContext context) {
+        getFunction().invoke(context);
+    }
 
 }

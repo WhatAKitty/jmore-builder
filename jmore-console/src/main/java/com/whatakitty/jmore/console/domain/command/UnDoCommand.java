@@ -29,6 +29,7 @@ public class UnDoCommand extends Command {
     }
 
     public static class UnDoReceiver extends Receiver {
+
         public UnDoReceiver() {
             super(context -> {
                 context.getHistory().showHistory();
@@ -36,11 +37,6 @@ public class UnDoCommand extends Command {
                 int index = context.getReader().nextInt();
                 context.getHistory().rollback(index);
             });
-        }
-
-        @Override
-        public void invoke(ConsoleContext context) {
-            getFunction().invoke(context);
         }
 
     }

@@ -37,11 +37,6 @@ public class ShowHistoryCommand extends Command {
             super(context -> context.getHistory().showHistory());
         }
 
-        @Override
-        public void invoke(ConsoleContext context) {
-            getFunction().invoke(context);
-        }
-
     }
 
 }
