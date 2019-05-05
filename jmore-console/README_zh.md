@@ -67,5 +67,5 @@
 * 一个命令有一个具体执行者
 * 批处理是一堆命令的集合
 
-![领域模型](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-1.png)
+![领域模型](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-2.png)
 
