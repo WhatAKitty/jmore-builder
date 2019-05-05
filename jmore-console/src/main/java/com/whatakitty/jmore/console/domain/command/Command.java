@@ -43,8 +43,9 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
             publishEvent(new CommandAfterExecuteEvent(context, result));
         } catch (Throwable e) {
             publishEvent(new CommandExecuteFailedEvent(context, e));
+        } finally {
+            publishEvent(new CommandFinishedEvent(context));
         }
-        publishEvent(new CommandFinishedEvent(context));
     }
 
     @Override
