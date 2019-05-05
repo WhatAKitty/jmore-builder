@@ -22,7 +22,7 @@ public interface ICommand extends Ordered {
     /**
      * execute the command
      */
-    void execute(ConsoleContext context);
+    CommandResult execute(ConsoleContext context);
 
     /**
      * undo the command

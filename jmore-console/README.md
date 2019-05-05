@@ -50,6 +50,7 @@ This will list all entity of [Command Sub Domain], [History Sub Domain] and [Con
 * Command
 * Receiver【Value Object】
 * BatchCommand
+* CommandResult【Value Object】
 * Domain Service——Command Parser【Transform the human language into the command and receiver】
 
 #### History Sub Domain
@@ -67,5 +68,4 @@ This will list all entity of [Command Sub Domain], [History Sub Domain] and [Con
 * One command has one receiver
 * BatchCommand is the collection of single command
 
-![Domain Model](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-2.png)
-
+![Domain Model](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-3.png)

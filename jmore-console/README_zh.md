@@ -50,6 +50,7 @@
 * 命令
 * 执行者【值对象】
 * 批处理
+* 命令结果【值对象】
 * 领域服务——命令解析器【将语义化命令转化为具现化命令以及执行者】
 
 #### 历史子域
@@ -67,5 +68,4 @@
 * 一个命令有一个具体执行者
 * 批处理是一堆命令的集合
 
-![领域模型](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-2.png)
-
+![领域模型](https://static.xuqiang.me/public/images/Shell%E6%8E%A7%E5%88%B6%E5%8F%B0DDD%E8%AE%BE%E8%AE%A1-3.png)

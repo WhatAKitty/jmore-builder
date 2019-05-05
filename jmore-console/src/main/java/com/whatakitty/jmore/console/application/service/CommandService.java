@@ -1,14 +1,12 @@
 package com.whatakitty.jmore.console.application.service;
 
-import com.whatakitty.jmore.console.domain.command.BatchCommand;
-import com.whatakitty.jmore.console.domain.command.Command;
-import com.whatakitty.jmore.console.domain.command.CommandRepository;
-import com.whatakitty.jmore.console.domain.command.ICommand;
+import com.whatakitty.jmore.console.domain.command.*;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.console.domain.history.HistoryRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,7 @@ public class CommandService {
      * @param context console context
      * @param cmd     command
      */
-    public void execute(ConsoleContext context, String cmd) {
+    public Optional<CommandResult> execute(ConsoleContext context, String cmd) {
         // get or create history
         context.bindHistory(() -> {
             History newOne = new History(context);
@@ -45,10 +43,10 @@ public class CommandService {
 
         // execute command
         try {
-            commandRepository.findById(new AggregateId<>(cmd))
-                .ifPresent(command -> {
+            return commandRepository.findById(new AggregateId<>(cmd))
+                .map(command -> {
                     context.setCurrentCommand(command);
-                    command.execute(context);
+                    return command.execute(context);
                 });
         } finally {
             context.removeCommand();

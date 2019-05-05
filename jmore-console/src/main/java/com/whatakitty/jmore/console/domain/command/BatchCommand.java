@@ -54,8 +54,11 @@ public class BatchCommand extends AbstractEntity implements ICommand {
     }
 
     @Override
-    public void execute(ConsoleContext context) {
-        commands.forEach(item -> item.execute(context));
+    public CommandResult execute(ConsoleContext context) {
+        List<CommandResult> results = commands.stream()
+            .map(item -> item.execute(context))
+            .collect(Collectors.toList());
+        return CommandResult.of(results.parallelStream().allMatch(CommandResult::isSucc), results);
     }
 
     @Override

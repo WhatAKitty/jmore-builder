@@ -35,14 +35,16 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
     private final IReceiver receiver;
 
     @Override
-    public void execute(ConsoleContext context) {
+    public CommandResult execute(ConsoleContext context) {
         publishEvent(new CommandBeforeExecuteEvent(context));
         try {
             // invoke
             final Object result = execute(context, receiver);
             publishEvent(new CommandAfterExecuteEvent(context, result));
+            return CommandResult.of(true, result);
         } catch (Throwable e) {
             publishEvent(new CommandExecuteFailedEvent(context, e));
+            return CommandResult.of(false, null);
         } finally {
             publishEvent(new CommandFinishedEvent(context));
         }
