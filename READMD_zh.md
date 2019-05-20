@@ -14,6 +14,7 @@
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.whatakitty.jmore/jmore-builder)
 [![HitCount](http://hits.dwyl.io/WhatAKitty/jmore-builder.svg)](http://hits.dwyl.io/WhatAKitty/jmore-builder)
+[![Build Status](https://dev.azure.com/104xuqiang/104xuqiang/_apis/build/status/WhatAKitty.jmore-builder?branchName=master)](https://dev.azure.com/104xuqiang/104xuqiang/_build/latest?definitionId=1&branchName=master)
 
 ## 架构组件
 
