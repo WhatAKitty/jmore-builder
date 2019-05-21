@@ -33,6 +33,7 @@
         <jmore-lock.version>1.0.0-SNAPSHOT</jmore-lock.version>
         <jmore-mybatis.version>1.0.0-SNAPSHOT</jmore-mybatis.version>
         <jmore-demo.version>1.0.0-SNAPSHOT</jmore-demo.version>
+        <jmore-blog.version>1.0.0-SNAPSHOT</jmore-blog.version>
 
         <!-- db -->
         <mongodb.version>3.9.1</mongodb.version>

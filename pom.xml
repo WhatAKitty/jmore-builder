@@ -47,6 +47,7 @@
         <module>jmore-console</module>
         <module>jmore-web</module>
         <module>jmore-console-demo</module>
+        <module>jmore-blog</module>
     </modules>
 
     <properties>
