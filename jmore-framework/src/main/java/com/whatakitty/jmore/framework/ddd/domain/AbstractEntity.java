@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.framework.ddd.domain;
 
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * base entity
@@ -9,8 +10,9 @@ import java.io.Serializable;
  * @date 2019/05/02
  * @description
  **/
-public abstract class AbstractEntity implements Serializable {
+@Data
+public abstract class AbstractEntity<PK> implements Serializable {
 
-
+    private PK id;
 
 }
