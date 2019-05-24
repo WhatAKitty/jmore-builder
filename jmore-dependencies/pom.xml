@@ -43,6 +43,7 @@
         <zookeeper.version>3.4.13</zookeeper.version>
 
         <!-- utils -->
+        <commons-io.version>2.6</commons-io.version>
         <commons-lang.version>3.8.1</commons-lang.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <hamcrest.version>2.1</hamcrest.version>
@@ -191,6 +192,11 @@
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
 
             <!-- FastJson -->
