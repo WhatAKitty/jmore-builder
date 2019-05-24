@@ -17,15 +17,39 @@ import org.springframework.context.ApplicationEvent;
 public abstract class AbstractAggregateRoot<PK> implements Serializable {
 
     private AggregateId<PK> id;
+    private AggregateStatus status = AggregateStatus.ACTIVE;
 
     /**
      * publish event
      *
      * @param event event object
      */
-    public void publishEvent(ApplicationEvent event) {
+    protected void publishEvent(ApplicationEvent event) {
         // TODO need to use another plan instead of injecting spring dependency
         SpringUtils.getApplicationContext().publishEvent(event);
+    }
+
+    /**
+     * active this aggregate root
+     */
+    protected void active() {
+        this.status = AggregateStatus.ACTIVE;
+    }
+
+    /**
+     * invalid this aggregate root
+     */
+    protected void invalid() {
+        this.status = AggregateStatus.INVALID;
+    }
+
+    /**
+     * check the aggregate root status, if {invalid} throw {@link IllegalAggregateStatus}
+     */
+    protected void checkActive() {
+        if (!AggregateStatus.ACTIVE.equals(this.status)) {
+            throw new IllegalAggregateStatus();
+        }
     }
 
 }
