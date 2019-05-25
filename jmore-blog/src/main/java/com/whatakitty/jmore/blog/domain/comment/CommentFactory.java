@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.comment;
 
 import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.blog.domain.security.User;
+import java.util.Date;
 
 /**
  * comment factory
@@ -21,6 +22,7 @@ public final class CommentFactory {
         comment.setContent(commentContent);
         comment.setArticle(article);
         comment.setPublisher(publisher);
+        comment.setCommentTime(new Date());
 
         // rubbish ?
         final boolean isRubbish = rubbishDetectService.rubbish(comment.getContent());

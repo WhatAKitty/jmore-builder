@@ -3,6 +3,7 @@ package com.whatakitty.jmore.blog.domain.comment;
 import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,6 +22,8 @@ public final class Comment extends AbstractAggregateRoot<Long> {
     private User publisher;
     private Article article;
     private CommentPendingStatus pendingStatus;
+
+    private Date commentTime;
 
     /**
      * mark pended
