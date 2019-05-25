@@ -1,13 +1,12 @@
 package com.whatakitty.jmore.blog.domain.security;
 
-import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -55,7 +54,7 @@ public final class User extends AbstractAggregateRoot<Long> {
      * @param password the password
      */
     public void setPassword(String password) {
-        this.password = Base64.encode(password.getBytes(StandardCharsets.UTF_8));
+        this.password = Base64.encodeBase64String(password.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -74,13 +73,7 @@ public final class User extends AbstractAggregateRoot<Long> {
         }
 
         // password decode
-        final String comparedPasswd;
-        try {
-            comparedPasswd = new String(Base64.decode(pendingUser.getPassword()), StandardCharsets.UTF_8);
-        } catch (Base64DecodingException e) {
-            log.error("the user {}'s password decoded by base64 failed", pendingUser.getUsername());
-            return false;
-        }
+        final String comparedPasswd = new String(Base64.decodeBase64(pendingUser.getPassword()), StandardCharsets.UTF_8);
 
         // password compare
         if (StringUtils.isBlank(password) || !password.equals(comparedPasswd)) {
