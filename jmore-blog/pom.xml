@@ -16,4 +16,16 @@
     <name>jmore-blog</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.whatakitty.jmore</groupId>
+            <artifactId>jmore-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
