@@ -5,6 +5,7 @@ import com.whatakitty.jmore.framework.utils.SpringUtils;
 import java.io.Serializable;
 import lombok.Data;
 import org.springframework.context.ApplicationEvent;
+import sun.misc.Unsafe;
 
 /**
  * base aggregate root
@@ -16,8 +17,12 @@ import org.springframework.context.ApplicationEvent;
 @Data
 public abstract class AbstractAggregateRoot<PK> implements Serializable {
 
+    private static final Unsafe unsafe = Unsafe.getUnsafe();
+    private static final long VERSION_OFFSET;
+
     private AggregateId<PK> id;
     private AggregateStatus status = AggregateStatus.ACTIVE;
+    private volatile Version version = Version.INITIAL_VERSION;
 
     /**
      * publish event
@@ -50,6 +55,28 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
         if (!AggregateStatus.ACTIVE.equals(this.status)) {
             throw new IllegalAggregateStatus();
         }
+    }
+
+    /**
+     * increment version value
+     *
+     * ignore the baddest stage: cannot update version always.
+     */
+    protected void incVersion() {
+        boolean result;
+        do {
+            result = Unsafe.getUnsafe().compareAndSwapObject(this, VERSION_OFFSET, version, Version.of(version.get() + 1));
+        } while (!result);
+    }
+
+    static {
+        try {
+            VERSION_OFFSET = unsafe.objectFieldOffset
+                (AbstractAggregateRoot.class.getDeclaredField("version"));
+        } catch (NoSuchFieldException e) {
+            throw new Error(e);
+        }
+
     }
 
 }
