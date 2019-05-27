@@ -33,7 +33,7 @@ public final class Article extends AbstractAggregateRoot<Long> {
      *
      * may be draft or published
      */
-    private ArticleStatus status;
+    private ArticleStatus articleStatus;
     /**
      * the article author
      */
@@ -70,7 +70,7 @@ public final class Article extends AbstractAggregateRoot<Long> {
      * @return {true} published successfully
      */
     public boolean publish() {
-        this.status = ArticleStatus.PUBLISHED;
+        this.articleStatus = ArticleStatus.PUBLISHED;
         this.publishDate = new Date();
         return true;
     }
@@ -81,7 +81,7 @@ public final class Article extends AbstractAggregateRoot<Long> {
      * @return
      */
     public boolean draft() {
-        this.status = ArticleStatus.DRAFT;
+        this.articleStatus = ArticleStatus.DRAFT;
         return true;
     }
 
