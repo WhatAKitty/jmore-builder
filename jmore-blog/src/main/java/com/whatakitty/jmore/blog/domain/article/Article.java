@@ -127,11 +127,12 @@ public final class Article extends AbstractAggregateRoot<Long> {
 
         this.content = content;
         if (this.resources.equals(resources)) {
-            final List<Resource> prevResource = new ArrayList<>(this.resources);
+            final List<Resource> prevResources = new ArrayList<>(this.resources);
+            final List<Resource> newResources = new ArrayList<>(resources);
             this.resources = resources;
 
             // publish event
-            publishEvent(new ArticleResourceChangedEvent(this, prevResource));
+            publishEvent(new ArticleResourceChangedEvent(this, prevResources, newResources));
         }
 
 

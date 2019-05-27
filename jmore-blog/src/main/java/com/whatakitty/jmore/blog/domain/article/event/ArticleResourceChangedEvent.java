@@ -14,15 +14,19 @@ import java.util.List;
 public class ArticleResourceChangedEvent extends AbstractBlogEvent {
 
     private final List<Resource> prevResources;
+    private final List<Resource> newResources;
 
     /**
      * Create a new Domain Event.
      *
      * @param source the object on which the event initially occurred (never {@code null})
      */
-    public ArticleResourceChangedEvent(final Object source, final List<Resource> prevResources) {
+    public ArticleResourceChangedEvent(final Object source,
+                                       final List<Resource> prevResources,
+                                       final List<Resource> newResources) {
         super(source);
         this.prevResources = prevResources;
+        this.newResources = newResources;
     }
 
 }
