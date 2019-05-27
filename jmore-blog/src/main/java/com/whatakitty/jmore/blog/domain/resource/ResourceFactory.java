@@ -13,6 +13,8 @@ import java.util.Date;
  **/
 public final class ResourceFactory {
 
+    public static final ResourceFactory FACTORY = new ResourceFactory();
+
     /**
      * create a new resource
      *

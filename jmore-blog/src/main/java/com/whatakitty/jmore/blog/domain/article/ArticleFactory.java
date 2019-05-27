@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
  **/
 public final class ArticleFactory {
 
+    public static final ArticleFactory FACTORY = new ArticleFactory();
+
     /**
      * create a new article
      *

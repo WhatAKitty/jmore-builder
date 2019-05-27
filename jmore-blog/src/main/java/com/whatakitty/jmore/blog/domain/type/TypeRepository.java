@@ -18,7 +18,7 @@ public interface TypeRepository {
 
     /**
      * remove the type from repository
-     * 
+     *
      * @param type
      */
     void remove(Type type);

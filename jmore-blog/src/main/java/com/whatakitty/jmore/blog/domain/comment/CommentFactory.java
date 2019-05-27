@@ -13,6 +13,8 @@ import java.util.Date;
  **/
 public final class CommentFactory {
 
+    public static final CommentFactory FACTORY = new CommentFactory();
+
     public Comment postComment(Article article,
                                User publisher,
                                String commentContent,

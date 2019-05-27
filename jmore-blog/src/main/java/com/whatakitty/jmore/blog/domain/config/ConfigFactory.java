@@ -9,6 +9,8 @@ package com.whatakitty.jmore.blog.domain.config;
  **/
 public final class ConfigFactory {
 
+    public static final ConfigFactory FACTORY = new ConfigFactory();
+
     /**
      * create a new config
      *
