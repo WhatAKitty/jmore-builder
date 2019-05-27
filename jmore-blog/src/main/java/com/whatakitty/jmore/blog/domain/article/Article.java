@@ -20,22 +20,54 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public final class Article extends AbstractAggregateRoot<Long> {
 
+    /**
+     * the article title
+     */
     private String title;
+    /**
+     * the article content
+     */
     private String content;
+    /**
+     * the article status, {@link ArticleStatus};
+     *
+     * may be draft or published
+     */
     private ArticleStatus status;
+    /**
+     * the article author
+     */
     private Author author;
+    /**
+     * the tags that the article related
+     */
     private List<ArticleTag> tags;
+    /**
+     * the types that the article related
+     */
     private List<Type> types;
+    /**
+     * resources used in the article
+     */
     private List<Resource> resources;
 
+    /**
+     * create date of the article
+     */
     private Date createDate;
+    /**
+     * modify date of the article
+     */
     private Date modifyDate;
+    /**
+     * publish date of the article
+     */
     private Date publishDate;
 
     /**
      * publish article
      *
-     * @return
+     * @return {true} published successfully
      */
     public boolean publish() {
         this.status = ArticleStatus.PUBLISHED;
