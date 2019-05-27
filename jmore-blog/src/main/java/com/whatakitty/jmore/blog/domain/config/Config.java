@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.blog.domain.config;
 
+import com.whatakitty.jmore.blog.domain.config.event.ConfigInitFinishedEvent;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import lombok.Data;
@@ -24,25 +25,10 @@ public class Config extends AbstractAggregateRoot<Long> {
 
     /**
      * blog init
-     *
-     * @param title     blog title
-     * @param contact   blog contact
-     * @param copyright blog copyright
-     * @param domain    blog domain
-     * @param username  the manager's username
-     * @param password  the manager's password
      */
-    public void init(String title,
-                     String contact,
-                     String copyright,
-                     String domain,
-                     String username,
-                     String password) {
-        this.title = title;
-        this.contact = contact;
-        this.copyright = copyright;
-        this.domain = domain;
-        this.author = Manager.of(username, password);
+    public boolean init() {
+        publishEvent(new ConfigInitFinishedEvent(this));
+        return true;
     }
 
 }
