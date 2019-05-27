@@ -1,5 +1,8 @@
 package com.whatakitty.jmore.blog.domain.security;
 
+import com.whatakitty.jmore.blog.domain.security.event.UserLoginFailedEvent;
+import com.whatakitty.jmore.blog.domain.security.event.UserLoginSuccessfullyEvent;
+import com.whatakitty.jmore.blog.domain.security.event.UserRestPwdEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -84,6 +87,10 @@ public final class User extends AbstractAggregateRoot<Long> {
         pendingUser.setLastLoginDate(new Date());
         pendingUser.setLastLoginIp(loginIp);
         log.info("the user {} login successfully", pendingUser.getUsername());
+
+        // publish event
+        publishEvent(new UserLoginSuccessfullyEvent(this));
+
         return true;
     }
 
@@ -97,6 +104,10 @@ public final class User extends AbstractAggregateRoot<Long> {
         if (user == null) {
             return false;
         }
+
+        // publish event
+        publishEvent(new UserLoginFailedEvent(this));
+
         return true;
     }
 
@@ -114,7 +125,8 @@ public final class User extends AbstractAggregateRoot<Long> {
         // reset
         user.setPassword(DEFAULT_PASSWORD);
 
-        // TODO publish reset password successfully event
+        // publish event
+        publishEvent(new UserRestPwdEvent(this));
 
         return true;
     }
