@@ -2,9 +2,11 @@ package com.whatakitty.jmore.blog.domain.article;
 
 import com.whatakitty.jmore.blog.domain.article.event.ArticleDroppedEvent;
 import com.whatakitty.jmore.blog.domain.article.event.ArticlePublishedEvent;
+import com.whatakitty.jmore.blog.domain.article.event.ArticleResourceChangedEvent;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -118,8 +120,21 @@ public final class Article extends AbstractAggregateRoot<Long> {
      * @return
      */
     public boolean modifyContent(String content, List<Resource> resources) {
+        // the same content
+        if (this.content.equals(content)) {
+            return true;
+        }
+
         this.content = content;
-        this.resources = resources;
+        if (this.resources.equals(resources)) {
+            final List<Resource> prevResource = new ArrayList<>(this.resources);
+            this.resources = resources;
+
+            // publish event
+            publishEvent(new ArticleResourceChangedEvent(this, prevResource));
+        }
+
+
         return true;
     }
 
