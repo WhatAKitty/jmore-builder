@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.article;
 
+import com.whatakitty.jmore.blog.domain.article.event.ArticleDroppedEvent;
+import com.whatakitty.jmore.blog.domain.article.event.ArticlePublishedEvent;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
@@ -65,13 +67,14 @@ public final class Article extends AbstractAggregateRoot<Long> {
     private Date publishDate;
 
     /**
-     * publish article
+     * publish article and then publish an event {@link ArticlePublishedEvent}
      *
      * @return {true} published successfully
      */
     public boolean publish() {
         this.articleStatus = ArticleStatus.PUBLISHED;
         this.publishDate = new Date();
+        publishEvent(new ArticlePublishedEvent(this));
         return true;
     }
 
@@ -86,12 +89,13 @@ public final class Article extends AbstractAggregateRoot<Long> {
     }
 
     /**
-     * delete the article
+     * delete the article and then publish an event {@link ArticleDroppedEvent}
      *
      * @return
      */
     public boolean dropped() {
         invalid();
+        publishEvent(new ArticleDroppedEvent(this));
         return true;
     }
 
