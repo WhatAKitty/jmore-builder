@@ -62,7 +62,7 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
      *
      * ignore the baddest stage: cannot update version always.
      */
-    protected void incVersion() {
+    public void incVersion() {
         boolean result;
         do {
             result = Unsafe.getUnsafe().compareAndSwapObject(this, VERSION_OFFSET, version, Version.of(version.get() + 1));
