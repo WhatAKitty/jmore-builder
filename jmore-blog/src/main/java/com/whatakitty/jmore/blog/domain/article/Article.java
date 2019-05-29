@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * article aggreate root
@@ -21,8 +22,9 @@ import lombok.EqualsAndHashCode;
  * @date 2019/05/23
  * @description
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public final class Article extends AbstractAggregateRoot<String> {
 
     /**

@@ -4,6 +4,7 @@ import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import com.whatakitty.jmore.framework.utils.SpringUtils;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.context.ApplicationEvent;
 import sun.misc.Unsafe;
 
@@ -21,7 +22,9 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
     private static final long VERSION_OFFSET;
 
     private AggregateId<PK> id;
+    @EqualsAndHashCode.Exclude
     private AggregateStatus status = AggregateStatus.ACTIVE;
+    @EqualsAndHashCode.Exclude
     private volatile Version version = Version.INITIAL_VERSION;
 
     /**

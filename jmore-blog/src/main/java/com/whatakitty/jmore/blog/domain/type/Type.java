@@ -3,8 +3,9 @@ package com.whatakitty.jmore.blog.domain.type;
 import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.List;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * type aggregate root
@@ -13,8 +14,9 @@ import lombok.EqualsAndHashCode;
  * @date 2019/05/23
  * @description
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public final class Type extends AbstractAggregateRoot<Long> {
 
     private String typeName;

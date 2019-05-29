@@ -6,8 +6,9 @@ import com.whatakitty.jmore.blog.domain.security.event.UserRestPwdEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -20,8 +21,9 @@ import org.apache.commons.lang3.StringUtils;
  * @description
  **/
 @Slf4j
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public final class User extends AbstractAggregateRoot<Long> {
 
     private static final String DEFAULT_PASSWORD = "123456";

@@ -1,10 +1,10 @@
 package com.whatakitty.jmore.blog.domain.config;
 
 import com.whatakitty.jmore.blog.domain.config.event.ConfigInitFinishedEvent;
-import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * blog config aggregate root
@@ -13,8 +13,9 @@ import lombok.EqualsAndHashCode;
  * @date 2019/05/25
  * @description
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public class Config extends AbstractAggregateRoot<Long> {
 
     private String title;

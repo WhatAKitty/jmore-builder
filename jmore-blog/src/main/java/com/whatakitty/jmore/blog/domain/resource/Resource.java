@@ -4,8 +4,9 @@ import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.io.File;
 import java.util.Date;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -16,8 +17,9 @@ import org.apache.commons.io.FilenameUtils;
  * @date 2019/05/24
  * @description
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public final class Resource extends AbstractAggregateRoot<String> {
 
     /**

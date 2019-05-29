@@ -3,8 +3,9 @@ package com.whatakitty.jmore.blog.domain.comment;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Date;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * comment aggregate root
@@ -13,8 +14,9 @@ import lombok.EqualsAndHashCode;
  * @date 2019/05/24
  * @description
  **/
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(callSuper = true)
 public final class Comment extends AbstractAggregateRoot<String> {
 
     private String content;
