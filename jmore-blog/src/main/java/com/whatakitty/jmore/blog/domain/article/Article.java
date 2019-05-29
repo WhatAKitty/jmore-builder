@@ -4,6 +4,7 @@ import com.whatakitty.jmore.blog.domain.article.event.ArticleDroppedEvent;
 import com.whatakitty.jmore.blog.domain.article.event.ArticlePublishedEvent;
 import com.whatakitty.jmore.blog.domain.article.event.ArticleResourceChangedEvent;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
+import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public final class Article extends AbstractAggregateRoot<Long> {
     /**
      * the article author
      */
-    private Author author;
+    private User author;
     /**
      * the tags that the article related
      */

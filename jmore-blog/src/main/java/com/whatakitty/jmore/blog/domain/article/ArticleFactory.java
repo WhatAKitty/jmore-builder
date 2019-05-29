@@ -37,7 +37,7 @@ public final class ArticleFactory {
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
-        article.setAuthor(Author.of(author.getNickname()));
+        article.setAuthor(author);
         article.setTags(tags.parallelStream().map(ArticleTag::of).collect(Collectors.toList()));
         article.setTypes(types);
         article.setResources(resources);

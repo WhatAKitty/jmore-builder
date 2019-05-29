@@ -1,6 +1,5 @@
 package com.whatakitty.jmore.blog.domain.comment;
 
-import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.blog.domain.security.User;
 import java.util.Date;
 
@@ -15,14 +14,14 @@ public final class CommentFactory {
 
     public static final CommentFactory FACTORY = new CommentFactory();
 
-    public Comment postComment(Article article,
+    public Comment postComment(CommentableResource commentableResource,
                                User publisher,
                                String commentContent,
                                RubbishDetectService rubbishDetectService) {
         // basic content
         final Comment comment = new Comment();
         comment.setContent(commentContent);
-        comment.setArticle(article);
+        comment.setCommentableResource(commentableResource);
         comment.setPublisher(publisher);
         comment.setCommentTime(new Date());
 

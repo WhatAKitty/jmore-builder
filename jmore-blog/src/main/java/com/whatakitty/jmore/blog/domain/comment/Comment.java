@@ -20,7 +20,7 @@ public final class Comment extends AbstractAggregateRoot<Long> {
 
     private String content;
     private User publisher;
-    private Article article;
+    private CommentableResource commentableResource;
     private CommentPendingStatus pendingStatus;
 
     private Date commentTime;
