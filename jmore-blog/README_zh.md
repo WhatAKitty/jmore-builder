@@ -82,4 +82,4 @@ JMore Blog 应用程序
 
 ### 领域模型
 
-![领域模型](https://static.xuqiang.me/public/images/%E5%8D%9A%E5%AE%A2DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-2.png)
+![领域模型](https://static.xuqiang.me/public/images/%E5%8D%9A%E5%AE%A2DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-3.png)
