@@ -75,6 +75,9 @@ public final class Article extends AbstractAggregateRoot<Long> {
      * @return {true} published successfully
      */
     public boolean publish() {
+        if (null != this.articleStatus && !ArticleStatus.DRAFT.equals(this.articleStatus)) {
+            return false;
+        }
         this.articleStatus = ArticleStatus.PUBLISHED;
         this.publishDate = new Date();
         publishEvent(new ArticlePublishedEvent(this));
@@ -87,6 +90,9 @@ public final class Article extends AbstractAggregateRoot<Long> {
      * @return
      */
     public boolean draft() {
+        if (ArticleStatus.PUBLISHED.equals(this.articleStatus)) {
+            return false;
+        }
         this.articleStatus = ArticleStatus.DRAFT;
         return true;
     }

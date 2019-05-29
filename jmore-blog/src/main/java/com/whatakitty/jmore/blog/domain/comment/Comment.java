@@ -31,6 +31,9 @@ public final class Comment extends AbstractAggregateRoot<Long> {
      * @return
      */
     public boolean markPended() {
+        if (null != this.pendingStatus && !CommentPendingStatus.PENDING.equals(this.pendingStatus)) {
+            return false;
+        }
         this.pendingStatus = CommentPendingStatus.PENDED;
         return true;
     }
@@ -41,6 +44,9 @@ public final class Comment extends AbstractAggregateRoot<Long> {
      * @return
      */
     public boolean markReject() {
+        if (null != this.pendingStatus && !CommentPendingStatus.PENDING.equals(this.pendingStatus)) {
+            return false;
+        }
         this.pendingStatus = CommentPendingStatus.REJECTED;
         return true;
     }
