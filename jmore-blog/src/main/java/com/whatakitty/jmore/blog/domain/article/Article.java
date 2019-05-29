@@ -23,7 +23,7 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public final class Article extends AbstractAggregateRoot<Long> {
+public final class Article extends AbstractAggregateRoot<String> {
 
     /**
      * the article title

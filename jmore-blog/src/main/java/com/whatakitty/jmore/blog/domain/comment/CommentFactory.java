@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.domain.comment;
 
 import com.whatakitty.jmore.blog.domain.security.User;
+import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
 import java.util.Date;
 
 /**
@@ -29,6 +30,7 @@ public final class CommentFactory {
         final boolean isRubbish = rubbishDetectService.rubbish(comment.getContent());
         comment.setPendingStatus(isRubbish ? CommentPendingStatus.PENDING : CommentPendingStatus.PENDED);
 
+        comment.setId(AggregateIdService.SERVICE.randomStringId(commentContent));
         return comment;
     }
 

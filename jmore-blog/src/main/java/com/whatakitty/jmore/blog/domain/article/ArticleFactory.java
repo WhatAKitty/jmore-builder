@@ -2,9 +2,14 @@ package com.whatakitty.jmore.blog.domain.article;
 
 import com.whatakitty.jmore.blog.domain.resource.Resource;
 import com.whatakitty.jmore.blog.domain.security.User;
+import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
 import com.whatakitty.jmore.blog.domain.type.Type;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * article factory
@@ -41,6 +46,7 @@ public final class ArticleFactory {
         article.setTags(tags.parallelStream().map(ArticleTag::of).collect(Collectors.toList()));
         article.setTypes(types);
         article.setResources(resources);
+        article.setId(AggregateIdService.SERVICE.randomStringId(article.getTitle()));
         return article;
     }
 

@@ -1,6 +1,5 @@
 package com.whatakitty.jmore.blog.domain.comment;
 
-import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
 import java.util.Date;
@@ -16,7 +15,7 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public final class Comment extends AbstractAggregateRoot<Long> {
+public final class Comment extends AbstractAggregateRoot<String> {
 
     private String content;
     private User publisher;

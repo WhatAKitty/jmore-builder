@@ -18,7 +18,7 @@ import org.apache.commons.io.FilenameUtils;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public final class Resource extends AbstractAggregateRoot<Long> {
+public final class Resource extends AbstractAggregateRoot<String> {
 
     /**
      * allowed extensions

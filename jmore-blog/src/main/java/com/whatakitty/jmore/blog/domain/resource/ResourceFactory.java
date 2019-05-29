@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.domain.resource;
 
 import com.whatakitty.jmore.blog.domain.security.User;
+import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
 import java.io.File;
 import java.util.Date;
 
@@ -28,6 +29,7 @@ public final class ResourceFactory {
         resource.setUser(publisher);
         resource.setUploadTime(new Date());
         resource.setFile(file);
+        resource.setId(AggregateIdService.SERVICE.randomStringId(file.getName()));
         return resource;
     }
 

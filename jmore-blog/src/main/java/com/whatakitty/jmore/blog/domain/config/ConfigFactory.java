@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.config;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * config factory
  *
@@ -10,6 +12,7 @@ package com.whatakitty.jmore.blog.domain.config;
 public final class ConfigFactory {
 
     public static final ConfigFactory FACTORY = new ConfigFactory();
+    private static final AggregateId<Long> DEFAULT_PK = AggregateId.of(1L);
 
     /**
      * create a new config
@@ -28,6 +31,7 @@ public final class ConfigFactory {
                             String username,
                             String password) {
         Config config = new Config();
+        config.setId(DEFAULT_PK);
         config.setTitle(title);
         config.setContact(contact);
         config.setCopyright(copyright);
