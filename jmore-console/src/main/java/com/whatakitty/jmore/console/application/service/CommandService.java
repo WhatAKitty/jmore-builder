@@ -43,7 +43,7 @@ public class CommandService {
 
         // execute command
         try {
-            return commandRepository.findById(new AggregateId<>(cmd))
+            return commandRepository.findById(AggregateId.of(cmd))
                 .map(command -> {
                     context.setCurrentCommand(command);
                     return command.execute(context);
@@ -63,7 +63,7 @@ public class CommandService {
      */
     public boolean createBatch(ConsoleContext context, String batchName, List<String> cmds) {
         List<ICommand> commands = commandRepository.findInIds(cmds.parallelStream()
-            .map(AggregateId::new)
+            .map(AggregateId::of)
             .collect(Collectors.toList()));
         BatchCommand batchCommand = Command.createBatch(commands);
         return commandRepository.saveCommand(batchName, batchCommand);

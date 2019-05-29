@@ -33,7 +33,7 @@ public class DefaultHistoryRepository extends InMemoryRepository<String, History
     }
 
     private AggregateId<String> createId() {
-        return new AggregateId<>(UUID.randomUUID().toString());
+        return AggregateId.of(UUID.randomUUID().toString());
     }
 
 }

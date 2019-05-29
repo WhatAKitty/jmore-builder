@@ -34,12 +34,12 @@ public class DefaultCommandRepository extends InMemoryRepository<String, IComman
 
     @Override
     public boolean saveCommand(String commmandName, ICommand command) {
-        return putIfAbsent(new AggregateId<>(commmandName), command) == null;
+        return putIfAbsent(AggregateId.of(commmandName), command) == null;
     }
 
     @Override
     protected void init() {
-        put(new AggregateId<>(ShowHistoryCommand.COMMAND_TIP), new ShowHistoryCommand());
-        put(new AggregateId<>(UnDoCommand.COMMAND_TIP), new UnDoCommand());
+        put(AggregateId.of(ShowHistoryCommand.COMMAND_TIP), new ShowHistoryCommand());
+        put(AggregateId.of(UnDoCommand.COMMAND_TIP), new UnDoCommand());
     }
 }

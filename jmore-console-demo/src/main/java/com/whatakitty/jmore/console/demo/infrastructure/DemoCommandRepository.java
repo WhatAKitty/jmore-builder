@@ -18,7 +18,7 @@ public class DemoCommandRepository extends DefaultCommandRepository {
     @Override
     protected void init() {
         super.init();
-        put(new AggregateId<>(SayHelloWorldCommand.COMMAND_TIP), new SayHelloWorldCommand());
+        put(AggregateId.of(SayHelloWorldCommand.COMMAND_TIP), new SayHelloWorldCommand());
     }
     
 }

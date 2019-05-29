@@ -10,7 +10,7 @@ import lombok.Value;
  * @date 2019/05/02
  * @description
  **/
-@Value
+@Value(staticConstructor = "of")
 public class AggregateId<T> implements Serializable {
 
     private T id;
