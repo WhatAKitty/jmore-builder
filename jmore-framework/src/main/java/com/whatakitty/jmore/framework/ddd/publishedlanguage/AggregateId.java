@@ -11,7 +11,7 @@ import lombok.Value;
  * @description
  **/
 @Value(staticConstructor = "of")
-public class AggregateId<T> implements Serializable {
+public final class AggregateId<T> implements Serializable {
 
     private T id;
 
