@@ -13,7 +13,7 @@ import lombok.Value;
  **/
 @Value(staticConstructor = "of")
 @EqualsAndHashCode(callSuper = true)
-public class Manager extends ValueObject {
+public final class Manager extends ValueObject {
 
     private final String username;
     private final String password;

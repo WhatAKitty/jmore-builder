@@ -7,7 +7,7 @@ package com.whatakitty.jmore.blog.domain.resource;
  * @date 2019/05/24
  * @description
  **/
-public class UploadFailedException extends RuntimeException {
+public final class UploadFailedException extends RuntimeException {
 
     public UploadFailedException() {
         super();

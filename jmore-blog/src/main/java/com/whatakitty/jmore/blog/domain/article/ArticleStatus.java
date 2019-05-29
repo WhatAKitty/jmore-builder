@@ -15,7 +15,7 @@ import lombok.Value;
  **/
 @Value(staticConstructor = "of")
 @EqualsAndHashCode(callSuper = true)
-public class ArticleStatus extends ValueObject {
+public final class ArticleStatus extends ValueObject {
 
     /**
      * draft
@@ -29,7 +29,7 @@ public class ArticleStatus extends ValueObject {
     private final Status status;
 
     @RequiredArgsConstructor
-    enum Status {
+    private enum Status {
 
         /**
          * draft status

@@ -13,8 +13,8 @@ import lombok.Value;
  **/
 @Value(staticConstructor = "of")
 @EqualsAndHashCode(callSuper = true)
-public class ArticleTag extends ValueObject {
+public final class ArticleTag extends ValueObject {
 
-    private String tagName;
+    private final String tagName;
 
 }
