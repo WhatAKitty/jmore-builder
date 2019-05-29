@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.blog.domain.security.event;
 
-import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
+import com.whatakitty.jmore.framework.ddd.event.DomainEvent;
 
 /**
  * user login failed event
@@ -9,7 +9,7 @@ import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
  * @date 2019/05/27
  * @description
  **/
-public class UserLoginFailedEvent extends AbstractBlogEvent {
+public class UserLoginFailedEvent extends DomainEvent {
 
     /**
      * Create a new Domain Event.

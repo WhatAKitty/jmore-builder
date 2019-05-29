@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.blog.domain.security.event;
 
-import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
+import com.whatakitty.jmore.framework.ddd.event.DomainEvent;
 
 /**
  * user reset password event
@@ -9,7 +9,7 @@ import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
  * @date 2019/05/27
  * @description
  **/
-public class UserRestPwdEvent extends AbstractBlogEvent {
+public class UserRestPwdEvent extends DomainEvent {
 
     /**
      * Create a new Domain Event.

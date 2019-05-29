@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.blog.domain.article.event;
 
-import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
+import com.whatakitty.jmore.framework.ddd.event.DomainEvent;
 
 /**
  * article published event
@@ -9,7 +9,7 @@ import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
  * @date 2019/05/27
  * @description
  **/
-public class ArticlePublishedEvent extends AbstractBlogEvent {
+public class ArticlePublishedEvent extends DomainEvent {
 
     /**
      * Create a new Domain Event.

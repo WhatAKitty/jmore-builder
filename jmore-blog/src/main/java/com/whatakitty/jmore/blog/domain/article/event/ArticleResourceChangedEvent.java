@@ -1,7 +1,7 @@
 package com.whatakitty.jmore.blog.domain.article.event;
 
-import com.whatakitty.jmore.blog.domain.AbstractBlogEvent;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
+import com.whatakitty.jmore.framework.ddd.event.DomainEvent;
 import java.util.List;
 
 /**
@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2019/05/27
  * @description
  **/
-public class ArticleResourceChangedEvent extends AbstractBlogEvent {
+public class ArticleResourceChangedEvent extends DomainEvent {
 
     private final List<Resource> prevResources;
     private final List<Resource> newResources;
