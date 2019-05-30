@@ -4,6 +4,7 @@ import com.whatakitty.jmore.console.domain.command.ICommand;
 import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.framework.compilerule.annotations.ThreadSafe;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.AccessLevel;
@@ -64,7 +65,8 @@ public class ConsoleContext extends AbstractAggregateRoot<String> {
     @Getter(AccessLevel.PROTECTED)
     private final Environment environment;
 
-    ConsoleContext(final Object source, final ApplicationContext appContext) {
+    ConsoleContext(final AggregateId<String> id, final Object source, final ApplicationContext appContext) {
+        super(id);
         this.source = source;
         this.appContext = appContext;
         this.environment = appContext.getEnvironment();

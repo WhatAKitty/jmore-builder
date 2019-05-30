@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 
 /**
  * show history command
@@ -13,8 +14,8 @@ public class ShowHistoryCommand extends Command {
 
     public static final String COMMAND_TIP = "history";
 
-    public ShowHistoryCommand() {
-        super(COMMAND_TIP, new ShowHistoryReceiver());
+    public ShowHistoryCommand(AggregateId<String> id) {
+        super(id, COMMAND_TIP, new ShowHistoryReceiver());
     }
 
     @Override

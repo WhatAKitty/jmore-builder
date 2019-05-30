@@ -39,7 +39,9 @@ public class DefaultCommandRepository extends InMemoryRepository<String, IComman
 
     @Override
     protected void init() {
-        put(AggregateId.of(ShowHistoryCommand.COMMAND_TIP), new ShowHistoryCommand());
-        put(AggregateId.of(UnDoCommand.COMMAND_TIP), new UnDoCommand());
+        AggregateId<String> showHistoryId = AggregateId.of(ShowHistoryCommand.COMMAND_TIP);
+        AggregateId<String> undoHistoryId = AggregateId.of(UnDoCommand.COMMAND_TIP);
+        put(showHistoryId, new ShowHistoryCommand(showHistoryId));
+        put(undoHistoryId, new UnDoCommand(undoHistoryId));
     }
 }

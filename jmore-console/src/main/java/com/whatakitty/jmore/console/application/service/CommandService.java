@@ -3,6 +3,7 @@ package com.whatakitty.jmore.console.application.service;
 import com.whatakitty.jmore.console.domain.command.*;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.domain.history.History;
+import com.whatakitty.jmore.console.domain.history.HistoryFactory;
 import com.whatakitty.jmore.console.domain.history.HistoryRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.List;
@@ -26,6 +27,7 @@ public class CommandService {
 
     private final CommandRepository commandRepository;
     private final HistoryRepository historyRepository;
+    private final HistoryFactory historyFactory;
 
     /**
      * execute command
@@ -36,7 +38,7 @@ public class CommandService {
     public Optional<CommandResult> execute(ConsoleContext context, String cmd) {
         // get or create history
         context.bindHistory(() -> {
-            History newOne = new History(context);
+            History newOne = historyFactory.create(context);
             historyRepository.create(newOne);
             return newOne;
         });

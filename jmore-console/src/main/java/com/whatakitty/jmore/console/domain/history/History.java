@@ -5,8 +5,8 @@ import com.whatakitty.jmore.console.domain.command.ShowHistoryCommand;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.infrastructure.stream.StreamMgr;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Stack;
-import lombok.RequiredArgsConstructor;
 
 /**
  * history aggregate root
@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
  * @date 2019/05/02
  * @description
  **/
-@RequiredArgsConstructor
 public class History extends AbstractAggregateRoot<String> {
 
     /**
@@ -26,6 +25,11 @@ public class History extends AbstractAggregateRoot<String> {
      * console context
      */
     private final ConsoleContext context;
+
+    public History(AggregateId<String> id, ConsoleContext context) {
+        super(id);
+        this.context = context;
+    }
 
     /**
      * add command into history stack

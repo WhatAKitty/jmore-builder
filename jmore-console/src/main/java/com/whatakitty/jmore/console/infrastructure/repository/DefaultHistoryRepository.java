@@ -4,7 +4,6 @@ import com.whatakitty.jmore.console.domain.history.History;
 import com.whatakitty.jmore.console.domain.history.HistoryRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * default history repository
@@ -22,18 +21,12 @@ public class DefaultHistoryRepository extends InMemoryRepository<String, History
 
     @Override
     public void create(History history) {
-        final AggregateId<String> historyId = createId();
-        history.setId(historyId);
-        put(historyId, history);
+        put(history.getId(), history);
     }
 
     @Override
     protected void init() {
         // do nothing
-    }
-
-    private AggregateId<String> createId() {
-        return AggregateId.of(UUID.randomUUID().toString());
     }
 
 }

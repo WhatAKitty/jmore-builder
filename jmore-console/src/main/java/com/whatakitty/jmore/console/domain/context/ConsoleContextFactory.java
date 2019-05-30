@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.console.domain.context;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsoleContextFactory {
 
+    private static final AggregateId<String> CONTEXT_ID = AggregateId.of("CONTEXT");
+
     /**
      * build console context from application args
      *
@@ -25,7 +28,10 @@ public class ConsoleContextFactory {
     public ConsoleContext create(final Object source,
                                  final ApplicationContext appContext,
                                  final ApplicationArguments args) {
-        ConsoleContext context = new ConsoleContext(source, appContext);
+        ConsoleContext context = new ConsoleContext(
+            CONTEXT_ID,
+            source,
+            appContext);
         args.getOptionNames().parallelStream()
             .forEach(name -> {
                 context.addParameter(name, args.getOptionValues(name));

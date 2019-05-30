@@ -6,7 +6,9 @@ import com.whatakitty.jmore.console.domain.command.event.CommandExecuteFailedEve
 import com.whatakitty.jmore.console.domain.command.event.CommandFinishedEvent;
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,6 +35,12 @@ public abstract class Command extends AbstractAggregateRoot<String> implements I
      * the receiver to actually execute
      */
     private final IReceiver receiver;
+
+    public Command(AggregateId<String> id, String name, IReceiver receiver) {
+        super(id);
+        this.name = name;
+        this.receiver = receiver;
+    }
 
     @Override
     public CommandResult execute(ConsoleContext context) {

@@ -2,6 +2,7 @@ package com.whatakitty.jmore.console.domain.command;
 
 import com.whatakitty.jmore.console.domain.context.ConsoleContext;
 import com.whatakitty.jmore.console.infrastructure.stream.StreamMgr;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 
 /**
  * undo command
@@ -14,8 +15,8 @@ public class UnDoCommand extends Command {
 
     public static final String COMMAND_TIP = "undo";
 
-    public UnDoCommand() {
-        super(COMMAND_TIP, new UnDoReceiver());
+    public UnDoCommand(AggregateId<String> id) {
+        super(id, COMMAND_TIP, new UnDoReceiver());
     }
 
     @Override
