@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.resource;
 
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.io.File;
 import java.util.Date;
 import lombok.Getter;
@@ -37,6 +38,10 @@ public final class Resource extends AbstractAggregateRoot<String> {
     private File file;
     private User user;
     private Date uploadTime;
+
+    public Resource(AggregateId<String> id) {
+        super(id);
+    }
 
     /**
      * upload file

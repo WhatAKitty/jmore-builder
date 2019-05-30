@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.config;
 
 import com.whatakitty.jmore.blog.domain.config.event.ConfigInitFinishedEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,6 +24,10 @@ public class Config extends AbstractAggregateRoot<Long> {
     private String copyright;
     private String domain;
     private Manager author;
+
+    public Config(AggregateId<Long> id) {
+        super(id);
+    }
 
     /**
      * blog init

@@ -20,7 +20,7 @@ public final class CommentFactory {
                                String commentContent,
                                RubbishDetectService rubbishDetectService) {
         // basic content
-        final Comment comment = new Comment();
+        final Comment comment = new Comment(AggregateIdService.SERVICE.randomStringId(commentContent));
         comment.setContent(commentContent);
         comment.setCommentableResource(commentableResource);
         comment.setPublisher(publisher);
@@ -30,7 +30,6 @@ public final class CommentFactory {
         final boolean isRubbish = rubbishDetectService.rubbish(comment.getContent());
         comment.setPendingStatus(isRubbish ? CommentPendingStatus.PENDING : CommentPendingStatus.PENDED);
 
-        comment.setId(AggregateIdService.SERVICE.randomStringId(commentContent));
         return comment;
     }
 

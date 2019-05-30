@@ -7,6 +7,7 @@ import com.whatakitty.jmore.blog.domain.resource.Resource;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,10 @@ public final class Article extends AbstractAggregateRoot<String> {
      * publish date of the article
      */
     private Date publishDate;
+
+    public Article(AggregateId<String> id) {
+        super(id);
+    }
 
     /**
      * publish article and then publish an event {@link ArticlePublishedEvent}

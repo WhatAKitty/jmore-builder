@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.comment;
 
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,10 @@ public final class Comment extends AbstractAggregateRoot<String> {
     private CommentPendingStatus pendingStatus;
 
     private Date commentTime;
+
+    public Comment(AggregateId<String> id) {
+        super(id);
+    }
 
     /**
      * mark pended

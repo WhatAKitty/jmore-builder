@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.type;
 
 import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +18,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public final class Type extends AbstractAggregateRoot<Long> {
+public final class Type extends AbstractAggregateRoot<String> {
 
     private String typeName;
+
+    public Type(AggregateId<String> id) {
+        super(id);
+    }
 
     /**
      * destory type

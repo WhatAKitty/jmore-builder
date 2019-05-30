@@ -30,8 +30,7 @@ public final class ConfigFactory {
                             String domain,
                             String username,
                             String password) {
-        Config config = new Config();
-        config.setId(DEFAULT_PK);
+        Config config = new Config(DEFAULT_PK);
         config.setTitle(title);
         config.setContact(contact);
         config.setCopyright(copyright);

@@ -5,11 +5,8 @@ import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * article factory
@@ -35,18 +32,23 @@ public final class ArticleFactory {
      */
     public Article newArticle(User author,
                               List<String> tags,
-                              List<Type> types,
-                              List<Resource> resources,
+                              List<String> types,
+                              List<String> resources,
                               String content,
                               String title) {
-        Article article = new Article();
+        Article article = new Article(AggregateIdService.SERVICE.randomStringId(title));
         article.setTitle(title);
         article.setContent(content);
         article.setAuthor(author);
-        article.setTags(tags.parallelStream().map(ArticleTag::of).collect(Collectors.toList()));
-        article.setTypes(types);
-        article.setResources(resources);
-        article.setId(AggregateIdService.SERVICE.randomStringId(article.getTitle()));
+        article.setTags(tags.parallelStream()
+            .map(ArticleTag::of)
+            .collect(Collectors.toList()));
+        article.setTypes(types.parallelStream()
+            .map(typeId -> new Type(AggregateId.of(typeId)))
+            .collect(Collectors.toList()));
+        article.setResources(resources.parallelStream()
+            .map(resourceId -> new Resource(AggregateId.of(resourceId)))
+            .collect(Collectors.toList()));
         return article;
     }
 

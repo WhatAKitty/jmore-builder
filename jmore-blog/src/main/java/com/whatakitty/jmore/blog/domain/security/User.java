@@ -4,6 +4,7 @@ import com.whatakitty.jmore.blog.domain.security.event.UserLoginFailedEvent;
 import com.whatakitty.jmore.blog.domain.security.event.UserLoginSuccessfullyEvent;
 import com.whatakitty.jmore.blog.domain.security.event.UserRestPwdEvent;
 import com.whatakitty.jmore.framework.ddd.domain.AbstractAggregateRoot;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import lombok.Getter;
@@ -52,6 +53,10 @@ public final class User extends AbstractAggregateRoot<Long> {
      * last login time
      */
     private Date lastLoginDate;
+
+    public User(AggregateId<Long> id) {
+        super(id);
+    }
 
     /**
      * set password with encoded base64
