@@ -21,7 +21,7 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
     private static final Unsafe unsafe = Unsafe.getUnsafe();
     private static final long VERSION_OFFSET;
 
-    private AggregateId<PK> id;
+    private final AggregateId<PK> id;
     @EqualsAndHashCode.Exclude
     private AggregateStatus status = AggregateStatus.ACTIVE;
     @EqualsAndHashCode.Exclude
