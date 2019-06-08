@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_creator" jdbcType="BIGINT" property="gmtCreator" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="gmt_modifier" jdbcType="BIGINT" property="gmtModifier" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="publisher" jdbcType="BIGINT" property="publisher" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="target" jdbcType="BIGINT" property="target" />
+    <result column="target_type" jdbcType="TINYINT" property="targetType" />
+    <result column="pending_status" jdbcType="BIT" property="pendingStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_creator, gmt_modified, gmt_modifier, content, publisher,
+    comment_time, target, target_type, pending_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sp_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sp_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentDO">
+    insert into sp_comment (id, gmt_create, gmt_creator, 
+      gmt_modified, gmt_modifier,
+      content, publisher, comment_time, 
+      target, target_type, pending_status
+      )
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtCreator,jdbcType=BIGINT}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{gmtModifier,jdbcType=BIGINT},
+      #{content,jdbcType=VARCHAR}, #{publisher,jdbcType=BIGINT}, #{commentTime,jdbcType=TIMESTAMP}, 
+      #{target,jdbcType=BIGINT}, #{targetType,jdbcType=TINYINT}, #{pendingStatus,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentDO">
+    insert into sp_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtCreator != null">
+        gmt_creator,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="gmtModifier != null">
+        gmt_modifier,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+      <if test="commentTime != null">
+        comment_time,
+      </if>
+      <if test="target != null">
+        target,
+      </if>
+      <if test="targetType != null">
+        target_type,
+      </if>
+      <if test="pendingStatus != null">
+        pending_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null">
+        #{gmtCreator,jdbcType=BIGINT},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModifier != null">
+        #{gmtModifier,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=BIGINT},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="target != null">
+        #{target,jdbcType=BIGINT},
+      </if>
+      <if test="targetType != null">
+        #{targetType,jdbcType=TINYINT},
+      </if>
+      <if test="pendingStatus != null">
+        #{pendingStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentDO">
+    update sp_comment
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreator != null">
+        gmt_creator = #{gmtCreator,jdbcType=BIGINT},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModifier != null">
+        gmt_modifier = #{gmtModifier,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=BIGINT},
+      </if>
+      <if test="commentTime != null">
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="target != null">
+        target = #{target,jdbcType=BIGINT},
+      </if>
+      <if test="targetType != null">
+        target_type = #{targetType,jdbcType=TINYINT},
+      </if>
+      <if test="pendingStatus != null">
+        pending_status = #{pendingStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.comment.CommentDO">
+    update sp_comment
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_creator = #{gmtCreator,jdbcType=BIGINT},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      gmt_modifier = #{gmtModifier,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=BIGINT},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      target = #{target,jdbcType=BIGINT},
+      target_type = #{targetType,jdbcType=TINYINT},
+      pending_status = #{pendingStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="user_type" jdbcType="TINYINT" property="userType"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="DetailResultMap"
+               type="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
+    </resultMap>
+    <resultMap extends="DetailResultMap" id="AllResultMap"
+               type="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        <result column="last_login_ipv4" jdbcType="VARCHAR" property="lastLoginIpv4"/>
+        <result column="last_login_date" jdbcType="TIMESTAMP" property="lastLoginDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, gmt_create, gmt_modified, user_type, username, password
+    </sql>
+    <sql id="Detailed_Column_List">
+        nick_name, mobile, birthday
+    </sql>
+    <sql id="All_Column_List">
+        last_login_ipv4, last_login_date
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sc_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectDetailedByPrimaryKey" parameterType="java.lang.Long" resultMap="DetailResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Detailed_Column_List"></include>
+        from sc_user main
+        left join sc_user_detail detail on detail.user_id = main.id
+        where main.id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAllByPrimaryKey" parameterType="java.lang.Long" resultMap="AllResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Detailed_Column_List" />
+        ,
+        <include refid="All_Column_List" />
+        from sc_user main
+        left join sc_user_detail detail on detail.user_id = main.id
+        left join sc_user_access access on access.user_id = main.id
+        where main.id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from sc_user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        insert into sc_user (id, gmt_create, gmt_modified,
+                             user_type, username,
+                             password)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{userType,jdbcType=TINYINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        insert into sc_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=TINYINT},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        update sc_user
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=TINYINT},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        update sc_user
+        set gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            user_type    = #{userType,jdbcType=TINYINT},
+            username     = #{username,jdbcType=VARCHAR},
+            password     = #{password,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceMapper">
+    <resultMap id="BaseResultMap"
+               type="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="article_id" jdbcType="BIGINT" property="articleId"/>
+        <result column="resource_id" jdbcType="BIGINT" property="resourceId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, article_id, resource_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bg_article_resource
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from bg_article_resource
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceDO">
+        insert into bg_article_resource (id, article_id, resource_id)
+        values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceDO">
+        insert into bg_article_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="resourceId != null">
+                resource_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="articleId != null">
+                #{articleId,jdbcType=BIGINT},
+            </if>
+            <if test="resourceId != null">
+                #{resourceId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertList" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into bg_article_resource (article_id, resource_id)
+        values
+        <foreach collection="articleResources" item="articleResource" open="" close="" index="index" separator=",">
+            (#{articleResource.articleId,jdbcType=VARCHAR}, #{articleResource.typeId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceDO">
+        update bg_article_resource
+        <set>
+            <if test="articleId != null">
+                article_id = #{articleId,jdbcType=BIGINT},
+            </if>
+            <if test="resourceId != null">
+                resource_id = #{resourceId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource.ArticleResourceDO">
+        update bg_article_resource
+        set article_id  = #{articleId,jdbcType=BIGINT},
+            resource_id = #{resourceId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="deleteAllByArticleId" parameterType="java.lang.Long">
+        delete
+        from bg_article_resource
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </delete>
+</mapper>
