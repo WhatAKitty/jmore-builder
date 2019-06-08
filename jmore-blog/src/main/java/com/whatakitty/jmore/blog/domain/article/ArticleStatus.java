@@ -17,6 +17,17 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = true)
 public final class ArticleStatus extends ValueObject {
 
+    public static ArticleStatus of(int raw) {
+        switch (raw) {
+            case 0:
+                return ArticleStatus.DRAFT;
+            case 1:
+                return ArticleStatus.PUBLISHED;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
     /**
      * draft
      */
@@ -29,7 +40,7 @@ public final class ArticleStatus extends ValueObject {
     private final Status status;
 
     @RequiredArgsConstructor
-    private enum Status {
+    public enum Status {
 
         /**
          * draft status
