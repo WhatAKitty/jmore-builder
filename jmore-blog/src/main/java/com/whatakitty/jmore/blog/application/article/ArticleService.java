@@ -4,12 +4,16 @@ import com.whatakitty.jmore.blog.domain.article.Article;
 import com.whatakitty.jmore.blog.domain.article.ArticleFactory;
 import com.whatakitty.jmore.blog.domain.article.ArticleRepository;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
+import com.whatakitty.jmore.blog.domain.resource.ResourceRepository;
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.type.Type;
+import com.whatakitty.jmore.blog.domain.type.TypeRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * article service
@@ -20,12 +24,13 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 @RequiredArgsConstructor
-public final class ArticleService {
+public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final TypeRepository typeRepository;
     private final ResourceRepository resourceRepository;
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void save(ArticleDTO articleDTO) {
         // TODO get the current user
         final AggregateId<Long> articleId = articleRepository.nextId();
@@ -44,10 +49,11 @@ public final class ArticleService {
         articleRepository.add(article);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void post(ArticleDTO articleDTO) {
         final Article article = articleRepository.at(AggregateId.of(articleDTO.getId()));
         article.publish();
-        articleRepository.add(article);
+        articleRepository.update(article);
     }
 
     /**
@@ -55,6 +61,7 @@ public final class ArticleService {
      *
      * @param articleDTO the article info
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void saveAndPost(ArticleDTO articleDTO) {
         // TODO get the current user
         final AggregateId<Long> articleId = articleRepository.nextId();
@@ -78,6 +85,7 @@ public final class ArticleService {
      *
      * @param articleDTO article info
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void modify(ArticleDTO articleDTO) {
         final Article article = articleRepository.at(AggregateId.of(articleDTO.getId()));
         article.modifyTitle(articleDTO.getTitle());
@@ -93,13 +101,14 @@ public final class ArticleService {
                 .map(typeId -> new Type(typeRepository.nextId()))
                 .collect(Collectors.toList())
         );
-        articleRepository.add(article);
+        articleRepository.update(article);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void drop(ArticleDTO articleDTO) {
         final Article article = articleRepository.at(AggregateId.of(articleDTO.getId()));
         article.dropped();
-        articleRepository.add(article);
+        articleRepository.remove(article);
     }
 
 }
