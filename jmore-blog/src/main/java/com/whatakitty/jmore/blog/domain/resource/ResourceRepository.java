@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.resource;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * resource repository
  *
@@ -8,6 +10,13 @@ package com.whatakitty.jmore.blog.domain.resource;
  * @description
  **/
 public interface ResourceRepository {
+
+    /**
+     * get the next id for resource
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
 
     /**
      * add resource into repository

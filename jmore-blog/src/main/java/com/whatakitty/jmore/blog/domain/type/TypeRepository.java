@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.type;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * type repository
  *
@@ -8,6 +10,13 @@ package com.whatakitty.jmore.blog.domain.type;
  * @description
  **/
 public interface TypeRepository {
+
+    /**
+     * get the next id for type
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
 
     /**
      * add type into repository

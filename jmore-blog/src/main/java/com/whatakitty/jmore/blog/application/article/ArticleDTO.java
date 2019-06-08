@@ -23,7 +23,7 @@ public final class ArticleDTO {
         groups = {ArticleModifyGroup.class, ArticleDropGroup.class},
         message = "the id should not be blank"
     )
-    private String id;
+    private Long id;
     /**
      * the article title
      */

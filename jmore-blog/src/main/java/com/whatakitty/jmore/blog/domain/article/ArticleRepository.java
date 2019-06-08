@@ -12,11 +12,18 @@ import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 public interface ArticleRepository {
 
     /**
+     * get the next id for article
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
+
+    /**
      * find article from repository by article id
      *
      * @param articleId
      */
-    Article at(AggregateId<String> articleId);
+    Article at(AggregateId<Long> articleId);
 
     /**
      * add article into repository
@@ -24,6 +31,13 @@ public interface ArticleRepository {
      * @param article
      */
     void add(Article article);
+
+    /**
+     * update article
+     *
+     * @param article
+     */
+    void update(Article article);
 
     /**
      * remove article from repository

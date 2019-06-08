@@ -18,11 +18,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public final class Type extends AbstractAggregateRoot<String> {
+public final class Type extends AbstractAggregateRoot<Long> {
 
     private String typeName;
 
-    public Type(AggregateId<String> id) {
+    public Type(AggregateId<Long> id) {
         super(id);
     }
 

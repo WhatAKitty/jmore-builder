@@ -1,7 +1,7 @@
 package com.whatakitty.jmore.blog.domain.resource;
 
 import com.whatakitty.jmore.blog.domain.security.User;
-import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.io.File;
 import java.util.Date;
 
@@ -23,9 +23,9 @@ public final class ResourceFactory {
      * @param publisher
      * @return
      */
-    public Resource newResource(File file, User publisher) {
+    public Resource newResource(AggregateId<Long> resourceId, File file, User publisher) {
         // create a new resource
-        Resource resource = new Resource(AggregateIdService.SERVICE.randomStringId(file.getName()));
+        Resource resource = new Resource(resourceId);
         resource.setUser(publisher);
         resource.setUploadTime(new Date());
         resource.setFile(file);

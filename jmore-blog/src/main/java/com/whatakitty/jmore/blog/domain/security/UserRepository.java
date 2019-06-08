@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.security;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * user repository
  *
@@ -8,6 +10,13 @@ package com.whatakitty.jmore.blog.domain.security;
  * @description
  **/
 public interface UserRepository {
+
+    /**
+     * get the next id for user
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
 
     /**
      * add user into repository

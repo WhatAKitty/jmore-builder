@@ -2,6 +2,7 @@ package com.whatakitty.jmore.blog.domain.comment;
 
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Date;
 
 /**
@@ -15,12 +16,13 @@ public final class CommentFactory {
 
     public static final CommentFactory FACTORY = new CommentFactory();
 
-    public Comment postComment(CommentableResource commentableResource,
+    public Comment postComment(AggregateId<Long> commentId,
+                               CommentableResource commentableResource,
                                User publisher,
                                String commentContent,
                                RubbishDetectService rubbishDetectService) {
         // basic content
-        final Comment comment = new Comment(AggregateIdService.SERVICE.randomStringId(commentContent));
+        final Comment comment = new Comment(commentId);
         comment.setContent(commentContent);
         comment.setCommentableResource(commentableResource);
         comment.setPublisher(publisher);

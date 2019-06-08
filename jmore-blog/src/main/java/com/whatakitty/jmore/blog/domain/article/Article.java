@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public final class Article extends AbstractAggregateRoot<String> {
+public final class Article extends AbstractAggregateRoot<Long> {
 
     /**
      * the article title
@@ -72,7 +72,7 @@ public final class Article extends AbstractAggregateRoot<String> {
      */
     private Date publishDate;
 
-    public Article(AggregateId<String> id) {
+    public Article(AggregateId<Long> id) {
         super(id);
     }
 

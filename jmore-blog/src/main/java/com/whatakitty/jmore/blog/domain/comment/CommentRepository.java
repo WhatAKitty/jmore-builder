@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.comment;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * comment repository
  *
@@ -8,6 +10,13 @@ package com.whatakitty.jmore.blog.domain.comment;
  * @description
  **/
 public interface CommentRepository {
+
+    /**
+     * get the next id for comment
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
 
     /**
      * add comment

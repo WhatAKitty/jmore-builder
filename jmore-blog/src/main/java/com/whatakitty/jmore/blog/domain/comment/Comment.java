@@ -18,7 +18,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public final class Comment extends AbstractAggregateRoot<String> {
+public final class Comment extends AbstractAggregateRoot<Long> {
 
     private String content;
     private User publisher;
@@ -27,7 +27,7 @@ public final class Comment extends AbstractAggregateRoot<String> {
 
     private Date commentTime;
 
-    public Comment(AggregateId<String> id) {
+    public Comment(AggregateId<Long> id) {
         super(id);
     }
 

@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.domain.config;
 
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+
 /**
  * config repository
  *
@@ -8,6 +10,13 @@ package com.whatakitty.jmore.blog.domain.config;
  * @description
  **/
 public interface ConfigRepository {
+
+    /**
+     * get the next id for config
+     *
+     * @return
+     */
+    AggregateId<Long> nextId();
 
     /**
      * create a config

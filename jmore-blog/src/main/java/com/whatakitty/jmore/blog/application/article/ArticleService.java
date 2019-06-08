@@ -23,16 +23,22 @@ import org.springframework.stereotype.Service;
 public final class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final TypeRepository typeRepository;
+    private final ResourceRepository resourceRepository;
 
     public void save(ArticleDTO articleDTO) {
         // TODO get the current user
+        final AggregateId<Long> articleId = articleRepository.nextId();
         final Article article = ArticleFactory.FACTORY.newArticle(
+            articleId,
             new User(AggregateId.of(1L)),
             articleDTO.getTags(),
             articleDTO.getTypes(),
             articleDTO.getResources(),
             articleDTO.getContent(),
-            articleDTO.getTitle()
+            articleDTO.getTitle(),
+            typeRepository,
+            resourceRepository
         );
         article.draft();
         articleRepository.add(article);
@@ -51,13 +57,17 @@ public final class ArticleService {
      */
     public void saveAndPost(ArticleDTO articleDTO) {
         // TODO get the current user
+        final AggregateId<Long> articleId = articleRepository.nextId();
         final Article article = ArticleFactory.FACTORY.newArticle(
+            articleId,
             new User(AggregateId.of(1L)),
             articleDTO.getTags(),
             articleDTO.getTypes(),
             articleDTO.getResources(),
             articleDTO.getContent(),
-            articleDTO.getTitle()
+            articleDTO.getTitle(),
+            typeRepository,
+            resourceRepository
         );
         article.publish();
         articleRepository.add(article);
@@ -74,13 +84,13 @@ public final class ArticleService {
         article.modifyContent(
             articleDTO.getContent(),
             articleDTO.getResources().parallelStream()
-                .map(resourceId -> new Resource(AggregateId.of(resourceId)))
+                .map(resourceId -> new Resource(resourceRepository.nextId()))
                 .collect(Collectors.toList())
         );
         article.changeArticleTag(articleDTO.getTags());
         article.changeType(
             articleDTO.getTypes().parallelStream()
-                .map(typeId -> new Type(AggregateId.of(typeId)))
+                .map(typeId -> new Type(typeRepository.nextId()))
                 .collect(Collectors.toList())
         );
         articleRepository.add(article);

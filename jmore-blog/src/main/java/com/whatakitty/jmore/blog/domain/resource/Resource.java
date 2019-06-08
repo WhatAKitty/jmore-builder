@@ -21,7 +21,7 @@ import org.apache.commons.io.FilenameUtils;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public final class Resource extends AbstractAggregateRoot<String> {
+public final class Resource extends AbstractAggregateRoot<Long> {
 
     /**
      * allowed extensions
@@ -39,7 +39,7 @@ public final class Resource extends AbstractAggregateRoot<String> {
     private User user;
     private Date uploadTime;
 
-    public Resource(AggregateId<String> id) {
+    public Resource(AggregateId<Long> id) {
         super(id);
     }
 
