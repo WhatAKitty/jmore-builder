@@ -2,6 +2,14 @@
 
 JMore Blog 应用程序
 
+## TODO
+
+- [ ] 文章版本记录
+- [ ] DDD聚合根版本号
+- [ ] 抽离状态机
+- [ ] 文章资源删除后，如何清除多余的资源？
+- [ ] 聚合跟Code与数据库ID的协调处理
+
 ## 功能
 
 * 发布/修改/删除文章
@@ -82,4 +90,4 @@ JMore Blog 应用程序
 
 ### 领域模型
 
-![领域模型](https://static.xuqiang.me/public/images/%E5%8D%9A%E5%AE%A2DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-3.png)
+![领域模型](https://static.xuqiang.me/public/images/%E5%8D%9A%E5%AE%A2DDD%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-4.png)
