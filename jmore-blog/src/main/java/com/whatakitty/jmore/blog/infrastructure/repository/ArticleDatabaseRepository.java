@@ -96,19 +96,19 @@ public final class ArticleDatabaseRepository implements ArticleRepository {
         final Date currentDate = new Date();
 
         // search user id by user code
-        final UserDO userDO = userMapper.selectByPrimaryKey(article.getAuthor().getId().getId());
+        final Long userId = article.getAuthor().getId().getId();
 
         // persist article
         final ArticleDO articleDO = new ArticleDO();
-        articleDO.setAuthor(userDO.getId());
+        articleDO.setAuthor(userId);
         articleDO.setTitle(article.getTitle());
         articleDO.setContent(article.getContent());
         articleDO.setPublishDate(article.getPublishDate());
         articleDO.setStatus(article.getArticleStatus().getStatus().getValue());
         articleDO.setGmtCreate(currentDate);
         articleDO.setGmtModified(currentDate);
-        articleDO.setGmtCreator(userDO.getId());
-        articleDO.setGmtModifier(userDO.getId());
+        articleDO.setGmtCreator(userId);
+        articleDO.setGmtModifier(userId);
         articleMapper.insert(articleDO);
 
         // persist relation between article and tags
@@ -163,7 +163,9 @@ public final class ArticleDatabaseRepository implements ArticleRepository {
                 return articleTagsDO;
             })
             .collect(Collectors.toList());
-        articleTagsMapper.insertList(articleTagsDOS);
+        if (!articleTagsDOS.isEmpty()) {
+            articleTagsMapper.insertList(articleTagsDOS);
+        }
     }
 
     private void insertRelationBetweenArticleAndTypes(Article article) {
@@ -178,7 +180,9 @@ public final class ArticleDatabaseRepository implements ArticleRepository {
                 return articleTypesDO;
             })
             .collect(Collectors.toList());
-        articleTypesMapper.insertList(articleTypesDOS);
+        if (!articleTypesDOS.isEmpty()) {
+            articleTypesMapper.insertList(articleTypesDOS);
+        }
     }
 
     private void insertRelationBetweenArticleAndResources(Article article) {
@@ -193,7 +197,9 @@ public final class ArticleDatabaseRepository implements ArticleRepository {
                 return articleResourceDO;
             })
             .collect(Collectors.toList());
-        articleResourceMapper.insertList(articleResourceDOS);
+        if (!articleResourceDOS.isEmpty()) {
+            articleResourceMapper.insertList(articleResourceDOS);
+        }
     }
 
     private void deleteRelationBetweenArticleAndTags(Article article) {

@@ -7,8 +7,10 @@ import com.whatakitty.jmore.blog.domain.service.AggregateIdService;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.blog.domain.type.TypeRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * article factory
@@ -41,6 +43,23 @@ public final class ArticleFactory {
                               String title,
                               TypeRepository typeRepository,
                               ResourceRepository resourceRepository) {
+        // check params
+        if (tags == null) {
+            tags = new ArrayList<>(0);
+        }
+        if (types == null) {
+            types = new ArrayList<>(0);
+        }
+        if (resources == null) {
+            resources = new ArrayList<>(0);
+        }
+        if (StringUtils.isBlank(content)) {
+            throw new IllegalArgumentException("content should not be null or empty");
+        }
+        if (StringUtils.isBlank(title)) {
+            throw new IllegalArgumentException("title should not be null or empty");
+        }
+
         Article article = new Article(articleId);
         article.setTitle(title);
         article.setContent(content);

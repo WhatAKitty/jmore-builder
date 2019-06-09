@@ -10,7 +10,7 @@
         <result column="type_name" jdbcType="VARCHAR" property="typeName"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_creator, gmt_modified, gmt_modifier, code, type_name
+        bg_type.id, bg_type.gmt_create, bg_type.gmt_creator, bg_type.gmt_modified, bg_type.gmt_modifier, bg_type.type_name
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -121,8 +121,8 @@
     <select id="selectListByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from bg_article_types relation
-        left join bg_type type on type.id = relation.type_id
-        where relation.article_id = #{articleId,jdbcType=BIGINT}
+        from bg_article_types
+        left join bg_type on bg_type.id = bg_article_types.type_id
+        where bg_article_types.article_id = #{articleId,jdbcType=BIGINT}
     </select>
 </mapper>

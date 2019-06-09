@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articleresource;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ArticleResourceMapper {
     int deleteByPrimaryKey(Long id);
@@ -9,7 +10,7 @@ public interface ArticleResourceMapper {
 
     int insertSelective(ArticleResourceDO record);
 
-    int insertList(List<ArticleResourceDO> articleResources);
+    int insertList(@Param("articleResources") List<ArticleResourceDO> articleResources);
 
     ArticleResourceDO selectByPrimaryKey(Long id);
 
@@ -17,5 +18,5 @@ public interface ArticleResourceMapper {
 
     int updateByPrimaryKey(ArticleResourceDO record);
 
-    int deleteAllByArticleId(Long articleId);
+    int deleteAllByArticleId(@Param("articleId") Long articleId);
 }

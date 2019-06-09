@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.infrastructure.repository.mybatis.articletags;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ArticleTagsMapper {
     int deleteByPrimaryKey(Long id);
@@ -9,7 +10,7 @@ public interface ArticleTagsMapper {
 
     int insertSelective(ArticleTagsDO record);
 
-    int insertList(List<ArticleTagsDO> articleTagsDOS);
+    int insertList(@Param("articleTagsDOS") List<ArticleTagsDO> articleTagsDOS);
 
     ArticleTagsDO selectByPrimaryKey(Long id);
 
@@ -19,5 +20,5 @@ public interface ArticleTagsMapper {
 
     int updateByPrimaryKey(ArticleTagsDO record);
 
-    int deleteAllTagsByArticleId(Long articleId);
+    int deleteAllTagsByArticleId(@Param("articleId") Long articleId);
 }

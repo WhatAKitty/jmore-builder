@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.infrastructure.repository.mybatis.type;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TypeMapper {
     int deleteByPrimaryKey(Long id);
@@ -11,7 +12,7 @@ public interface TypeMapper {
 
     TypeDO selectByPrimaryKey(Long id);
 
-    List<TypeDO> selectByPrimaryKeys(List<Long> ids);
+    List<TypeDO> selectByPrimaryKeys(@Param("ids") List<Long> ids);
 
     int updateByPrimaryKeySelective(TypeDO record);
 
@@ -19,7 +20,7 @@ public interface TypeMapper {
 
 
     // relation with article
-    List<TypeDO> selectListByArticleId(Long articleId);
+    List<TypeDO> selectListByArticleId(@Param("articleId") Long articleId);
 
 
 }

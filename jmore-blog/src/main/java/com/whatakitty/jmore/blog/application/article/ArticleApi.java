@@ -26,7 +26,7 @@ public final class ArticleApi {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void postArticle(@RequestBody ArticleDTO articleDTO) {
-        articleService.post(articleDTO);
+        articleService.saveAndPost(articleDTO);
     }
 
 }

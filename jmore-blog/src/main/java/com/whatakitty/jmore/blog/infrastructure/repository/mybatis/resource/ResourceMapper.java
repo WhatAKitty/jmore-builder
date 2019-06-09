@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.blog.infrastructure.repository.mybatis.resource;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ResourceMapper {
     int deleteByPrimaryKey(Long id);
@@ -11,7 +12,7 @@ public interface ResourceMapper {
 
     ResourceDO selectByPrimaryKey(Long id);
 
-    List<ResourceDO> selectByPrimaryKeys(List<Long> ids);
+    List<ResourceDO> selectByPrimaryKeys(@Param("ids") List<Long> ids);
 
     int updateByPrimaryKeySelective(ResourceDO record);
 

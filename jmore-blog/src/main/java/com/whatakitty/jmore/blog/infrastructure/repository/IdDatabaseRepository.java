@@ -23,7 +23,7 @@ public class IdDatabaseRepository {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
     public Long nextId() {
-        if (idMapper.genNextId() != 1) {
+        if (idMapper.genNextId() <= 0) {
             throw new IdGenerationException();
         }
         return idMapper.getNextId();
