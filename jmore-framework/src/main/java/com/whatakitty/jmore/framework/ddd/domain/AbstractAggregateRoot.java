@@ -3,6 +3,7 @@ package com.whatakitty.jmore.framework.ddd.domain;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import com.whatakitty.jmore.framework.utils.SpringUtils;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.context.ApplicationEvent;
@@ -18,7 +19,7 @@ import sun.misc.Unsafe;
 @Data
 public abstract class AbstractAggregateRoot<PK> implements Serializable {
 
-    private static final Unsafe unsafe = Unsafe.getUnsafe();
+    private static final Unsafe unsafe;
     private static final long VERSION_OFFSET;
 
     private final AggregateId<PK> id;
@@ -26,6 +27,10 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
     private AggregateStatus status = AggregateStatus.ACTIVE;
     @EqualsAndHashCode.Exclude
     private volatile Version version = Version.INITIAL_VERSION;
+
+    public AbstractAggregateRoot(AggregateId<PK> id) {
+        this.id = id.clone();
+    }
 
     /**
      * publish event
@@ -73,6 +78,14 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
     }
 
     static {
+        try {
+            final Field unsafeField = Unsafe.class.getDeclaredFields()[0];
+            unsafeField.setAccessible(true);
+            unsafe = (Unsafe) unsafeField.get(null);
+        } catch (IllegalAccessException e) {
+            throw new Error(e);
+        }
+
         try {
             VERSION_OFFSET = unsafe.objectFieldOffset
                 (AbstractAggregateRoot.class.getDeclaredField("version"));
