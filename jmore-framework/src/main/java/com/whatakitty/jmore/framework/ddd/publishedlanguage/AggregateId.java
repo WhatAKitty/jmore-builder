@@ -11,8 +11,13 @@ import lombok.Value;
  * @description
  **/
 @Value(staticConstructor = "of")
-public final class AggregateId<T> implements Serializable {
+public final class AggregateId<T> implements Serializable, Cloneable {
 
     private T id;
+
+    @Override
+    public AggregateId<T> clone() {
+        return AggregateId.of(id);
+    }
 
 }
