@@ -1,5 +1,7 @@
 package com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -12,6 +14,8 @@ public interface UserMapper {
     UserDO selectDetailedByPrimaryKey(Long id);
 
     UserDO selectAllByPrimaryKey(Long id);
+
+    UserDO selectByUsername(@Param("username") String username);
 
     int updateByPrimaryKeySelective(UserDO record);
 

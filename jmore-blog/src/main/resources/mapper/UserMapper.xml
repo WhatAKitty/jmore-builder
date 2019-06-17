@@ -56,6 +56,12 @@
         left join sc_user_access access on access.user_id = main.id
         where main.id = #{id,jdbcType=BIGINT}
     </select>
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sc_user
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from sc_user

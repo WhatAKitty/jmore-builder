@@ -19,6 +19,14 @@ public interface UserRepository {
     AggregateId<Long> nextId();
 
     /**
+     * find an user by username
+     *
+     * @param username
+     * @return
+     */
+    User findWithUsername(String username);
+
+    /**
      * add user into repository
      *
      * @param user
