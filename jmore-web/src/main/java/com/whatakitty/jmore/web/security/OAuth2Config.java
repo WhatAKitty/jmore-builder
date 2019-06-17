@@ -37,9 +37,9 @@ public class OAuth2Config {
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-        @Value("${spring.security.oauth2.resource-id:oauth2-server}")
+        @Value("${jmore.security.oauth2.resource-id:oauth2-server}")
         private String resourceId;
-        @Value("${spring.security.oauth2.resource-path:/api/**}")
+        @Value("${jmore.security.oauth2.resource-path:/api/**}")
         private String protectedResource;
 
         @Override
@@ -73,7 +73,7 @@ public class OAuth2Config {
         private final UserDetailsService userDetailsService;
         private final AuthenticationManager authenticationManager;
 
-        @Value("${spring.security.oauth2.resource-id:oauth2-server}")
+        @Value("${jmore.security.oauth2.resource-id:oauth2-server}")
         private String resourceId;
 
         public AuthorizationServerConfiguration(TokenStore tokenStore,

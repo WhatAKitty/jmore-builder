@@ -25,16 +25,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  **/
 @Configuration
 @EnableWebSecurity
-@ConditionalOnProperty(name = "jmore.security")
+@ConditionalOnProperty(name = "jmore.security.type", havingValue = "normal")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${spring.security.login:/login}")
+    @Value("${jmore.security.login:/login}")
     private String login;
-    @Value("${spring.security.logout:/login?logout}")
+    @Value("${jmore.security.logout:/login?logout}")
     private String logoutSuccess;
-    @Value("${spring.security.home:/home}")
+    @Value("${jmore.security.home:/home}")
     private String home;
-    @Value("${spring.security.exclude-paths:}")
+    @Value("${jmore.security.exclude-paths:}")
     private List<String> excluded;
 
     private final UserDetailsService userDetailsService;
