@@ -34,6 +34,13 @@ public interface UserRepository {
     void add(User user);
 
     /**
+     * update user into repository
+     *
+     * @param user
+     */
+    void update(User user);
+
+    /**
      * remove the user from repository
      *
      * @param user

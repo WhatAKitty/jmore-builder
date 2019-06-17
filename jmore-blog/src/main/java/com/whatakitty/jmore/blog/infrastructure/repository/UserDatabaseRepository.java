@@ -49,6 +49,13 @@ public class UserDatabaseRepository implements UserRepository {
     }
 
     @Override
+    public void update(User user) {
+        UserDO userDO = new UserDO();
+
+        userMapper.updateByPrimaryKeySelective(userDO);
+    }
+
+    @Override
     public void remove(User user) {
 
     }

@@ -26,14 +26,17 @@ public class SecurityService implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         User user = userRepository.findWithUsername(authentication.getName());
-        boolean login = user.login("");
+        boolean login = user.login(authentication.getCredentials().toString(), "");
 
         if (login) {
+            // update user info such as last login ip and last login time
+            userRepository.update(user);
             return new UsernamePasswordAuthenticationToken(
                 user.getUsername(),
                 user.getPassword(),
                 new ArrayList<>(0));
         } else {
+            // login failed
             return null;
         }
     }

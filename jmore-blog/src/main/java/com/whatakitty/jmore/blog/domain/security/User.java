@@ -64,26 +64,27 @@ public final class User extends AbstractAggregateRoot<Long> {
      * @param password the password
      */
     public void setPassword(String password) {
-        this.password = Base64.encodeBase64String(password.getBytes(StandardCharsets.UTF_8));
+        this.password = password;
     }
 
     /**
      * user login
      *
-     * @param loginIp login ip
+     * @param password the password user input
+     * @param loginIp  login ip
      * @return {true} login successfully while {false} failure
      */
-    public boolean login(String loginIp) {
+    public boolean login(String password, String loginIp) {
         // no pending user could be found
         if (StringUtils.isBlank(this.getUsername())) {
             return false;
         }
 
-        // password decode
-        final String comparedPasswd = new String(Base64.decodeBase64(this.getPassword()), StandardCharsets.UTF_8);
+        // compared password
+        final String comparedPassword = new String(Base64.decodeBase64(password), StandardCharsets.UTF_8);
 
         // password compare
-        if (StringUtils.isBlank(password) || !password.equals(comparedPasswd)) {
+        if (StringUtils.isBlank(password) || !comparedPassword.equals(this.getPassword())) {
             return false;
         }
 
