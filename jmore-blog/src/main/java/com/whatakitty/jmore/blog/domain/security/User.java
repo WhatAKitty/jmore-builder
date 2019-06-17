@@ -70,20 +70,17 @@ public final class User extends AbstractAggregateRoot<Long> {
     /**
      * user login
      *
-     * @param pendingUser the user found by username
-     * @param password    the password that be input
-     *                    and should be compared with the pending user's password
-     * @param loginIp     login ip
+     * @param loginIp login ip
      * @return {true} login successfully while {false} failure
      */
-    public boolean login(User pendingUser, String password, String loginIp) {
+    public boolean login(String loginIp) {
         // no pending user could be found
-        if (pendingUser == null || StringUtils.isBlank(pendingUser.getUsername())) {
+        if (StringUtils.isBlank(this.getUsername())) {
             return false;
         }
 
         // password decode
-        final String comparedPasswd = new String(Base64.decodeBase64(pendingUser.getPassword()), StandardCharsets.UTF_8);
+        final String comparedPasswd = new String(Base64.decodeBase64(this.getPassword()), StandardCharsets.UTF_8);
 
         // password compare
         if (StringUtils.isBlank(password) || !password.equals(comparedPasswd)) {
@@ -91,9 +88,9 @@ public final class User extends AbstractAggregateRoot<Long> {
         }
 
         // set login date into user model
-        pendingUser.setLastLoginDate(new Date());
-        pendingUser.setLastLoginIp(loginIp);
-        log.info("the user {} login successfully", pendingUser.getUsername());
+        this.setLastLoginDate(new Date());
+        this.setLastLoginIp(loginIp);
+        log.info("the user {} login successfully", this.getUsername());
 
         // publish event
         publishEvent(new UserLoginSuccessfullyEvent(this));
@@ -104,14 +101,9 @@ public final class User extends AbstractAggregateRoot<Long> {
     /**
      * user logout
      *
-     * @param user the user to logout
      * @return {true} logout successfully while {false} failure
      */
-    public boolean logout(User user) {
-        if (user == null) {
-            return false;
-        }
-
+    public boolean logout() {
         // publish event
         publishEvent(new UserLoginFailedEvent(this));
 
@@ -121,16 +113,11 @@ public final class User extends AbstractAggregateRoot<Long> {
     /**
      * reset user's password
      *
-     * @param user the user that will be reset password
      * @return {true} reset successfully while {false} failure
      */
-    public boolean resetPassword(User user) {
-        if (user == null) {
-            return false;
-        }
-
+    public boolean resetPassword() {
         // reset
-        user.setPassword(DEFAULT_PASSWORD);
+        this.setPassword(DEFAULT_PASSWORD);
 
         // publish event
         publishEvent(new UserRestPwdEvent(this));
