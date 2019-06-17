@@ -2,6 +2,7 @@ package com.whatakitty.jmore.web.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -32,6 +33,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class OAuth2Config {
 
     @Configuration
+    @ConditionalOnProperty(name = "jmore.security.type", havingValue = "oauth2")
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
@@ -61,6 +63,7 @@ public class OAuth2Config {
 
 
     @Configuration
+    @ConditionalOnProperty(name = "jmore.security.type", havingValue = "oauth2")
     @EnableAuthorizationServer
     @EnableGlobalMethodSecurity(securedEnabled = true)
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {

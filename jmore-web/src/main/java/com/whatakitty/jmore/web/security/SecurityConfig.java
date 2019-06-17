@@ -3,6 +3,7 @@ package com.whatakitty.jmore.web.security;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -24,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  **/
 @Configuration
 @EnableWebSecurity
+@ConditionalOnProperty(name = "jmore.security")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.security.login:/login}")
@@ -87,4 +89,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    @Configuration
+    @EnableWebSecurity
+    @ConditionalOnProperty(name = "jmore.security", matchIfMissing = true)
+    public static class DisabledSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+        private final AuthenticationManager authenticationManager;
+
+        protected DisabledSecurityConfiguration(@Lazy AuthenticationManager authenticationManager) {
+            super(true);
+            this.authenticationManager = authenticationManager;
+        }
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            // @formatter:off
+            http.authorizeRequests().anyRequest().permitAll();
+            // @formatter:on
+        }
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web
+                .ignoring()
+                .antMatchers("/**");
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                .parentAuthenticationManager(authenticationManager);
+        }
+
+    }
+
 }
