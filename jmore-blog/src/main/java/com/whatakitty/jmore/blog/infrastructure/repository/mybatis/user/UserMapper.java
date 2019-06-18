@@ -9,6 +9,8 @@ public interface UserMapper {
 
     int insertSelective(UserDO record);
 
+    UserDO selectFirst();
+
     UserDO selectByPrimaryKey(Long id);
 
     UserDO selectDetailedByPrimaryKey(Long id);

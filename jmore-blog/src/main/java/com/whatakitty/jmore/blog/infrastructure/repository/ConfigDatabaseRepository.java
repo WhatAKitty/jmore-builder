@@ -36,7 +36,7 @@ public class ConfigDatabaseRepository implements ConfigRepository {
 
     @Override
     public Config load() {
-        final UserDO userDO = userMapper.selectByPrimaryKey(1L);
+        final UserDO userDO = userMapper.selectFirst();
         final ConfigDO configDO = configMapper.selectByPrimaryKey(CONFIG_ID);
 
         if (userDO == null || configDO == null) {

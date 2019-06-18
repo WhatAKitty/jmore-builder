@@ -29,6 +29,12 @@
     <sql id="All_Column_List">
         last_login_ipv4, last_login_date
     </sql>
+    <select id="selectFirst" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sc_user
+        limit 1
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
