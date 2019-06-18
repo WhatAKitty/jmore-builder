@@ -9,6 +9,7 @@ import com.whatakitty.jmore.framework.ddd.domain.AggregateStatus;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -51,6 +52,12 @@ public class UserDatabaseRepository implements UserRepository {
         user.setLastLoginIp(userDO.getLastLoginIpv4());
         user.setUserType(UserType.AUTHOR);
         return user;
+    }
+
+    @Override
+    public User currentUser() {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return findWithUsername(name);
     }
 
     @Override

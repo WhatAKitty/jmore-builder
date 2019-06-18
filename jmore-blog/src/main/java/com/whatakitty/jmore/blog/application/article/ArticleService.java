@@ -6,6 +6,7 @@ import com.whatakitty.jmore.blog.domain.article.ArticleRepository;
 import com.whatakitty.jmore.blog.domain.resource.Resource;
 import com.whatakitty.jmore.blog.domain.resource.ResourceRepository;
 import com.whatakitty.jmore.blog.domain.security.User;
+import com.whatakitty.jmore.blog.domain.security.UserRepository;
 import com.whatakitty.jmore.blog.domain.type.Type;
 import com.whatakitty.jmore.blog.domain.type.TypeRepository;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
@@ -29,14 +30,15 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final TypeRepository typeRepository;
     private final ResourceRepository resourceRepository;
+    private final UserRepository userRepository;
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public void save(ArticleDTO articleDTO) {
-        // TODO get the current user
+        final User currentUser = userRepository.currentUser();
         final AggregateId<Long> articleId = articleRepository.nextId();
         final Article article = ArticleFactory.FACTORY.newArticle(
             articleId,
-            new User(AggregateId.of(1L)),
+            currentUser,
             articleDTO.getTags(),
             articleDTO.getTypes(),
             articleDTO.getResources(),
@@ -63,11 +65,11 @@ public class ArticleService {
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public void saveAndPost(ArticleDTO articleDTO) {
-        // TODO get the current user
+        final User currentUser = userRepository.currentUser();
         final AggregateId<Long> articleId = articleRepository.nextId();
         final Article article = ArticleFactory.FACTORY.newArticle(
             articleId,
-            new User(AggregateId.of(1L)),
+            currentUser,
             articleDTO.getTags(),
             articleDTO.getTypes(),
             articleDTO.getResources(),

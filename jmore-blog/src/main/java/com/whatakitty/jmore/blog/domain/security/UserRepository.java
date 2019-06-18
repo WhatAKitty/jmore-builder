@@ -27,6 +27,13 @@ public interface UserRepository {
     User findWithUsername(String username);
 
     /**
+     * find the current login user
+     *
+     * @return
+     */
+    User currentUser();
+
+    /**
      * add user into repository
      *
      * @param user
