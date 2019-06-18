@@ -1,3 +1,4 @@
+debug: true
 spring:
   datasource:
     username: root
@@ -7,6 +8,7 @@ spring:
 jmore:
   security:
     type: custom
+    exclude-paths: /configuration/initialization
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
