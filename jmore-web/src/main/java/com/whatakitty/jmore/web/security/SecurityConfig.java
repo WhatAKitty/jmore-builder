@@ -142,7 +142,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         private List<String> excluded;
 
         protected CustomizedAuthenticationConfiguration(AuthenticationProvider authenticationProvider) {
-            super(true);
             this.authenticationProvider = authenticationProvider;
         }
 
