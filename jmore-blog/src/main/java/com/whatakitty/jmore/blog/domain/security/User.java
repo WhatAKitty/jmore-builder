@@ -46,6 +46,14 @@ public final class User extends AbstractAggregateRoot<Long> {
      */
     private String nickname;
     /**
+     * the user's birthday
+     */
+    private String birthday;
+    /**
+     * the user's mobile number
+     */
+    private String mobile;
+    /**
      * last login ip
      */
     private String lastLoginIp;

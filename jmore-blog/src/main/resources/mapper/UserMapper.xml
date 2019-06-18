@@ -62,6 +62,18 @@
         from sc_user
         where username = #{username,jdbcType=VARCHAR}
     </select>
+    <select id="selectAllByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Detailed_Column_List" />
+        ,
+        <include refid="All_Column_List" />
+        from sc_user main
+        left join sc_user_detail detail on detail.user_id = main.id
+        left join sc_user_access access on access.user_id = main.id
+        where main.username = #{username,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from sc_user
@@ -118,6 +130,11 @@
             </if>
         </trim>
     </insert>
+    <insert id="addAccessRecord"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        insert into sc_user_access (user_id, last_login_ipv4, last_login_date)
+        values (#{id,jdbcType=BIGINT}, #{lastLoginIpv4,jdbcType=VARCHAR}, #{lastLoginDate,jdbcType=TIMESTAMP})
+    </insert>
     <update id="updateByPrimaryKeySelective"
             parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
         update sc_user
@@ -139,6 +156,85 @@
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateDetailsByPrimaryKeySelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        insert into sc_user_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                user_id,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="nickName != null">
+                nick_name=#{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile=#{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday=#{birthday,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </update>
+    <update id="updateAccessByPrimaryKeySelective"
+            parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">
+        insert into sc_user_access
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                user_id,
+            </if>
+            <if test="lastLoginIpv4 != null">
+                last_login_ipv4,
+            </if>
+            <if test="lastLoginDate != null">
+                last_login_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="lastLoginIpv4 != null">
+                #{lastLoginIpv4,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginDate != null">
+                #{lastLoginDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="lastLoginIpv4 != null">
+                last_login_ipv4=#{lastLoginIpv4,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginDate != null">
+                last_login_date=#{lastLoginDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
     </update>
     <update id="updateByPrimaryKey"
             parameterType="com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO">

@@ -17,7 +17,13 @@ public interface UserMapper {
 
     UserDO selectByUsername(@Param("username") String username);
 
+    UserDO selectAllByUsername(@Param("username") String username);
+
     int updateByPrimaryKeySelective(UserDO record);
+
+    int updateDetailsByPrimaryKeySelective(UserDO record);
+
+    int updateAccessByPrimaryKeySelective(UserDO record);
 
     int updateByPrimaryKey(UserDO record);
 }

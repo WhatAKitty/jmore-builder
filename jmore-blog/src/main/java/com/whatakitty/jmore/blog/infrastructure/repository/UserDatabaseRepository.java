@@ -2,10 +2,12 @@ package com.whatakitty.jmore.blog.infrastructure.repository;
 
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.security.UserRepository;
+import com.whatakitty.jmore.blog.domain.security.UserType;
 import com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserDO;
 import com.whatakitty.jmore.blog.infrastructure.repository.mybatis.user.UserMapper;
 import com.whatakitty.jmore.framework.ddd.domain.AggregateStatus;
 import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
+import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,15 +33,21 @@ public class UserDatabaseRepository implements UserRepository {
 
     @Override
     public User findWithUsername(String username) {
-        UserDO userDO = userMapper.selectByUsername(username);
+        final UserDO userDO = userMapper.selectAllByUsername(username);
 
         if (null == userDO) {
             return ANONYMOUS;
         }
 
-        User user = new User(AggregateId.of(userDO.getId()));
+        final User user = new User(AggregateId.of(userDO.getId()));
         user.setUsername(userDO.getUsername());
         user.setPassword(userDO.getPassword());
+        user.setNickname(userDO.getNickName());
+        user.setMobile(userDO.getMobile());
+        user.setBirthday(userDO.getBirthday());
+        user.setLastLoginDate(userDO.getLastLoginDate());
+        user.setLastLoginIp(userDO.getLastLoginIpv4());
+        user.setUserType(UserType.AUTHOR);
         return user;
     }
 
@@ -50,9 +58,19 @@ public class UserDatabaseRepository implements UserRepository {
 
     @Override
     public void update(User user) {
-        UserDO userDO = new UserDO();
+        final Date date = new Date();
+        final UserDO userDO = new UserDO();
 
-        userMapper.updateByPrimaryKeySelective(userDO);
+        userDO.setId(user.getId().getId());
+        userDO.setNickName(user.getNickname());
+        userDO.setMobile(user.getMobile());
+        userDO.setBirthday(user.getBirthday());
+        userDO.setLastLoginDate(date);
+        userDO.setLastLoginIpv4(user.getLastLoginIp());
+
+        userMapper.updateDetailsByPrimaryKeySelective(userDO);
+        userMapper.updateAccessByPrimaryKeySelective(userDO);
+
     }
 
     @Override
