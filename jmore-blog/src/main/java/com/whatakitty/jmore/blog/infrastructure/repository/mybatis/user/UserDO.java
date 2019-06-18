@@ -12,7 +12,7 @@ public class UserDO {
 
     private Date gmtModified;
 
-    private Byte userType;
+    private Integer userType;
 
     private String username;
 

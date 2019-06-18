@@ -17,5 +17,6 @@ public final class Manager extends ValueObject {
 
     private final String username;
     private final String password;
+    private final String mobile;
 
 }

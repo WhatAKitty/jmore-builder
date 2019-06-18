@@ -31,7 +31,7 @@ public final class UserType extends ValueObject {
     private final Type type;
 
     @RequiredArgsConstructor
-    private enum Type {
+    public enum Type {
 
         /**
          * guest

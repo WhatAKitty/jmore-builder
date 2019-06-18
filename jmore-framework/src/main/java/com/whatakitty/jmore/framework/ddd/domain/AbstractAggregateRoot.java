@@ -59,7 +59,7 @@ public abstract class AbstractAggregateRoot<PK> implements Serializable {
     /**
      * check the aggregate root status, if {invalid} throw {@link IllegalAggregateStatus}
      */
-    protected void checkActive() {
+    public void checkActive() {
         if (!AggregateStatus.ACTIVE.equals(this.status)) {
             throw new IllegalAggregateStatus();
         }

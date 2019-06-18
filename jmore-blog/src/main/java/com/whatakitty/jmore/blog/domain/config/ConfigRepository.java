@@ -19,6 +19,11 @@ public interface ConfigRepository {
     AggregateId<Long> nextId();
 
     /**
+     * load a config
+     */
+    Config load();
+
+    /**
      * create a config
      *
      * @param config

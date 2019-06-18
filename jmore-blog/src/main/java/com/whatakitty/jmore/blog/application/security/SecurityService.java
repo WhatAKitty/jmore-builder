@@ -2,6 +2,8 @@ package com.whatakitty.jmore.blog.application.security;
 
 import com.whatakitty.jmore.blog.domain.security.User;
 import com.whatakitty.jmore.blog.domain.security.UserRepository;
+import com.whatakitty.jmore.blog.domain.security.UserType;
+import com.whatakitty.jmore.framework.ddd.publishedlanguage.AggregateId;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -39,6 +41,18 @@ public class SecurityService implements AuthenticationProvider {
             // login failed
             return null;
         }
+    }
+
+    public void createAuthor(UserDTO userDTO) {
+        AggregateId<Long> userId = userRepository.nextId();
+        User user = new User(userId);
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setNickname(userDTO.getUsername());
+        user.setUserType(UserType.AUTHOR);
+        user.setMobile(userDTO.getMobile());
+        user.setBirthday("19900101");
+        userRepository.add(user);
     }
 
     @Override

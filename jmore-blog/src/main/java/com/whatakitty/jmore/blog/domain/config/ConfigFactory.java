@@ -23,19 +23,21 @@ public final class ConfigFactory {
      * @param domain    blog domain
      * @param username  the manager's username
      * @param password  the manager's password
+     * @param mobile    the manager's mobile number
      */
     public Config newConfig(String title,
                             String contact,
                             String copyright,
                             String domain,
                             String username,
-                            String password) {
+                            String password,
+                            String mobile) {
         Config config = new Config(DEFAULT_PK);
         config.setTitle(title);
         config.setContact(contact);
         config.setCopyright(copyright);
         config.setDomain(domain);
-        config.setAuthor(Manager.of(username, password));
+        config.setAuthor(Manager.of(username, password, mobile));
         return config;
     }
 

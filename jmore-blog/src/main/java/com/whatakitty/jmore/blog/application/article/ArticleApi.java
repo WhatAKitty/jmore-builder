@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/articles")
+@RequestMapping(path = "/articles")
 public final class ArticleApi {
 
     private final ArticleService articleService;

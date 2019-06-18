@@ -26,9 +26,11 @@ public class UserDatabaseRepository implements UserRepository {
 
     private final UserMapper userMapper;
 
+    private final IdDatabaseRepository idDatabaseRepository;
+
     @Override
     public AggregateId<Long> nextId() {
-        return null;
+        return AggregateId.of(idDatabaseRepository.nextId());
     }
 
     @Override
@@ -53,7 +55,21 @@ public class UserDatabaseRepository implements UserRepository {
 
     @Override
     public void add(User user) {
+        final Date date = new Date();
+        final UserDO userDO = new UserDO();
 
+        userDO.setId(user.getId().getId());
+        userDO.setUsername(user.getUsername());
+        userDO.setPassword(user.getPassword());
+        userDO.setUserType(UserType.AUTHOR.getType().getValue());
+        userDO.setGmtCreate(date);
+        userDO.setGmtModified(date);
+        userMapper.insertSelective(userDO);
+
+        userDO.setNickName(user.getNickname());
+        userDO.setMobile(user.getMobile());
+        userDO.setBirthday(user.getBirthday());
+        userMapper.updateDetailsByPrimaryKeySelective(userDO);
     }
 
     @Override
