@@ -1,5 +1,11 @@
 package com.whatakitty.jmore.blog.application.article;
 
+import com.sun.tools.javac.main.Option;
+import com.sun.tools.javac.util.Context;
+import com.sun.tools.javac.util.Log;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.EnumSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +23,18 @@ import org.springframework.web.bind.annotation.*;
 public final class ArticleApi {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
+
+    /**
+     * save an article
+     *
+     * @param articleDTO
+     */
+    @PostMapping(path = "/draft")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveDraft(@RequestBody ArticleDTO articleDTO) {
+        articleService.draft(articleDTO);
+    }
 
     /**
      * post an article and return 201 status
@@ -27,6 +45,53 @@ public final class ArticleApi {
     @ResponseStatus(HttpStatus.CREATED)
     public void postArticle(@RequestBody ArticleDTO articleDTO) {
         articleService.saveAndPost(articleDTO);
+    }
+
+    /**
+     * publish draft
+     *
+     * @param articleId
+     */
+    @PatchMapping(path = "/{articleId}/published")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void publish(@PathVariable("articleId") Long articleId) {
+        articleService.post(articleId);
+    }
+
+    /**
+     * update an article
+     *
+     * @param articleId
+     * @param articleDTO
+     */
+    @PutMapping(path = "/{articleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable("articleId") Long articleId, @RequestBody ArticleDTO articleDTO) {
+        articleDTO.setId(articleId);
+        articleService.modify(articleDTO);
+    }
+
+    /**
+     * delete an article
+     *
+     * @param articleId
+     */
+    @DeleteMapping(path = "/${articleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void destory(@PathVariable("articleId") Long articleId) {
+        articleService.drop(articleId);
+    }
+
+    /**
+     * comment at article
+     *
+     * @param articleId
+     * @param commentDTO
+     */
+    @PostMapping(path = "/${articleId}/comments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void comment(@PathVariable("articleId") Long articleId, @RequestBody CommentDTO commentDTO) {
+        commentService.commentAtArticle(articleId, commentDTO);
     }
 
 }

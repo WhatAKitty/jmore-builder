@@ -33,7 +33,7 @@ public class ArticleService {
     private final UserRepository userRepository;
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void save(ArticleDTO articleDTO) {
+    public void draft(ArticleDTO articleDTO) {
         final User currentUser = userRepository.currentUser();
         final AggregateId<Long> articleId = articleRepository.nextId();
         final Article article = ArticleFactory.FACTORY.newArticle(
@@ -52,8 +52,8 @@ public class ArticleService {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void post(ArticleDTO articleDTO) {
-        final Article article = articleRepository.at(AggregateId.of(articleDTO.getId()));
+    public void post(Long articleId) {
+        final Article article = articleRepository.at(AggregateId.of(articleId));
         article.publish();
         articleRepository.update(article);
     }
@@ -107,8 +107,8 @@ public class ArticleService {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void drop(ArticleDTO articleDTO) {
-        final Article article = articleRepository.at(AggregateId.of(articleDTO.getId()));
+    public void drop(Long articleId) {
+        final Article article = articleRepository.at(AggregateId.of(articleId));
         article.dropped();
         articleRepository.remove(article);
     }

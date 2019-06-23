@@ -35,7 +35,7 @@ public final class Resource extends AbstractAggregateRoot<Long> {
      */
     private static final long ALLOWED_MAX_SIZE = 2 * FileUtils.ONE_MB;
 
-    private File file;
+    private Object target;
     private User user;
     private Date uploadTime;
 
@@ -47,20 +47,32 @@ public final class Resource extends AbstractAggregateRoot<Long> {
      * upload file
      *
      * @return the uploaded resource
+     * @throws UploadFailedException
+     * @throws UnsupportedResourceTypeException
      */
     public boolean upload() {
         // check status
         checkActive();
 
-        // check file
-        if (!file.exists() || !file.isFile()) {
+        // check target
+        if (null == target) {
             throw new UploadFailedException();
         }
 
-        // check size and legal
-        final String fileName = file.getName();
-        if (!FilenameUtils.isExtension(fileName, ALLOWED_EXTENSIONS)) {
-            throw new UploadFailedException();
+        // target type
+        if (target instanceof File) {
+            final File file = (File) target;
+            if (!file.exists() || !file.isFile()) {
+                throw new UploadFailedException();
+            }
+
+            // check size and legal
+            final String fileName = file.getName();
+            if (!FilenameUtils.isExtension(fileName, ALLOWED_EXTENSIONS)) {
+                throw new UploadFailedException();
+            }
+        } else {
+            throw new UnsupportedResourceTypeException(target.getClass().getName());
         }
 
         return true;

@@ -19,16 +19,16 @@ public final class ResourceFactory {
     /**
      * create a new resource
      *
-     * @param file
+     * @param target
      * @param publisher
      * @return
      */
-    public Resource newResource(AggregateId<Long> resourceId, File file, User publisher) {
+    public Resource newResource(AggregateId<Long> resourceId, Object target, User publisher) {
         // create a new resource
         Resource resource = new Resource(resourceId);
         resource.setUser(publisher);
         resource.setUploadTime(new Date());
-        resource.setFile(file);
+        resource.setTarget(target);
         return resource;
     }
 
