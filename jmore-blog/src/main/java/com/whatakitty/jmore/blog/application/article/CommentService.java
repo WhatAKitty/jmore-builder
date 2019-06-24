@@ -38,13 +38,13 @@ public class CommentService {
         final Article article = articleRepository.at(AggregateId.of(articleId));
         final User currentUser = userRepository.currentUser();
         final AggregateId<Long> commentId = commentRepository.nextId();
-        final Comment comment = CommentFactory.FACTORY.postComment(
+        final Comment comment = CommentFactory.FACTORY.createComment(
             commentId,
             CommentableResource.of(article.getId()),
             currentUser,
-            commentDTO.getContent(),
-            rubbishDetectService
+            commentDTO.getContent()
         );
+        comment.post(rubbishDetectService);
         commentRepository.add(comment);
     }
 

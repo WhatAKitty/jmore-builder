@@ -32,6 +32,17 @@ public final class Comment extends AbstractAggregateRoot<Long> {
     }
 
     /**
+     * post a comment
+     *
+     * @param rubbishDetectService
+     * @return
+     */
+    public boolean post(RubbishDetectService rubbishDetectService) {
+        boolean rubbish = rubbishDetectService.rubbish(this.content);
+        return rubbish ? markReject() : markPended();
+    }
+
+    /**
      * mark pended
      *
      * @return

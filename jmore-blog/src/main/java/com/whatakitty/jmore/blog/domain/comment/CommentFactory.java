@@ -16,22 +16,16 @@ public final class CommentFactory {
 
     public static final CommentFactory FACTORY = new CommentFactory();
 
-    public Comment postComment(AggregateId<Long> commentId,
-                               CommentableResource commentableResource,
-                               User publisher,
-                               String commentContent,
-                               RubbishDetectService rubbishDetectService) {
+    public Comment createComment(AggregateId<Long> commentId,
+                                 CommentableResource commentableResource,
+                                 User publisher,
+                                 String commentContent) {
         // basic content
         final Comment comment = new Comment(commentId);
         comment.setContent(commentContent);
         comment.setCommentableResource(commentableResource);
         comment.setPublisher(publisher);
         comment.setCommentTime(new Date());
-
-        // rubbish ?
-        final boolean isRubbish = rubbishDetectService.rubbish(comment.getContent());
-        comment.setPendingStatus(isRubbish ? CommentPendingStatus.PENDING : CommentPendingStatus.PENDED);
-
         return comment;
     }
 
