@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.demo;
 
 import com.whatakitty.jmore.framework.bootstrap.JMoreApplication;
+import com.whatakitty.jmore.lock.EnableJMoreLock;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2019/02/19
  * @description
  **/
+@EnableJMoreLock
 @SpringBootApplication(scanBasePackages = "com.whatakitty.jmore")
 public class JMoreDemo {
 

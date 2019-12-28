@@ -18,5 +18,9 @@ spring:
       initial-size: 5
       max-active: 20
       max-wait: 10000
+  lock:
+    lock-type: redis
+    redis:
+
 
 
