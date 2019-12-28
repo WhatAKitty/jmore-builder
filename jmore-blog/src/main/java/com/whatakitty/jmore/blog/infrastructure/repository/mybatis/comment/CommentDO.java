@@ -23,7 +23,7 @@ public class CommentDO {
 
     private Long target;
 
-    private Byte targetType;
+    private Integer targetType;
 
-    private Boolean pendingStatus;
+    private Integer pendingStatus;
 }

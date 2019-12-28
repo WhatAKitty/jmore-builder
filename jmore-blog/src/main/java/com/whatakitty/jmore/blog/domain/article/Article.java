@@ -101,6 +101,7 @@ public final class Article extends AbstractAggregateRoot<Long> {
             return false;
         }
         this.articleStatus = ArticleStatus.DRAFT;
+        this.publishDate = null;
         return true;
     }
 

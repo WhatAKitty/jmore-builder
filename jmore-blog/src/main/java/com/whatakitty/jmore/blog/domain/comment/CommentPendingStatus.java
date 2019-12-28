@@ -36,7 +36,7 @@ public final class CommentPendingStatus extends ValueObject {
      * comment pending status inner class
      */
     @RequiredArgsConstructor
-    private enum Status {
+    public enum Status {
 
         /**
          * pending
