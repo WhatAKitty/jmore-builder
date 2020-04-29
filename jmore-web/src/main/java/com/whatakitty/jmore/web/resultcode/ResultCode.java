@@ -1,4 +1,4 @@
-package com.whatakitty.jmore.web.api;
+package com.whatakitty.jmore.web.resultcode;
 
 import java.io.Serializable;
 import lombok.AccessLevel;
@@ -19,15 +19,7 @@ public class ResultCode implements Serializable {
     /**
      * success response
      */
-    public static final ResultCode SUCCESS = create(0, "nice");
-    /**
-     * bad request
-     */
-    public static final ResultCode BAD_REQUEST = create(-400, "bad request");
-    /**
-     * system error
-     */
-    public static final ResultCode SYSTEM_ERROR = create(-1, "system error");
+    public static final ResultCode SUCCESS = create("00000", "nice");
 
     /**
      * create a result code for this app
@@ -36,11 +28,11 @@ public class ResultCode implements Serializable {
      * @param msg  response msg
      * @return result code instance
      */
-    protected static ResultCode create(final int code, final String msg) {
+    protected static ResultCode create(final String code, final String msg) {
         return new ResultCode(code, msg);
     }
 
-    private final int code;
+    private final String code;
     private final String msg;
 
 }

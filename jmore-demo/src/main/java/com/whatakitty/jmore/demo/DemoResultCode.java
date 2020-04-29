@@ -1,6 +1,6 @@
 package com.whatakitty.jmore.demo;
 
-import com.whatakitty.jmore.web.api.ResultCode;
+import com.whatakitty.jmore.web.resultcode.ResultCode;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.web.api;
 
 import com.whatakitty.jmore.framework.validation.DetailedMsg;
+import com.whatakitty.jmore.web.resultcode.ResultCode;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +43,7 @@ public class Result<T> implements Serializable {
         return new Result<>(resultCode.getCode(), newMsg, data, System.currentTimeMillis());
     }
 
-    private final int code;
+    private final String code;
     private final String msg;
     private final T data;
     private final long timestamp;

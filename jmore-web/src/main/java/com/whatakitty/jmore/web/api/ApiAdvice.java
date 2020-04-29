@@ -1,6 +1,7 @@
 package com.whatakitty.jmore.web.api;
 
 import com.whatakitty.jmore.framework.validation.ValidationMsg;
+import com.whatakitty.jmore.web.resultcode.ResultCode;
 import java.util.stream.Collectors;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Component;
