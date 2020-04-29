@@ -6,9 +6,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.alibaba.fastjson.JSON;
+import com.whatakitty.jmore.framework.validation.ValidatorConfig;
 import com.whatakitty.jmore.web.api.ApiAdvice;
 import com.whatakitty.jmore.web.i18n.I18nConfig;
-import com.whatakitty.jmore.framework.validation.ValidatorConfig;
+import com.whatakitty.jmore.web.resultcode.system.SystemExecutionResultCode;
+import com.whatakitty.jmore.web.resultcode.user.UserRequestParamsResultCode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +57,7 @@ public class DemoApiTest {
     public void exceptionTest() throws Exception {
         mockMvc.perform(post("/api/demo/exception"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.code", is(DemoResultCode.SYSTEM_ERROR.getCode())))
+            .andExpect(jsonPath("$.code", is(SystemExecutionResultCode.SYSTEM_EXECUTION_EXCEPTION.getCode())))
             .andExpect(jsonPath("$.msg", is("uncaught exception")));
     }
 
@@ -83,7 +85,7 @@ public class DemoApiTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(JSON.toJSONString(demoParam)))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.code", is(DemoResultCode.BAD_REQUEST.getCode())));
+            .andExpect(jsonPath("$.code", is(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR.getCode())));
     }
 
     @Test
@@ -91,7 +93,7 @@ public class DemoApiTest {
         mockMvc.perform(
             post("/api/demo/param1").contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.code", is(DemoResultCode.BAD_REQUEST.getCode())));
+            .andExpect(jsonPath("$.code", is(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR.getCode())));
     }
 
     @Test
@@ -101,10 +103,10 @@ public class DemoApiTest {
 
         mockMvc.perform(
             post("/api/demo/param2")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(demoParam)))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.code", is(DemoResultCode.BAD_REQUEST.getCode())));
+            .andExpect(jsonPath("$.code", is(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR.getCode())));
     }
 
     @Configuration

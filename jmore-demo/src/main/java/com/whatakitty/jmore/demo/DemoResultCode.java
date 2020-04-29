@@ -3,7 +3,7 @@ package com.whatakitty.jmore.demo;
 import com.whatakitty.jmore.web.resultcode.ResultCode;
 
 /**
- * Created with IntelliJ IDEA.
+ * 样例结果编码
  *
  * @author WhatAKitty
  * @date 2019/02/19
@@ -11,7 +11,7 @@ import com.whatakitty.jmore.web.resultcode.ResultCode;
  **/
 public class DemoResultCode extends ResultCode {
 
-    protected DemoResultCode(int code, String msg) {
+    protected DemoResultCode(String code, String msg) {
         super(code, msg);
     }
 }

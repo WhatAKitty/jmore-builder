@@ -1,7 +1,8 @@
 package com.whatakitty.jmore.web.api;
 
 import com.whatakitty.jmore.framework.validation.ValidationMsg;
-import com.whatakitty.jmore.web.resultcode.ResultCode;
+import com.whatakitty.jmore.web.resultcode.system.SystemExecutionResultCode;
+import com.whatakitty.jmore.web.resultcode.user.UserRequestParamsResultCode;
 import java.util.stream.Collectors;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Component;
@@ -35,17 +36,17 @@ public final class ApiAdvice {
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
     private Object handleHttpMessageNotReadableException() {
-        return Result.getResult(ResultCode.BAD_REQUEST, "missing body");
+        return Result.getResult(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR, "missing body");
     }
 
     @ExceptionHandler({Throwable.class})
     private Object handleUncaughtException(Throwable t) {
-        return Result.getResult(ResultCode.SYSTEM_ERROR, t.getMessage());
+        return Result.getResult(SystemExecutionResultCode.SYSTEM_EXECUTION_EXCEPTION, t.getMessage());
     }
 
     private Object handleBindingResultException(BindingResult bindingResult) {
         return Result.getResult(
-            ResultCode.BAD_REQUEST,
+            UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR,
             bindingResult.getAllErrors().stream()
                 .map(ValidationMsg::new)
                 .collect(Collectors.toSet())
