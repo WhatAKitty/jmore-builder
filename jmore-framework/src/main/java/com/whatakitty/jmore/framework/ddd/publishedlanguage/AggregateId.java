@@ -1,7 +1,7 @@
 package com.whatakitty.jmore.framework.ddd.publishedlanguage;
 
 import java.io.Serializable;
-import lombok.Value;
+import lombok.Data;
 
 /**
  * aggregate root id
@@ -10,10 +10,18 @@ import lombok.Value;
  * @date 2019/05/02
  * @description
  **/
-@Value(staticConstructor = "of")
-public final class AggregateId<T> implements Serializable, Cloneable {
+@Data
+public class AggregateId<T> implements Serializable, Cloneable {
 
-    private T id;
+    public static <T> AggregateId<T> of(T id) {
+        return new AggregateId<>(id);
+    }
+
+    private final T id;
+
+    protected AggregateId(T id) {
+        this.id = id;
+    }
 
     @Override
     public AggregateId<T> clone() {
