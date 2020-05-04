@@ -1,5 +1,6 @@
 package com.whatakitty.jmore.lock;
 
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -14,8 +15,7 @@ import org.springframework.context.annotation.Role;
  * @date 2019/02/22
  * @description
  **/
-@Getter
-@Configuration
+@Data
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @ConfigurationProperties(prefix = "spring.lock")
 public class LockProperties {
@@ -30,6 +30,6 @@ public class LockProperties {
     /**
      * the redis properties
      */
-    private RedisProperties redis;
+//    private RedisProperties redis;
 
 }
