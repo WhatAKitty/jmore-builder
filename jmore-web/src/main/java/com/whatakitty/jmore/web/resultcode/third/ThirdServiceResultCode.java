@@ -3,7 +3,7 @@ package com.whatakitty.jmore.web.resultcode.third;
 import com.whatakitty.jmore.web.resultcode.ResultCode;
 
 /**
- * Created with IntelliJ IDEA.
+ * 第三方服务异常编码
  *
  * @author WhatAKitty
  * @date 2020/04/29
