@@ -49,6 +49,7 @@
         <module>jmore-console-demo</module>
         <module>jmore-ddd-template</module>
         <module>jmore-blog</module>
+        <module>jmore-dfs-client</module>
     </modules>
 
     <properties>
