@@ -1,6 +1,5 @@
 package com.whatakitty.jmore.dfs.client.webdav;
 
-import com.github.sardine.DavResource;
 import com.github.sardine.Sardine;
 import com.github.sardine.SardineFactory;
 import com.whatakitty.jmore.dfs.client.api.DfsClient;
@@ -80,17 +79,12 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
 
     @Override
     public void visit(Visitor visitor) {
-        try {
-            final Sardine sardine = this.sardine.get();
-            final List<DavResource> list = sardine.list(configuration.getEndpoint());
-            final WebDavObjectKey objectKey = new WebDavObjectKey("/", new String[0]);
-            final WebDavDirectory webDavDirectory = new WebDavDirectory(sardine, objectKey);
+        final Sardine sardine = this.sardine.get();
+        final WebDavObjectKey objectKey = new WebDavObjectKey("/", new String[0]);
+        final WebDavDirectory webDavDirectory = new WebDavDirectory(sardine, objectKey);
 
-            // visit
-            webDavDirectory.visit(visitor);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // visit
+        webDavDirectory.visit(visitor);
     }
 
     @Override
