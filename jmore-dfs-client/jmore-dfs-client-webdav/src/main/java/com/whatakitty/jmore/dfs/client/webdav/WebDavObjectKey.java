@@ -1,10 +1,10 @@
 package com.whatakitty.jmore.dfs.client.webdav;
 
-import com.sun.deploy.util.StringUtils;
-import com.sun.tools.javac.util.List;
+import com.google.common.collect.Lists;
 import com.whatakitty.jmore.dfs.client.api.domain.ObjectKey;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +22,7 @@ public class WebDavObjectKey implements ObjectKey<String> {
 
     @Override
     public String getKey() {
-        return String.format("/%s/%s", StringUtils.join(List.of(categories), "/"), resourceKey);
+        return String.format("/%s/%s", StringUtils.join(Lists.newArrayList(categories), "/"), resourceKey);
     }
 
 }
