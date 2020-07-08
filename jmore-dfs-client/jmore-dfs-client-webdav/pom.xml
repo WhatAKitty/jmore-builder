@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.whatakitty.jmore</groupId>
             <artifactId>jmore-dfs-client-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
