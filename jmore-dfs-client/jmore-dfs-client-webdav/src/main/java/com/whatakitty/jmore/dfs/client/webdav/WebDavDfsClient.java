@@ -8,6 +8,8 @@ import com.whatakitty.jmore.dfs.client.api.domain.Object;
 import com.whatakitty.jmore.dfs.client.api.visitor.Visitor;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -40,7 +42,15 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
 
     @Override
     public void init() {
+        final URL url;
+        try {
+            url = new URL(configuration.getEndpoint());
+        } catch (MalformedURLException e) {
+            throw new Error("illegal endpoint: " + configuration.getEndpoint());
+        }
         final Sardine newSardine = SardineFactory.begin(configuration.getAccessKey(), configuration.getAccessSecret());
+        newSardine.enablePreemptiveAuthentication(url.getHost(), 80, 443);
+        newSardine.enableCompression();
         sardine.set(newSardine);
     }
 
@@ -51,10 +61,10 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
             try (
                 final InputStream inputStream = ((WebDavObject) object).getInputStream();
             ) {
-                sardine.get().put(object.getUrl(), inputStream);
+                sardine.get().put(getUrl((String) object.getKey()), inputStream);
                 return Boolean.TRUE;
             } catch (IOException e) {
-                log.error("failed to put object into platform");
+                log.error("failed to put object into platform", e);
             }
             return Boolean.FALSE;
         });
@@ -65,7 +75,7 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
         return CompletableFuture.supplyAsync(() -> {
             final WebDavObject webDavObject = new WebDavObject(objectKey);
             try {
-                final InputStream inputStream = sardine.get().get(objectKey.getKey());
+                final InputStream inputStream = sardine.get().get(getUrl(objectKey.getKey()));
                 webDavObject.setInputStream(inputStream);
                 return webDavObject;
             } catch (IOException e) {
@@ -73,8 +83,6 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
                 throw new RuntimeException(e);
             }
         });
-
-
     }
 
     @Override
@@ -94,6 +102,10 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
         } catch (IOException e) {
             log.error("failed to shutdown sardine");
         }
+    }
+
+    private String getUrl(String resourceKey) {
+        return configuration.getEndpoint() + resourceKey;
     }
 
 }
