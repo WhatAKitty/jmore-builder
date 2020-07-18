@@ -9,9 +9,12 @@ import com.whatakitty.jmore.dfs.client.api.visitor.Visitor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.extern.slf4j.Slf4j;
@@ -55,28 +58,49 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
     }
 
     @Override
-    public Future<Boolean> putObject(Object<WebDavObjectKey> object, boolean mkdir) {
-        assert object instanceof WebDavObject;
+    public Future<Boolean> createDirectories(String directoryUrl) {
         return CompletableFuture.supplyAsync(() -> {
             final Sardine sardine = this.sardine.get();
 
-            // check
-            final String parentUrl = getUrl((String) object.getParent());
             try {
-                final boolean exists = sardine.exists(parentUrl);
-                if (!exists) {
-                    if (!mkdir) {
-                        // not allowed to create directories
-                        log.error("the parent directory {} is not exists. please check it.", parentUrl);
-                        return Boolean.FALSE;
-                    }
-                    // not exists
-                    sardine.createDirectory(parentUrl);
-                }
+                final URI root = new URI(directoryUrl);
+                createParents(sardine, root);
+                return Boolean.TRUE;
             } catch (IOException e) {
-                log.error("create directory {} failed", parentUrl, e);
+                log.error("create parents directory {} failed", directoryUrl, e);
+                return Boolean.FALSE;
+            } catch (URISyntaxException e) {
+                log.error("parse url {} failed, please check url format", directoryUrl, e);
                 return Boolean.FALSE;
             }
+        });
+    }
+
+    @Override
+    public Future<Boolean> putObject(Object<WebDavObjectKey> object, boolean mkdir) {
+        assert object instanceof WebDavObject;
+
+        // create directories
+        final String parentUrl = getUrl((String) object.getParent());
+        final Future<Boolean> createDirectoriesFuture = createDirectories(parentUrl);
+        try {
+            final Boolean result = createDirectoriesFuture.get();
+            if (!result) {
+                log.error("create parent url failed {}", parentUrl);
+                return CompletableFuture.completedFuture(Boolean.FALSE);
+            }
+        } catch (InterruptedException e) {
+            // interrupted
+            Thread.currentThread().interrupt();
+            return CompletableFuture.completedFuture(Boolean.FALSE);
+        } catch (ExecutionException e) {
+            // exception
+            log.error("failed to create directories {}", parentUrl);
+            return CompletableFuture.completedFuture(Boolean.FALSE);
+        }
+
+        return CompletableFuture.supplyAsync(() -> {
+            final Sardine sardine = this.sardine.get();
 
             final String url = getUrl((String) object.getKey());
             try (
@@ -128,6 +152,21 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
 
     private String getUrl(String resourceKey) {
         return configuration.getEndpoint() + resourceKey;
+    }
+
+    private void createParents(Sardine sardine, URI uri) throws IOException {
+        final String directoryUrl = uri.toString();
+        final String actualUrl = directoryUrl.endsWith("/") ? directoryUrl.substring(0, directoryUrl.length() - 1) : directoryUrl;
+        if (sardine.exists(actualUrl)) {
+            return;
+        }
+
+        // not exists
+        final URI parentUri = uri.getPath().endsWith("/") ? uri.resolve("..") : uri.resolve(".");
+        createParents(sardine, parentUri);
+
+        // create directory
+        sardine.createDirectory(directoryUrl);
     }
 
 }

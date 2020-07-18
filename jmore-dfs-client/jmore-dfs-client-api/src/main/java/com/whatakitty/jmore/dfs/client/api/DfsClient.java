@@ -28,6 +28,14 @@ public interface DfsClient<T extends ObjectKey<?>> {
     void init();
 
     /**
+     * create directories recursively
+     *
+     * @param directoryUrl directory url
+     * @return the result
+     */
+    Future<Boolean> createDirectories(String directoryUrl);
+
+    /**
      * upload object put dfs
      *
      * @param object the object need to upload
