@@ -59,26 +59,33 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
         assert object instanceof WebDavObject;
         return CompletableFuture.supplyAsync(() -> {
             final Sardine sardine = this.sardine.get();
+
             // check
+            final String parentUrl = getUrl((String) object.getParent());
             try {
-                final String parentUrl = getUrl((String) object.getParent());
                 final boolean exists = sardine.exists(parentUrl);
                 if (!exists) {
+                    if (!mkdir) {
+                        // not allowed to create directories
+                        log.error("the parent directory {} is not exists. please check it.", parentUrl);
+                        return Boolean.FALSE;
+                    }
                     // not exists
                     sardine.createDirectory(parentUrl);
                 }
             } catch (IOException e) {
-                log.error("create directory failed", e);
+                log.error("create directory {} failed", parentUrl, e);
                 return Boolean.FALSE;
             }
 
+            final String url = getUrl((String) object.getKey());
             try (
                 final InputStream inputStream = ((WebDavObject) object).getInputStream();
             ) {
-                sardine.put(getUrl((String) object.getKey()), inputStream);
+                sardine.put(url, inputStream);
                 return Boolean.TRUE;
             } catch (IOException e) {
-                log.error("failed to put object into platform", e);
+                log.error("failed to put object {} into dfs platform", url, e);
             }
             return Boolean.FALSE;
         });
