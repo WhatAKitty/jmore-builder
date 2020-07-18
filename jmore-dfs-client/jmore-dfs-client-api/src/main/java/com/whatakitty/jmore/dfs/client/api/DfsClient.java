@@ -31,8 +31,9 @@ public interface DfsClient<T extends ObjectKey<?>> {
      * upload object put dfs
      *
      * @param object the object need to upload
+     * @param mkdir  to create parent directories while not exist
      */
-    Future<Boolean> putObject(Object<T> object);
+    Future<Boolean> putObject(Object<T> object, boolean mkdir);
 
     /**
      * download object from dfs

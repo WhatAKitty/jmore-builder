@@ -55,13 +55,27 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
     }
 
     @Override
-    public Future<Boolean> putObject(Object<WebDavObjectKey> object) {
+    public Future<Boolean> putObject(Object<WebDavObjectKey> object, boolean mkdir) {
         assert object instanceof WebDavObject;
         return CompletableFuture.supplyAsync(() -> {
+            final Sardine sardine = this.sardine.get();
+            // check
+            try {
+                final String parentUrl = getUrl((String) object.getParent());
+                final boolean exists = sardine.exists(parentUrl);
+                if (!exists) {
+                    // not exists
+                    sardine.createDirectory(parentUrl);
+                }
+            } catch (IOException e) {
+                log.error("create directory failed", e);
+                return Boolean.FALSE;
+            }
+
             try (
                 final InputStream inputStream = ((WebDavObject) object).getInputStream();
             ) {
-                sardine.get().put(getUrl((String) object.getKey()), inputStream);
+                sardine.put(getUrl((String) object.getKey()), inputStream);
                 return Boolean.TRUE;
             } catch (IOException e) {
                 log.error("failed to put object into platform", e);
@@ -99,6 +113,7 @@ public class WebDavDfsClient implements DfsClient<WebDavObjectKey> {
     public void destroy() {
         try {
             sardine.get().shutdown();
+            log.info("sardine closed.");
         } catch (IOException e) {
             log.error("failed to shutdown sardine");
         }

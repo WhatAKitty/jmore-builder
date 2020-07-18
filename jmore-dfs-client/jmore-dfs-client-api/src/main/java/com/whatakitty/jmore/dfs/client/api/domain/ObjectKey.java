@@ -9,6 +9,8 @@ package com.whatakitty.jmore.dfs.client.api.domain;
  **/
 public interface ObjectKey<T> {
 
+    T getParent();
+
     T getKey();
 
 }

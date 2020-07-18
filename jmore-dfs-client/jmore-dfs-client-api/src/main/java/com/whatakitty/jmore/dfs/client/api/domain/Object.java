@@ -17,6 +17,10 @@ public abstract class Object<T extends ObjectKey<?>> {
 
     public abstract String getUrl();
 
+    public final java.lang.Object getParent() {
+        return objectKey.getParent();
+    }
+
     public final java.lang.Object getKey() {
         return objectKey.getKey();
     }

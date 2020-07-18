@@ -21,6 +21,11 @@ public class WebDavObjectKey implements ObjectKey<String> {
     private final String[] categories;
 
     @Override
+    public String getParent() {
+        return String.format("/%s", StringUtils.join(Lists.newArrayList(categories), "/"));
+    }
+
+    @Override
     public String getKey() {
         return String.format("/%s/%s", StringUtils.join(Lists.newArrayList(categories), "/"), resourceKey);
     }
