@@ -69,7 +69,7 @@ public class DemoApiTest {
 
         mockMvc.perform(
             post("/api/demo/param1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(demoParam)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.code", is(DemoResultCode.SUCCESS.getCode())))
@@ -82,7 +82,7 @@ public class DemoApiTest {
 
         mockMvc.perform(
             post("/api/demo/param1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(demoParam)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.code", is(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR.getCode())));
@@ -91,7 +91,7 @@ public class DemoApiTest {
     @Test
     public void test_param1_missingbody() throws Exception {
         mockMvc.perform(
-            post("/api/demo/param1").contentType(MediaType.APPLICATION_JSON_UTF8))
+            post("/api/demo/param1").contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.code", is(UserRequestParamsResultCode.USER_REQUEST_PARAMS_ERROR.getCode())));
     }
