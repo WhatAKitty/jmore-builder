@@ -37,7 +37,7 @@
         <jmore-dfs-client.version>1.0.0-SNAPSHOT</jmore-dfs-client.version>
 
         <!-- db -->
-        <mongodb.version>3.12.5</mongodb.version>
+        <mongodb.version>3.12.7</mongodb.version>
         <druid.version>1.1.23</druid.version>
 
         <!-- reg -->
