@@ -5,13 +5,13 @@
     <parent>
         <artifactId>jmore-parent</artifactId>
         <groupId>com.whatakitty.jmore</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
         <relativePath>../jmore-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jmore-lock</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 
     <name>jmore-lock</name>
     <url>https://github.com/WhatAKitty/jmore-builder</url>
